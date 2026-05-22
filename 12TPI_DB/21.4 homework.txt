@@ -1,0 +1,10 @@
+            int int1;
+            int int2;
+            char final;
+
+            Console.WriteLine("Please enter and integer between 0 and 97:");
+            int1 = Convert.ToInt32(Console.ReadLine());
+            int2 = int1 + 2;
+            final = Convert.ToChar(int2);
+
+            Console.WriteLine($"Your character is: {final}");

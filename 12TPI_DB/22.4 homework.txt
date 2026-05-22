@@ -1,0 +1,108 @@
+           //3.1.
+
+           double radius;
+           double pi;
+           double area;
+           double finalarea;
+
+           pi = 3.14;
+
+           Console.WriteLine("Please enter the radius of the circle:");
+           radius = Convert.ToDouble(Console.ReadLine());
+
+           area = radius * radius; //squaring the radius
+           finalarea = pi * area;
+
+           Console.WriteLine($"Your circle's area is: {finalarea}");
+
+
+**************************************
+
+
+          //3.2.
+
+          double diameter;
+          double radius;
+          double pi;
+          double area;
+          double finalarea;
+
+          pi = 3.14;
+
+          Console.WriteLine("Please enter the diameter of the circle:");
+          diameter = Convert.ToDouble(Console.ReadLine());
+
+          radius = diameter / 2;
+          area = radius * radius; //squaring the radius
+          finalarea = pi * area;
+
+          Console.WriteLine($"Your circle's area is: {finalarea}");
+
+
+**************************************
+
+           //6.1.
+
+           double drink;
+           int order;
+           double cost;
+
+           drink = 23.89;
+
+           Console.WriteLine("Please enter how many drinks:");
+           order = Convert.ToInt32(Console.ReadLine());
+
+           cost = drink * order;
+
+           Console.WriteLine($"You ordered {order} drinks, which costs {cost}");
+
+
+**************************************
+
+
+            //6.2.
+
+            double drink;
+            int pay;
+            int order;
+            double cost;
+            double change;
+
+            drink = 23.89;
+
+            Console.WriteLine("Please enter how many drinks:");
+            order = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Please enter how much payed:");
+            pay = Convert.ToInt32(Console.ReadLine());
+
+            cost = drink * order;
+            change = pay - cost;
+
+            Console.WriteLine($"You ordered {order} drinks, which costs {cost}, meaning your change is {change}");
+       
+
+**************************************
+
+
+            //6.3.
+
+            double drink;
+            int pay;
+            int order;
+            double cost;
+            double change;
+
+            drink = 23.89;
+
+            Console.WriteLine("Please enter how many drinks:");
+            order = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Please enter how much payed:");
+            pay = Convert.ToInt32(Console.ReadLine());
+
+            cost = drink * order;
+            change = pay - cost;
+
+            //Console.WriteLine($"You ordered {order} drinks, which costs {cost}, meaning your change is {change}");
+            Console.WriteLine($"Drinks\tCost\tChange\n{order}\t{cost}\t{change}");

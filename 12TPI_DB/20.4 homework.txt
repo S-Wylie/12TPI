@@ -1,0 +1,41 @@
+string word1;
+int word1length;
+
+string word2;
+int word2length;
+
+string word3;
+int word3length;
+
+int wholenum;
+
+    Console.WriteLine("********");
+
+Console.WriteLine("Please enter your first word:");
+word1 = Console.ReadLine();
+word1length = word1.Length;
+
+Console.WriteLine("Please enter your second word:");
+word2 = Console.ReadLine();
+word2length = word2.Length;
+
+Console.WriteLine("Please enter your third word:");
+word3 = Console.ReadLine();
+word3length = word3.Length;
+
+wholenum = word1length + word2length + word3length;
+
+    Console.WriteLine("********");
+
+Console.WriteLine("This is your word first word and the number of characters:");
+Console.WriteLine($"{word1}: {word1length}");
+
+Console.WriteLine("This is your word second word and the number of characters:");
+Console.WriteLine($"{word2}: {word2length}");
+
+Console.WriteLine("This is your word third word and the number of characters:");
+Console.WriteLine($"{word3}: {word3length}");
+
+Console.WriteLine($"The total number of characters in your three words is: {wholenum}");
+
+    Console.WriteLine("********");
