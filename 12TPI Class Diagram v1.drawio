@@ -1,0 +1,29 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1" id="Pu3g0FgxpK4twh-HetbZ">
+    <mxGraphModel dx="603" dy="470" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="uGzxl5nXeSTcGAhPtwNq-1" parent="1" style="shape=table;startSize=30;container=1;collapsible=0;childLayout=tableLayout;fixedHeader=1;" value="Planes" vertex="1">
+          <mxGeometry height="210" width="600" x="170" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="uGzxl5nXeSTcGAhPtwNq-2" parent="uGzxl5nXeSTcGAhPtwNq-1" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fixedHeader=1;" value="" vertex="1">
+          <mxGeometry height="140" width="600" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="uGzxl5nXeSTcGAhPtwNq-3" parent="uGzxl5nXeSTcGAhPtwNq-2" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" value="- RegistrationID : autoint&lt;div&gt;- Name : varchar&lt;/div&gt;&lt;div&gt;- Manufacturer : varchar&lt;/div&gt;&lt;div&gt;- Model : varchar&lt;/div&gt;&lt;div&gt;- PassengerCapacity : integer&lt;/div&gt;&lt;div&gt;- CargoCapacity : decimal&lt;/div&gt;&lt;div&gt;- MinimumTakeoff : decimal&lt;/div&gt;&lt;div&gt;- MinimumLanding : decimal&amp;nbsp;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="140" width="600" as="geometry">
+            <mxRectangle height="140" width="600" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uGzxl5nXeSTcGAhPtwNq-4" parent="uGzxl5nXeSTcGAhPtwNq-1" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fixedHeader=1;" value="" vertex="1">
+          <mxGeometry height="40" width="600" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="uGzxl5nXeSTcGAhPtwNq-5" parent="uGzxl5nXeSTcGAhPtwNq-4" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" value="+ Constructor (r : integer, ma : varchar, mo : varchar, p : integer, c : integer, t : decimal, l : decimal)" vertex="1">
+          <mxGeometry height="40" width="600" as="geometry">
+            <mxRectangle height="40" width="600" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
