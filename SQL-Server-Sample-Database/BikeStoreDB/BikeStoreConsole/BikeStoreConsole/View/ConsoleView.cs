@@ -3,8 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BikeStore.ConsoleView
+namespace BikeStoreConsole.View
 {
+  
     public class ConsoleView
     {
 
@@ -72,3 +73,4 @@ namespace BikeStore.ConsoleView
         }
     }
 }
+

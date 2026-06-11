@@ -64,7 +64,7 @@ namespace BikeStoreConsole
                     case "4":
 
                         DeleteBrandByName();
-
+                        break;
                     //Need to ensure that can't delete if the linked to an exisisting relationships and catches errorsbreak;
 
                     case "5":
@@ -173,22 +173,23 @@ namespace BikeStoreConsole
 
             {
 
-                if (ex.Number == 547) // Foreign key violation                {
+                if (ex.Number == 547) // Foreign key violation
+                {
 
                     myView.DisplayMessage("Cannot delete brand because it is referenced by existing products.");
 
-            }
+                }
 
                 else
-            {
+                {
 
-                myView.DisplayMessage($"SQL Error occurred while deleting brand: {ex.Message}");
+                    myView.DisplayMessage($"SQL Error occurred while deleting brand: {ex.Message}");
+
+
+                }
 
 
             }
-
-
-        }
 
             catch (Exception ex)
 
@@ -200,10 +201,7 @@ namespace BikeStoreConsole
 
 
             }
-
-
-}
-
+        }
     }
-
 }
+
