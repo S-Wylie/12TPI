@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ConsoleView
+namespace BikeStore.ConsoleView
 {
     public class ConsoleView
     {

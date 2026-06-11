@@ -1,8 +1,9 @@
 ﻿using BikeStoreConsole.Controller;
 using BikeStoreConsole.Model;
 using Microsoft.Data.SqlClient;
+using BikeStoreConsole.View;
 
-namespace BikeStoreConsole2026
+namespace BikeStoreConsole
 
 {
 
