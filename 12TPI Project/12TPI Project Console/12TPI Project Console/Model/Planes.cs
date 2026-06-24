@@ -4,7 +4,7 @@ using System.Text;
 
 namespace _12TPI_Project_Console.Model
 {
-    public class Planes
+    public class Planes //Creates a public class for the 'Planes' table of the database 
     {
         public int RegistrationID { get; set; }
         public String Manufacturer { get; set; }
@@ -13,8 +13,8 @@ namespace _12TPI_Project_Console.Model
         public int CargoCapacity { get; set; }
         public decimal MinimumTakeoff { get; set; }
         public decimal MinimumLanding { get; set; }
-        public Planes() { }
-        public Planes(int r, string ma, string mo, int p, int c, decimal t, decimal l)
+        public Planes() { } //Craetes the constructor for the 'Planes' class
+        public Planes(int r /* = RegistartionID */, string ma /* = Manufacturer */, string mo /* = Model */, int p /* = PassengerCapcity */, int c /* = CargoCapacity */, decimal t /* = MinimumTakeoff */, decimal l /* = MinimumLanding*/)
         {
             RegistrationID = r;
             Manufacturer = ma;

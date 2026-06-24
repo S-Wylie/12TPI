@@ -4,19 +4,19 @@ using System.Text;
 
 namespace _12TPI_Project_Console.Model
 {
-    public class Flights
+    public class Flights //Creates a public class for the 'Flights' table of the database
     {
         public int FlightID { get; set; }
         public int PlaneRegistrationID { get; set; }
         public int FlightNumber { get; set; }
         public String PilotName { get; set; }
-        public DateTime DepartingDateTime { get; set; }
+        public DateTime DepartingDateTime { get; set; } //Possibly incorrect datatype
         public String DepartingAirport { get; set; }
-        public DateTime ArrivingDateTime { get; set; }
+        public DateTime ArrivingDateTime { get; set; } //Possibly incorrect datatype
         public String ArrivingAirport { get; set; }
         public String Status { get; set; }
-        public Flights() { }
-        public Flights(int fi, int pr, int fn, string p, DateTime dt, string da, DateTime at, string aa, string s)
+        public Flights() { } //Creates the constructor for the 'Flights' class
+        public Flights(int fi /* = FlightID */, int pr /* = PlaneRegistrationID */, int fn /* = FlightNumber*/, string p /* = PilotName */, DateTime dt /* = DepartingDateTime */, string da /* = DepartingAirport */, DateTime at /* = ArrivingDateTime */, string aa /* = ArrivingAirport */, string s /* = Status */)
         {
             FlightID = fi;
             PlaneRegistrationID = pr;
