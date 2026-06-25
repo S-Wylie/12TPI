@@ -4,15 +4,15 @@ using System.Text;
 
 namespace _12TPI_Project_Console.Model
 {
-    public class Classes
+    public class Classes //Creates a public class for the 'Classes' table of the database
     {
         public String ClassCode { get; set; }
         public String Name { get; set; }
         public String ChangesPermitted { get; set; }
         public int BaggageAllowance { get; set; }
         public String MilesAccural { get; set; }
-        public Classes() { }
-        public Classes(string c, string n, string p, int b, string m)
+        public Classes() { } //Creates the constructor for the 'Classes' class
+        public Classes(string c /* = ClassCode */, string n /* = Name */, string p /* = ChangesPermitted */, int b /* = BaggageAllowance */ , string m /* = MilesAccural */)
         {
             ClassCode = c;
             Name = n;
