@@ -7,6 +7,11 @@ namespace _12TPI_Project_Console.View
 {
     public class ConsoleView
     {
+        public void DisplayWelcomeMessage()
+        {
+            Console.WriteLine("Welcome to the Flight Management System!");
+            Console.WriteLine("by Sienna Wylie 12TPI.  (C) 2026.");
+        }
         public void DisplayLandingScreen()
         {
             Console.WriteLine("Welcome!");
@@ -18,6 +23,29 @@ namespace _12TPI_Project_Console.View
             Console.WriteLine("5. Exit");
 
             Console.Write("Please select an option: ");
+        }
+        public string GetUserInput()
+        {
+            return Console.ReadLine();
+        }
+        public int GetUserChoice()
+        {
+            int choice;
+            while (!int.TryParse(Console.ReadLine(), out choice))
+            {
+                Console.WriteLine("Invalid input. Please enter a number.");
+                Console.Write("Please select an option: ");
+            }
+            return choice;
+        }
+        public void DisplayInvalidChoiceMessage()
+        {
+            Console.WriteLine("Invalid choice. Please try again.");
+            Console.Write("Please select an option: ");
+        }
+        public void DisplayExitMessage()
+        {
+            Console.WriteLine("Thank you for using the Flight Management System. Goodbye!");
         }
         public void DisplayGeneralView()
         {
