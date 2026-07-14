@@ -485,11 +485,59 @@ namespace _12TPI_Project_Console.Controller
                 return cmd.ExecuteNonQuery();
             }
         }
-        public int DeleteBrandByName(string brandName)
+        public int DeletePlaneByID(int r /* = RegistartionID */)
         {
-            using (SqlCommand cmd = new SqlCommand("DELETE FROM production.Brands WHERE BRAND_NAME = @BrandName", conn))
+            using (SqlCommand cmd = new SqlCommand("DELETE FROM Planes WHERE REGISTRATION_ID = @RegistrationID", conn))
             {
-                cmd.Parameters.AddWithValue("@BrandName", brandName);
+                cmd.Parameters.AddWithValue("@RegistrationID", r);
+                return cmd.ExecuteNonQuery();
+            }
+        }
+        public int DeleteFlightByID(int fi /* = FlightID */)
+        {
+            using (SqlCommand cmd = new SqlCommand("DELETE FROM Flights WHERE FLIGHT_ID = @FlightID", conn))
+            {
+                cmd.Parameters.AddWithValue("@FlightID", fi);
+                return cmd.ExecuteNonQuery();
+            }
+        }
+        public int DeleteAirportByIATACode(string i /* = IATACode */)
+        {
+            using (SqlCommand cmd = new SqlCommand("DELETE FROM Airports WHERE IATA_CODE = @IATACode", conn))
+            {
+                cmd.Parameters.AddWithValue("@IATACode", i);
+                return cmd.ExecuteNonQuery();
+            }
+        }
+        public int DeletePassengerByID(int c /* = CustomerID */)
+        {
+            using (SqlCommand cmd = new SqlCommand("DELETE FROM Passengers WHERE CUSTOMER_ID = @CustomerID", conn))
+            {
+                cmd.Parameters.AddWithValue("@CustomerID", c);
+                return cmd.ExecuteNonQuery();
+            }
+        }
+        public int DeleteTicketByID(int t /* = TicketID */)
+        {
+            using (SqlCommand cmd = new SqlCommand("DELETE FROM PassengerTickets WHERE TICKET_ID = @TicketID", conn))
+            {
+                cmd.Parameters.AddWithValue("@TicketID", t);
+                return cmd.ExecuteNonQuery();
+            }
+        }
+        public int DeleteClassesByCode(string c /* = ClassCode */)
+        {
+            using (SqlCommand cmd = new SqlCommand("DELETE FROM Classes WHERE CLASS_CODE = @ClassCode", conn))
+            {
+                cmd.Parameters.AddWithValue("@ClassCode", c);
+                return cmd.ExecuteNonQuery();
+            }
+        }
+        public int DeleteMealOptionsByCode(string m /* = MealCode */)
+        {
+            using (SqlCommand cmd = new SqlCommand("DELETE FROM MealOptions WHERE MEAL_CODE = @MealCode", conn))
+            {
+                cmd.Parameters.AddWithValue("@MealCode", m);
                 return cmd.ExecuteNonQuery();
             }
         }
