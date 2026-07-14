@@ -402,15 +402,89 @@ namespace _12TPI_Project_Console.Controller
                 return cmd.ExecuteNonQuery();
             }
         }
-        public int InsertBrand(string brandName)
+        public int InsertPlane(string ma /* = Manufacturer */, string mo /* = Model */, int p /* = PassengerCapcity */, int c /* = CargoCapacity */, decimal t /* = MinimumTakeoff */, decimal l /* = MinimumLanding*/)
         {
-            using (SqlCommand cmd = new SqlCommand("INSERT INTO production.Brands (BRAND_NAME) VALUES (@BrandName); SELECT SCOPE_IDENTITY();", conn))
+            using (SqlCommand cmd = new SqlCommand("INSERT INTO Planes (MANUFACTURER, MODEL, PASSENGER_CAPACITY, CARGO_CAPACITY, MINIMUM_TAKEOFF, MINIMUM_LANDING) VALUES (@Manufacturer, @Model, @PassengerCapacity, @CargoCapacity, @MinimumTakeoff, @MinimumLanding); SELECT SCOPE_IDENTITY();", conn))
             {
-                cmd.Parameters.AddWithValue("@BrandName", brandName);
+                cmd.Parameters.AddWithValue("@Manufacturer", ma);
+                cmd.Parameters.AddWithValue("@Model", mo);
+                cmd.Parameters.AddWithValue("@PassengerCapacity", p);
+                cmd.Parameters.AddWithValue("@CargoCapacity", c);
+                cmd.Parameters.AddWithValue("@MinimumTakeoff", t);
+                cmd.Parameters.AddWithValue("@MinimumLanding", l);
                 return Convert.ToInt32(cmd.ExecuteScalar());
             }
         }
-
+        public int InsertFlight(int pr /* = PlaneRegistrationID */, int fn /* = FlightNumber*/, string p /* = PilotName */, DateTime dt /* = DepartingDateTime */, string da /* = DepartingAirport */, DateTime at /* = ArrivingDateTime */, string aa /* = ArrivingAirport */, string s /* = Status */)
+        {
+            using (SqlCommand cmd = new SqlCommand("INSERT INTO Flights (PLANE_REGISTRATION_ID, FLIGHT_NUMBER, PILOT_NAME, DEPARTING_DATE_TIME, DEPARTING_AIRPORT, ARRIVING_DATE_TIME, ARRIVING_AIRPORT, STATUS) VALUES (@PlaneRegistrationId, @FlightNumber, @PilotName, @DepartingDateTime, @DepartingAirport, @ArrivingDateTime, @ArrivingAirport, @Status); SELECT SCOPE_IDENTITY();", conn))
+            {
+                cmd.Parameters.AddWithValue("@PlaneRegistrationId", pr);
+                cmd.Parameters.AddWithValue("@FlightNumber", fn);
+                cmd.Parameters.AddWithValue("@PilotName", p);
+                cmd.Parameters.AddWithValue("@DepartingDateTime", dt);
+                cmd.Parameters.AddWithValue("@DepartingAirport", da);
+                cmd.Parameters.AddWithValue("@ArrivingDateTime", at);
+                cmd.Parameters.AddWithValue("@ArrivingAirport", aa);
+                cmd.Parameters.AddWithValue("@Status", s);
+                return Convert.ToInt32(cmd.ExecuteScalar());
+            }
+        }
+        public int InsertAirport(int i /* = IATACode */, string n /* = Name */, string cor /* = Coordinates */, string con /* = Country */ , string t /* Timezone */)
+        {
+            using (SqlCommand cmd = new SqlCommand("INSERT INTO Airports (IATA_CODE, NAME, COORDINATES, COUNTRY, TIMEZONE) VALUES (@IATACode, @Name, @Coordinates, @Country, @Timezone);", conn))
+            {
+                cmd.Parameters.AddWithValue("@IATACode", i);
+                cmd.Parameters.AddWithValue("@Name", n);
+                cmd.Parameters.AddWithValue("@Coordinates", cor);
+                cmd.Parameters.AddWithValue("@Country", con);
+                cmd.Parameters.AddWithValue("@Timezone", t);
+                return cmd.ExecuteNonQuery();
+            }
+        }
+        public int InsertPassenger(string f /* = FirstName */ , string l /* = LastName */ , string m /* = MembershipStatus */)
+        {
+            using (SqlCommand cmd = new SqlCommand("INSERT INTO Passengers (FIRST_NAME, LAST_NAME, MEMBERSHIP_STATUS) VALUES (@FirstName, @LastName, @MembershipStatus);", conn))
+            {
+                cmd.Parameters.AddWithValue("@FirstName", f);
+                cmd.Parameters.AddWithValue("@LastName", l);
+                cmd.Parameters.AddWithValue("@MembershipStatus", m);
+                return Convert.ToInt32(cmd.ExecuteScalar());
+            }
+        }
+        public int InsertTicket(int f /* = Flight ID */, int ci /* = Customer ID */, string cn /* = ClassName */, string m /* = MealChoice */)
+        {
+            using (SqlCommand cmd = new SqlCommand("INSERT INTO Tickets (FLIGHT_ID, CUSTOMER_ID, CLASS_NAME, MEAL_CHOICE) VALUES (@FlightId, @CustomerId, @ClassName, @MealChoice);", conn))
+            {
+                cmd.Parameters.AddWithValue("@FlightId", f);
+                cmd.Parameters.AddWithValue("@CustomerId", ci);
+                cmd.Parameters.AddWithValue("@ClassName", cn);
+                cmd.Parameters.AddWithValue("@MealChoice", m);
+                return Convert.ToInt32(cmd.ExecuteScalar());
+            }
+        }
+        public int InsertClasses(string c /* = ClassCode */, string n /* = Name */, string p /* = ChangesPermitted */, int b /* = BaggageAllowance */ , string m /* = MilesAccural */)
+        {
+            using (SqlCommand cmd = new SqlCommand("INSERT INTO Classes (CLASS_CODE, NAME, CHANGES_PERMITTED, BAGGAGE_ALLOWANCE, MILES_ACCRUAL) VALUES (@ClassCode, @Name, @ChangesPermitted, @BaggageAllowance, @MilesAccrual);", conn))
+            {
+                cmd.Parameters.AddWithValue("@ClassCode", c);
+                cmd.Parameters.AddWithValue("@Name", n);
+                cmd.Parameters.AddWithValue("@ChangesPermitted", p);
+                cmd.Parameters.AddWithValue("@BaggageAllowance", b);
+                cmd.Parameters.AddWithValue("@MilesAccrual", m);
+                return cmd.ExecuteNonQuery();
+            }
+        }
+        public int InsertMealOptions(string m /* = MealCode */, string n /* = Name */, string c /* = Conditions*/)
+        {
+            using (SqlCommand cmd = new SqlCommand("INSERT INTO MealOptions (MEAL_CODE, NAME, CONDITIONS) VALUES (@MealCode, @Name, @Conditions);", conn))
+            {
+                cmd.Parameters.AddWithValue("@MealCode", m);
+                cmd.Parameters.AddWithValue("@Name", n);
+                cmd.Parameters.AddWithValue("@Conditions", c);
+                return cmd.ExecuteNonQuery();
+            }
+        }
         public int DeleteBrandByName(string brandName)
         {
             using (SqlCommand cmd = new SqlCommand("DELETE FROM production.Brands WHERE BRAND_NAME = @BrandName", conn))
