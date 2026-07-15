@@ -16,6 +16,110 @@ namespace _12TPI_Project_Console.Controller
             this.consoleView = consoleView;
         }
 
+        public void DisplayAllFlights()
+        {
+            var flights = storageManager.GetAllFlights();
+            consoleView.DisplayFlights(flights);
+        }
+
+        public void DisplayAllPassengers()
+        {
+            var passengers = storageManager.GetAllPassengers();
+            consoleView.DisplayPassengers(passengers);
+        }
+
+        public void DisplayAllPassengerTickets()
+        {
+            var tickets = storageManager.GetAllPassengerTickets();
+            consoleView.DisplayTickets(tickets);
+        }
+
+        public void LaunchGeneralMenu()
+        {
+            bool exit = false;
+            while (!exit)
+            {
+                consoleView.DisplayGeneralView();
+                int choice = consoleView.GetUserChoice();
+                switch (choice)
+                {
+                    case 1:
+                        DisplayAllFlights();
+                        break;
+                    case 2:
+                        DisplayAllPassengers();
+                        break;
+                    case 3:
+                        DisplayAllPassengerTickets();
+                        break;
+                    case 4:
+                        exit = true;
+                        break;
+                    default:
+                        consoleView.DisplayInvalidChoiceMessage();
+                        break;
+                }
+            }
+
+        }
+
+        public void LaunchEditingMenu() {
+            bool exit = false;
+            while (!exit)
+            {
+                consoleView.DisplayEditingView();
+                int choice = consoleView.GetUserChoice();
+                switch (choice)
+                {
+                    case 1:
+                        consoleView.DisplayGeneralView();
+                        break;
+                    case 2:
+                        consoleView.DisplayEditingView();
+                        break;
+                    case 3:
+                        consoleView.DisplayAdminView();
+                        break;
+                    case 4:
+                        exit = true;
+                        break;
+                    default:
+                        consoleView.DisplayInvalidChoiceMessage();
+                        break;
+                }
+            }
+
+
+        }
+
+        public void LaunchAdminMenu()
+        {
+            bool exit = false;
+            while (!exit)
+            {
+                consoleView.DisplayAdminView();
+                int choice = consoleView.GetUserChoice();
+                switch (choice)
+                {
+                    case 1:
+                        LaunchGeneralMenu();
+                        break;
+                    case 2:
+                        LaunchEditingMenu();
+                        break;
+                    case 3:
+                        LaunchAdminMenu();
+                        break;
+                    case 4:
+                        exit = true;
+                        break;
+                    default:
+                        consoleView.DisplayInvalidChoiceMessage();
+                        break;
+                }
+            }
+        }
+
         public void Run()
         {
             consoleView.DisplayWelcomeMessage();
@@ -27,13 +131,13 @@ namespace _12TPI_Project_Console.Controller
                 switch (choice)
                 {
                     case 1:
-                        // Handle option 1
+                        LaunchGeneralMenu();
                         break;
                     case 2:
-                        // Handle option 2
+                        LaunchEditingMenu();
                         break;
                     case 3:
-                        // Handle option 3
+                        LaunchAdminMenu();
                         break;
                     case 4:
                         exit = true;

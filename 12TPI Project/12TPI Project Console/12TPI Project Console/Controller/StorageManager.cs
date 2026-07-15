@@ -3,11 +3,23 @@ using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Xml;
 
 namespace _12TPI_Project_Console.Controller
 {
+    public static class DataReaderExtensions
+    {
+        public static string GetSafeString(this SqlDataReader reader, int columnIndex)
+        {
+            if (columnIndex < 0 || columnIndex >= reader.FieldCount)
+            {
+                throw new IndexOutOfRangeException($"Column index {columnIndex} is out of range.");
+            }
+            return reader.IsDBNull(columnIndex) ? "(unknown)" : reader.GetString(columnIndex);
+        }
+    }
     public class StorageManager
     {
         private SqlConnection conn;
@@ -68,8 +80,8 @@ namespace _12TPI_Project_Console.Controller
                             Planes plane = new Planes()
                             {
                                 RegistrationID = reader.GetInt32(0),
-                                Manufacturer = reader.GetString(1),
-                                Model = reader.GetString(2),
+                                Manufacturer = reader.GetSafeString(1),
+                                Model = reader.GetSafeString(2),
                                 PassengerCapacity = reader.GetInt32(3),
                                 CargoCapacity = reader.GetInt32(4),
                                 MinimumTakeoff = reader.GetInt32(5),
@@ -108,13 +120,13 @@ namespace _12TPI_Project_Console.Controller
                             {
                                 FlightID = reader.GetInt32(0),
                                 PlaneRegistrationID = reader.GetInt32(1),
-                                FlightNumber = reader.GetInt32(2),
-                                PilotName = reader.GetString(3),
+                                FlightNumber = reader.GetSafeString(2),
+                                PilotName = reader.GetSafeString(3),
                                 DepartingDateTime = reader.GetDateTime(4),
-                                DepartingAirport = reader.GetString(5),
+                                DepartingAirport = reader.GetSafeString(5),
                                 ArrivingDateTime = reader.GetDateTime(6),
-                                ArrivingAirport = reader.GetString(7),
-                                Status = reader.GetString(8)
+                                ArrivingAirport = reader.GetSafeString(7),
+                                Status = reader.GetSafeString(8)
                             };
                             flightsList.Add(flight);
                         }
@@ -148,10 +160,10 @@ namespace _12TPI_Project_Console.Controller
                             Airports airport = new Airports()
                             {
                                 IATACode = reader.GetInt32(0),
-                                Name = reader.GetString(1),
-                                Coordinates = reader.GetString(2),
-                                Country = reader.GetString(3),
-                                Timezone = reader.GetString(4),
+                                Name = reader.GetSafeString(1),
+                                Coordinates = reader.GetSafeString(2),
+                                Country = reader.GetSafeString(3),
+                                Timezone = reader.GetSafeString(4),
                             };
                             airportsList.Add(airport);
                         }
@@ -185,9 +197,9 @@ namespace _12TPI_Project_Console.Controller
                             Passengers passenger = new Passengers()
                             {
                                 CustomerID = reader.GetInt32(0),
-                                FirstName = reader.GetString(1),
-                                LastName = reader.GetString(2),
-                                MembershipStatus = reader.GetString(3)
+                                FirstName = reader.GetSafeString(1),
+                                LastName = reader.GetSafeString(2),
+                                MembershipStatus = reader.GetSafeString(3)
                             };
                             passengersList.Add(passenger);
                         }
@@ -223,8 +235,8 @@ namespace _12TPI_Project_Console.Controller
                                 TicketID = reader.GetInt32(0),
                                 FlightID = reader.GetInt32(1),
                                 CustomerID = reader.GetInt32(2),
-                                ClassName = reader.GetString(3),
-                                MealChoice = reader.GetString(4),
+                                ClassName = reader.GetSafeString(3),
+                                MealChoice = reader.GetSafeString(4),
                             };
                             passengerTicketsList.Add(passengerTicket);
                         }
@@ -257,11 +269,11 @@ namespace _12TPI_Project_Console.Controller
                         {
                             Classes Class = new Classes()
                             {
-                                ClassCode = reader.GetString(0),
-                                Name = reader.GetString(1),
-                                ChangesPermitted = reader.GetString(2),
+                                ClassCode = reader.GetSafeString(0),
+                                Name = reader.GetSafeString(1),
+                                ChangesPermitted = reader.GetSafeString(2),
                                 BaggageAllowance = reader.GetInt32(3),
-                                MilesAccural = reader.GetString(4)
+                                MilesAccural = reader.GetSafeString(4)
                             };
                             classesList.Add(Class);
                         }
@@ -294,9 +306,9 @@ namespace _12TPI_Project_Console.Controller
                         {
                             MealOptions mealOption = new MealOptions()
                             {
-                                MealCode = reader.GetString(0),
-                                Name = reader.GetString(1),
-                                Conditions = reader.GetString(2)
+                                MealCode = reader.GetSafeString(0),
+                                Name = reader.GetSafeString(1),
+                                Conditions = reader.GetSafeString(2)
                             };
                             mealOptionsList.Add(mealOption);
                         }
