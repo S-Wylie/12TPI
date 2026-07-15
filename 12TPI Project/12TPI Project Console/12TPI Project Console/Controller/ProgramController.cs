@@ -15,11 +15,22 @@ namespace _12TPI_Project_Console.Controller
             this.storageManager = storageManager;
             this.consoleView = consoleView;
         }
+        public void DisplayAllPlanes()
+        {
+            var planes = storageManager.GetAllPlanes();
+            consoleView.DisplayPlanes(planes);
+        }
 
         public void DisplayAllFlights()
         {
             var flights = storageManager.GetAllFlights();
             consoleView.DisplayFlights(flights);
+        }
+
+        public void DisplayAllAirports()
+        {
+            var airports = storageManager.GetAllAirports();
+            consoleView.DisplayAirports(airports);
         }
 
         public void DisplayAllPassengers()
@@ -34,6 +45,66 @@ namespace _12TPI_Project_Console.Controller
             consoleView.DisplayTickets(tickets);
         }
 
+        public void DisplayAllClasses()
+        {
+            var classes = storageManager.GetAllClasses();
+            consoleView.DisplayClasses(classes);
+        }
+
+        public void DisplayAllMealOptions()
+        {
+            var mealOptions = storageManager.GetAllMealOptions();
+            consoleView.DisplayMealOptions(mealOptions);
+        }
+        public void AddNewPlane()
+        {
+            var newPlane = consoleView.PromptAddPlane();
+            storageManager.AddPlane(newPlane);
+            consoleView.DisplaySuccessMessage();
+        }
+        public void UpdatePlane()
+        {
+            var updatedPlane = consoleView.PromptUpdatePlane();
+            storageManager.UpdatePlane(updatedPlane);
+            consoleView.DisplaySuccessMessage();
+        }
+        public void DeletePlane()
+        {
+            var planeToDelete = consoleView.PromptDeletePlane();
+            storageManager.DeletePlaneByID(planeToDelete);
+            consoleView.DisplaySuccessMessage();
+        }
+        public void LaunchPlanesMenu()
+        {
+            bool exit = false;
+            while (!exit)
+            {
+                consoleView.DisplayPlanesMenu();
+                int choice = consoleView.GetUserChoice();
+                switch (choice)
+                {
+                    case 1:
+                        DisplayAllPlanes();
+                        break;
+                    case 2:
+                        AddNewPlane();
+                        break;
+                    case 3:
+                        UpdatePlane();
+                        break;
+                    case 4:
+                        DeletePlane();
+                        break;
+                    case 5:
+                        exit = true;
+                        break;
+                    default:
+                        consoleView.DisplayInvalidChoiceMessage();
+                        break;
+                }
+            }
+
+        }
         public void LaunchGeneralMenu()
         {
             bool exit = false;
@@ -60,9 +131,7 @@ namespace _12TPI_Project_Console.Controller
                         break;
                 }
             }
-
         }
-
         public void LaunchEditingMenu() {
             bool exit = false;
             while (!exit)
@@ -72,15 +141,21 @@ namespace _12TPI_Project_Console.Controller
                 switch (choice)
                 {
                     case 1:
-                        consoleView.DisplayGeneralView();
+                        LaunchPlanesMenu();
                         break;
                     case 2:
-                        consoleView.DisplayEditingView();
+                        ;
                         break;
                     case 3:
-                        consoleView.DisplayAdminView();
+                        ;
                         break;
                     case 4:
+                        ;
+                        break;
+                    case 5:
+                        ;
+                        break;
+                    case 6:
                         exit = true;
                         break;
                     default:

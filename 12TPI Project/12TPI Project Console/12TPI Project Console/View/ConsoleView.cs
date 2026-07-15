@@ -221,13 +221,66 @@ namespace _12TPI_Project_Console.View
         {
             Console.WriteLine(message);
         }
-        public string GetInput()
+
+        public void DisplaySuccessMessage()
         {
-            return Console.ReadLine();
+            Console.WriteLine("Operation completed successfully.");
         }
-        public int GetIntInput()
+        public string GetStringInput(string prompt)
         {
-            return int.Parse(Console.ReadLine());
+            string response;
+            while (true)
+            {
+                Console.Write(prompt);
+                response = Console.ReadLine();
+                if (!string.IsNullOrWhiteSpace(response))
+                {
+                    break;
+                }
+                Console.WriteLine("Invalid input. Please try again.");
+            }
+            return response;
+        }
+        public int GetIntInput(string prompt)
+        {
+            int response;
+            while (true)
+            {
+                Console.Write(prompt);
+                if (int.TryParse(Console.ReadLine(), out response))
+                {
+                    break;
+                }
+                Console.WriteLine("Invalid input. Please try again.");
+            }
+            return response;
+        }
+        public Planes PromptAddPlane()
+        {
+            Planes newPlane = new Planes();
+            newPlane.Manufacturer = GetStringInput("Enter the Manufacturer: ");
+            newPlane.Model = GetStringInput("Enter the Model: ");
+            newPlane.PassengerCapacity = GetIntInput("Enter the Passenger Capacity: ");
+            newPlane.CargoCapacity = GetIntInput("Enter the Cargo Capacity: ");
+            newPlane.MinimumTakeoff = GetIntInput("Enter the Minimum Takeoff Length: ");
+            newPlane.MinimumLanding = GetIntInput("Enter the Minimum Landing Length: ");
+            return newPlane;
+        }
+        public Planes PromptUpdatePlane()
+        {
+            Planes updatedPlane = new Planes();
+            updatedPlane.RegistrationID = GetIntInput("Enter the Registration ID of the plane to update: ");
+            updatedPlane.Manufacturer = GetStringInput("Enter the new Manufacturer: ");
+            updatedPlane.Model = GetStringInput("Enter the new Model: ");
+            updatedPlane.PassengerCapacity = GetIntInput("Enter the new Passenger Capacity: ");
+            updatedPlane.CargoCapacity = GetIntInput("Enter the new Cargo Capacity: ");
+            updatedPlane.MinimumTakeoff = GetIntInput("Enter the new Minimum Takeoff Length: ");
+            updatedPlane.MinimumLanding = GetIntInput("Enter the new Minimum Landing Length: ");
+            return updatedPlane;
+        }
+        public int PromptDeletePlane()
+        {
+            return GetIntInput("Enter the Registration ID of the plane to delete: ");
         }
     }
 }
