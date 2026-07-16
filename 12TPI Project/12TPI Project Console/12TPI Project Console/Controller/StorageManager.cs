@@ -400,7 +400,7 @@ namespace _12TPI_Project_Console.Controller
                     cmd.Parameters.AddWithValue("@Name", Class.Name);
                     cmd.Parameters.AddWithValue("@ChangesPermitted", Class.ChangesPermitted);
                     cmd.Parameters.AddWithValue("@BaggageAllowance", Class.BaggageAllowance);
-                    cmd.Parameters.AddWithValue("@MilesAccural", Class.MilesAccural);
+                    cmd.Parameters.AddWithValue("@MilesAccrual", Class.MilesAccrual);
                     return cmd.ExecuteNonQuery();
                 }
             }
@@ -427,73 +427,73 @@ namespace _12TPI_Project_Console.Controller
                 return Convert.ToInt32(cmd.ExecuteScalar());
             }
         }
-        public int AddFlight(int pr /* = PlaneRegistrationID */, int fn /* = FlightNumber*/, string p /* = PilotName */, DateTime dt /* = DepartingDateTime */, string da /* = DepartingAirport */, DateTime at /* = ArrivingDateTime */, string aa /* = ArrivingAirport */, string s /* = Status */)
+        public int AddFlight(Flights flight)
         {
-            using (SqlCommand cmd = new SqlCommand("INSERT INTO Flights (PLANE_REGISTRATION_ID, FLIGHT_NUMBER, PILOT_NAME, DEPARTING_DATE_TIME, DEPARTING_AIRPORT, ARRIVING_DATE_TIME, ARRIVING_AIRPORT, STATUS) VALUES (@PlaneRegistrationId, @FlightNumber, @PilotName, @DepartingDateTime, @DepartingAirport, @ArrivingDateTime, @ArrivingAirport, @Status); SELECT SCOPE_IDENTITY();", conn))
+            using (SqlCommand cmd = new SqlCommand("INSERT INTO Flights (PlaneRegistrationID, FlightNumber, PilotName, DepartingDateTime, DepartingAirport, ArrivingDateTime, ArrivingAirport, Status) VALUES (@PlaneRegistrationID, @FlightNumber, @PilotName, @DepartingDateTime, @DepartingAirport, @ArrivingDateTime, @ArrivingAirport, @Status); SELECT SCOPE_IDENTITY();", conn))
             {
-                cmd.Parameters.AddWithValue("@PlaneRegistrationId", pr);
-                cmd.Parameters.AddWithValue("@FlightNumber", fn);
-                cmd.Parameters.AddWithValue("@PilotName", p);
-                cmd.Parameters.AddWithValue("@DepartingDateTime", dt);
-                cmd.Parameters.AddWithValue("@DepartingAirport", da);
-                cmd.Parameters.AddWithValue("@ArrivingDateTime", at);
-                cmd.Parameters.AddWithValue("@ArrivingAirport", aa);
-                cmd.Parameters.AddWithValue("@Status", s);
+                cmd.Parameters.AddWithValue("@PlaneRegistrationID", flight.PlaneRegistrationID);
+                cmd.Parameters.AddWithValue("@FlightNumber", flight.FlightNumber);
+                cmd.Parameters.AddWithValue("@PilotName", flight.PilotName);
+                cmd.Parameters.AddWithValue("@DepartingDateTime", flight.DepartingDateTime);
+                cmd.Parameters.AddWithValue("@DepartingAirport", flight.DepartingAirport);
+                cmd.Parameters.AddWithValue("@ArrivingDateTime", flight.ArrivingDateTime);
+                cmd.Parameters.AddWithValue("@ArrivingAirport", flight.ArrivingAirport);
+                cmd.Parameters.AddWithValue("@Status", flight.Status);
                 return Convert.ToInt32(cmd.ExecuteScalar());
             }
         }
-        public int AddAirport(int i /* = IATACode */, string n /* = Name */, string cor /* = Coordinates */, string con /* = Country */ , string t /* Timezone */)
+        public int AddAirport(Airports airport)
         {
-            using (SqlCommand cmd = new SqlCommand("INSERT INTO Airports (IATA_CODE, NAME, COORDINATES, COUNTRY, TIMEZONE) VALUES (@IATACode, @Name, @Coordinates, @Country, @Timezone);", conn))
+            using (SqlCommand cmd = new SqlCommand("INSERT INTO Airports (IATACode, Name, Coordinates, Country, Timezone) VALUES (@IATACode, @Name, @Coordinates, @Country, @Timezone);", conn))
             {
-                cmd.Parameters.AddWithValue("@IATACode", i);
-                cmd.Parameters.AddWithValue("@Name", n);
-                cmd.Parameters.AddWithValue("@Coordinates", cor);
-                cmd.Parameters.AddWithValue("@Country", con);
-                cmd.Parameters.AddWithValue("@Timezone", t);
+                cmd.Parameters.AddWithValue("@IATACode", airport.IATACode);
+                cmd.Parameters.AddWithValue("@Name", airport.Name);
+                cmd.Parameters.AddWithValue("@Coordinates", airport.Coordinates);
+                cmd.Parameters.AddWithValue("@Country", airport.Country);
+                cmd.Parameters.AddWithValue("@Timezone", airport.Timezone);
                 return cmd.ExecuteNonQuery();
             }
         }
-        public int AddPassenger(string f /* = FirstName */ , string l /* = LastName */ , string m /* = MembershipStatus */)
+        public int AddPassenger(Passengers passenger)
         {
-            using (SqlCommand cmd = new SqlCommand("INSERT INTO Passengers (FIRST_NAME, LAST_NAME, MEMBERSHIP_STATUS) VALUES (@FirstName, @LastName, @MembershipStatus);", conn))
+            using (SqlCommand cmd = new SqlCommand("INSERT INTO Passengers (FirstName, LastName, MembershipStatus) VALUES (@FirstName, @LastName, @MembershipStatus);", conn))
             {
-                cmd.Parameters.AddWithValue("@FirstName", f);
-                cmd.Parameters.AddWithValue("@LastName", l);
-                cmd.Parameters.AddWithValue("@MembershipStatus", m);
+                cmd.Parameters.AddWithValue("@FirstName", passenger.FirstName);
+                cmd.Parameters.AddWithValue("@LastName", passenger.LastName);
+                cmd.Parameters.AddWithValue("@MembershipStatus", passenger.MembershipStatus );
                 return Convert.ToInt32(cmd.ExecuteScalar());
             }
         }
-        public int AddTicket(int f /* = Flight ID */, int ci /* = Customer ID */, string cn /* = ClassName */, string m /* = MealChoice */)
+        public int AddTicket(PassengerTickets tickets)
         {
-            using (SqlCommand cmd = new SqlCommand("INSERT INTO Tickets (FLIGHT_ID, CUSTOMER_ID, CLASS_NAME, MEAL_CHOICE) VALUES (@FlightId, @CustomerId, @ClassName, @MealChoice);", conn))
+            using (SqlCommand cmd = new SqlCommand("INSERT INTO PassengerTickets (FlightID, CustomerID, ClassName, MealChoice) VALUES (@FlightID, @CustomerID, @ClassName, @MealChoice);", conn))
             {
-                cmd.Parameters.AddWithValue("@FlightId", f);
-                cmd.Parameters.AddWithValue("@CustomerId", ci);
-                cmd.Parameters.AddWithValue("@ClassName", cn);
-                cmd.Parameters.AddWithValue("@MealChoice", m);
+                cmd.Parameters.AddWithValue("@FlightID", tickets.FlightID);
+                cmd.Parameters.AddWithValue("@CustomerID", tickets.CustomerID);
+                cmd.Parameters.AddWithValue("@ClassName", tickets.ClassName);
+                cmd.Parameters.AddWithValue("@MealChoice", tickets.MealChoice);
                 return Convert.ToInt32(cmd.ExecuteScalar());
             }
         }
-        public int AddClasses(string c /* = ClassCode */, string n /* = Name */, string p /* = ChangesPermitted */, int b /* = BaggageAllowance */ , string m /* = MilesAccural */)
+        public int AddClasses(Classes Class)
         {
-            using (SqlCommand cmd = new SqlCommand("INSERT INTO Classes (CLASS_CODE, NAME, CHANGES_PERMITTED, BAGGAGE_ALLOWANCE, MILES_ACCRUAL) VALUES (@ClassCode, @Name, @ChangesPermitted, @BaggageAllowance, @MilesAccrual);", conn))
+            using (SqlCommand cmd = new SqlCommand("INSERT INTO Classes (ClassCode, Name, ChangesPermitted, BaggageAllowance, MilesAccrual) VALUES (@ClassCode, @Name, @ChangesPermitted, @BaggageAllowance, @MilesAccrual);", conn))
             {
-                cmd.Parameters.AddWithValue("@ClassCode", c);
-                cmd.Parameters.AddWithValue("@Name", n);
-                cmd.Parameters.AddWithValue("@ChangesPermitted", p);
-                cmd.Parameters.AddWithValue("@BaggageAllowance", b);
-                cmd.Parameters.AddWithValue("@MilesAccrual", m);
+                cmd.Parameters.AddWithValue("@ClassCode", Class.ClassCode);
+                cmd.Parameters.AddWithValue("@Name", Class.Name);
+                cmd.Parameters.AddWithValue("@ChangesPermitted", Class.ChangesPermitted);
+                cmd.Parameters.AddWithValue("@BaggageAllowance", Class.BaggageAllowance);
+                cmd.Parameters.AddWithValue("@MilesAccrual", Class.MilesAccrual);
                 return cmd.ExecuteNonQuery();
             }
         }
-        public int AddMealOptions(string m /* = MealCode */, string n /* = Name */, string c /* = Conditions*/)
+        public int AddMealOptions(MealOptions meal)
         {
-            using (SqlCommand cmd = new SqlCommand("INSERT INTO MealOptions (MEAL_CODE, NAME, CONDITIONS) VALUES (@MealCode, @Name, @Conditions);", conn))
+            using (SqlCommand cmd = new SqlCommand("INSERT INTO MealOptions (MealCode, Name, Conditions) VALUES (@MealCode, @Name, @Conditions);", conn))
             {
-                cmd.Parameters.AddWithValue("@MealCode", m);
-                cmd.Parameters.AddWithValue("@Name", n);
-                cmd.Parameters.AddWithValue("@Conditions", c);
+                cmd.Parameters.AddWithValue("@MealCode", meal.MealCode);
+                cmd.Parameters.AddWithValue("@Name", meal.Name);
+                cmd.Parameters.AddWithValue("@Conditions", meal.Conditions);
                 return cmd.ExecuteNonQuery();
             }
         }

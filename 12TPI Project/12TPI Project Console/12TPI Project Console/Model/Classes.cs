@@ -10,15 +10,15 @@ namespace _12TPI_Project_Console.Model
         public String Name { get; set; }
         public String ChangesPermitted { get; set; }
         public int BaggageAllowance { get; set; }
-        public String MilesAccural { get; set; }
+        public String MilesAccrual { get; set; }
         public Classes() { } //Creates the constructor for the 'Classes' class
-        public Classes(string c /* = ClassCode */, string n /* = Name */, string p /* = ChangesPermitted */, int b /* = BaggageAllowance */ , string m /* = MilesAccural */)
+        public Classes(string c /* = ClassCode */, string n /* = Name */, string p /* = ChangesPermitted */, int b /* = BaggageAllowance */ , string m /* = MilesAccrual */)
         {
             ClassCode = c;
             Name = n;
             ChangesPermitted = p;
             BaggageAllowance = b;
-            MilesAccural = m;
+            MilesAccrual = m;
         }
     }
 }
