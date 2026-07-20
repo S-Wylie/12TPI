@@ -200,7 +200,7 @@ namespace _12TPI_Project_Console.View
         {
             foreach (PassengerTickets ticket in ticketsList)
             {
-                Console.WriteLine($"{ticket.TicketID}, {ticket.FlightID},{ticket.CustomerID},{ticket.ClassName},{ticket.MealChoice}");
+                Console.WriteLine($"{ticket.TicketID}, {ticket.FlightID},{ticket.CustomerID},{ticket.ClassCode},{ticket.MealChoice}");
             }
         }
         public void DisplayClasses(List<Classes> classesList)
@@ -255,6 +255,20 @@ namespace _12TPI_Project_Console.View
             }
             return response;
         }
+        public DateTime GetDateTimeInput(string prompt)
+        {
+            DateTime response;
+            while (true)
+            {
+                Console.Write(prompt);
+                if (DateTime.TryParse(Console.ReadLine(), out response))
+                {
+                    break;
+                }
+                Console.WriteLine("Invalid input. Please try again.");
+            }
+            return response;
+        }
         public Planes PromptAddPlane()
         {
             Planes newPlane = new Planes();
@@ -265,6 +279,64 @@ namespace _12TPI_Project_Console.View
             newPlane.MinimumTakeoff = GetIntInput("Enter the Minimum Takeoff Length: ");
             newPlane.MinimumLanding = GetIntInput("Enter the Minimum Landing Length: ");
             return newPlane;
+        }
+        public Flights PromptAddFlight()
+        {
+            Flights newFlight = new Flights();
+            newFlight.PlaneRegistrationID = GetIntInput("Enter the Plane Registration ID: ");
+            newFlight.FlightNumber = GetStringInput("Enter the Flight Number: ");
+            newFlight.PilotName = GetStringInput("Enter the Pilot Name: ");
+            newFlight.DepartingDateTime = GetDateTimeInput("Enter the Departing Date and Time: ");
+            newFlight.DepartingAirport = GetStringInput("Enter the Departing Airport: ");
+            newFlight.ArrivingDateTime = GetDateTimeInput("Enter the Arriving Date and Time: ");
+            newFlight.ArrivingAirport = GetStringInput("Enter the Arriving Airport: ");
+            newFlight.Status = GetStringInput("Enter the Flight's Status: ");
+            return newFlight;
+        }
+        public Airports PromptAddAirport()
+        {
+            Airports newAirport = new Airports();
+            newAirport.IATACode = GetIntInput("Enter the IATA Code: ");
+            newAirport.Name = GetStringInput("Enter the Airport's Name: ");
+            newAirport.Coordinates = GetStringInput("Enter the Coordinates: ");
+            newAirport.Country = GetStringInput("Enter the Airport's Country: ");
+            newAirport.Timezone = GetStringInput("Enter the Timezone: ");
+            return newAirport;
+        }
+        public Passengers PromptAddPassenger()
+        {
+            Passengers newPassenger = new Passengers();
+            newPassenger.FirstName = GetStringInput("Enter First Name: ");
+            newPassenger.LastName = GetStringInput("Enter Last Name: ");
+            newPassenger.MembershipStatus = GetStringInput("Enter the Passenger's Membership Status: ");
+            return newPassenger;
+        }
+        public PassengerTickets PromptAddTicket()
+        {
+            PassengerTickets newTicket = new PassengerTickets();
+            newTicket.FlightID = GetIntInput("Enter the Flight ID: ");
+            newTicket.CustomerID = GetIntInput("Enter the Customer ID: ");
+            newTicket.ClassCode = GetStringInput("Enter the Ticket's Class Code: ");
+            newTicket.MealChoice = GetStringInput("Enter the Ticket's Meal Choice: ");
+            return newTicket;
+        }
+        public Classes PromptAddClass()
+        {
+            Classes newClass = new Classes();
+            newClass.ClassCode = GetStringInput("Enter the Classe Code");
+            newClass.Name = GetStringInput("Enter the Class Name: ");
+            newClass.ChangesPermitted = GetStringInput("Enter if changes are permitted (Yes/No): ");
+            newClass.BaggageAllowance = GetIntInput("Enter the Baggage Allowance: ");
+            newClass.MilesAccrual = GetStringInput("Enter if Miles can be accrued (Yes/No): ");
+            return newClass;
+        }
+        public MealOptions PromptAddMealOption()
+        {
+            MealOptions newMealOption = new MealOptions();
+            newMealOption.MealCode = GetStringInput("Enter the Meal Code: ");
+            newMealOption.Name = GetStringInput("Enter the Meal's Name: ");
+            newMealOption.Conditions = GetStringInput("Enter the Meal's Conditions: ");
+            return newMealOption;
         }
         public Planes PromptUpdatePlane()
         {

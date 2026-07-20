@@ -273,7 +273,7 @@ namespace _12TPI_Project_Console.Controller
                                 Name = reader.GetSafeString(1),
                                 ChangesPermitted = reader.GetSafeString(2),
                                 BaggageAllowance = reader.GetInt32(3),
-                                MilesAccural = reader.GetSafeString(4)
+                                MilesAccrual = reader.GetSafeString(4)
                             };
                             classesList.Add(Class);
                         }
@@ -487,7 +487,7 @@ namespace _12TPI_Project_Console.Controller
                 return cmd.ExecuteNonQuery();
             }
         }
-        public int AddMealOptions(MealOptions meal)
+        public int AddMealOption(MealOptions meal)
         {
             using (SqlCommand cmd = new SqlCommand("INSERT INTO MealOptions (MealCode, Name, Conditions) VALUES (@MealCode, @Name, @Conditions);", conn))
             {

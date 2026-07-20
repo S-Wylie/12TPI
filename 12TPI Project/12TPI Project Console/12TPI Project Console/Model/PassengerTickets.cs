@@ -9,15 +9,15 @@ namespace _12TPI_Project_Console.Model
         public int TicketID { get; set; }
         public int FlightID { get; set; }
         public int CustomerID { get; set; }
-        public String ClassName { get; set; }
+        public String ClassCode { get; set; }
         public String MealChoice { get; set; }
         public PassengerTickets() { } //Creates the constructor for the 'PassengerTickets' class
-        public PassengerTickets(int t /* = TicketID */, int f /* = Flight ID */, int ci /* = Customer ID */, string cn /* = ClassName */, string m /* = MealChoice */)
+        public PassengerTickets(int t /* = TicketID */, int f /* = Flight ID */, int ci /* = Customer ID */, string cc /* = ClassCode */, string m /* = MealChoice */)
         {
             TicketID = t;
             FlightID = f;
             CustomerID = ci;
-            ClassName = cn;
+            ClassCode = cc;
             MealChoice = m;
         }
     }

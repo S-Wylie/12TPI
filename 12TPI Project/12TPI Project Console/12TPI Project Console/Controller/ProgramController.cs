@@ -62,6 +62,42 @@ namespace _12TPI_Project_Console.Controller
             storageManager.AddPlane(newPlane);
             consoleView.DisplaySuccessMessage();
         }
+        public void AddNewFlight()
+        {
+            var newFlight = consoleView.PromptAddFlight();
+            storageManager.AddFlight(newFlight);
+            consoleView.DisplaySuccessMessage();
+        }
+        public void AddNewAirport()
+        {
+            var newAirport = consoleView.PromptAddAirport();
+            storageManager.AddAirport(newAirport);
+            consoleView.DisplaySuccessMessage();
+        }
+        public void AddNewPassenger()
+        {
+            var newPassenger = consoleView.PromptAddPassenger();
+            storageManager.AddPassenger(newPassenger);
+            consoleView.DisplaySuccessMessage();
+        }
+        public void AddNewTicket()
+        {
+            var newTicket = consoleView.PromptAddTicket();
+            storageManager.AddTicket(newTicket);
+            consoleView.DisplaySuccessMessage();
+        }
+        public void AddNewClass()
+        {
+            var newClass = consoleView.PromptAddClass();
+            storageManager.AddClasses(newClass);
+            consoleView.DisplaySuccessMessage();
+        }
+        public void AddNewMealOption()
+        {
+            var newMealOption = consoleView.PromptAddMealOption();
+            storageManager.AddMealOption(newMealOption);
+            consoleView.DisplaySuccessMessage();
+        }
         public void UpdatePlane()
         {
             var updatedPlane = consoleView.PromptUpdatePlane();
