@@ -507,7 +507,7 @@ namespace _12TPI_Project_Console.Controller
         }
         public int DeleteFlightByID(int fi /* = FlightID */)
         {
-            using (SqlCommand cmd = new SqlCommand("DELETE FROM Flights WHERE FLIGHT_ID = @FlightID", conn))
+            using (SqlCommand cmd = new SqlCommand("DELETE FROM Flights WHERE FlightID = @FlightID", conn))
             {
                 cmd.Parameters.AddWithValue("@FlightID", fi);
                 return cmd.ExecuteNonQuery();
@@ -515,7 +515,7 @@ namespace _12TPI_Project_Console.Controller
         }
         public int DeleteAirportByIATACode(string i /* = IATACode */)
         {
-            using (SqlCommand cmd = new SqlCommand("DELETE FROM Airports WHERE IATA_CODE = @IATACode", conn))
+            using (SqlCommand cmd = new SqlCommand("DELETE FROM Airports WHERE IATACode = @IATACode", conn))
             {
                 cmd.Parameters.AddWithValue("@IATACode", i);
                 return cmd.ExecuteNonQuery();
@@ -523,7 +523,7 @@ namespace _12TPI_Project_Console.Controller
         }
         public int DeletePassengerByID(int c /* = CustomerID */)
         {
-            using (SqlCommand cmd = new SqlCommand("DELETE FROM Passengers WHERE CUSTOMER_ID = @CustomerID", conn))
+            using (SqlCommand cmd = new SqlCommand("DELETE FROM Passengers WHERE CustomerID = @CustomerID", conn))
             {
                 cmd.Parameters.AddWithValue("@CustomerID", c);
                 return cmd.ExecuteNonQuery();
@@ -531,7 +531,7 @@ namespace _12TPI_Project_Console.Controller
         }
         public int DeleteTicketByID(int t /* = TicketID */)
         {
-            using (SqlCommand cmd = new SqlCommand("DELETE FROM PassengerTickets WHERE TICKET_ID = @TicketID", conn))
+            using (SqlCommand cmd = new SqlCommand("DELETE FROM PassengerTickets WHERE TicketID = @TicketID", conn))
             {
                 cmd.Parameters.AddWithValue("@TicketID", t);
                 return cmd.ExecuteNonQuery();
@@ -539,7 +539,7 @@ namespace _12TPI_Project_Console.Controller
         }
         public int DeleteClassesByCode(string c /* = ClassCode */)
         {
-            using (SqlCommand cmd = new SqlCommand("DELETE FROM Classes WHERE CLASS_CODE = @ClassCode", conn))
+            using (SqlCommand cmd = new SqlCommand("DELETE FROM Classes WHERE ClassCode = @ClassCode", conn))
             {
                 cmd.Parameters.AddWithValue("@ClassCode", c);
                 return cmd.ExecuteNonQuery();
@@ -547,7 +547,7 @@ namespace _12TPI_Project_Console.Controller
         }
         public int DeleteMealOptionsByCode(string m /* = MealCode */)
         {
-            using (SqlCommand cmd = new SqlCommand("DELETE FROM MealOptions WHERE MEAL_CODE = @MealCode", conn))
+            using (SqlCommand cmd = new SqlCommand("DELETE FROM MealOptions WHERE MealCode = @MealCode", conn))
             {
                 cmd.Parameters.AddWithValue("@MealCode", m);
                 return cmd.ExecuteNonQuery();
