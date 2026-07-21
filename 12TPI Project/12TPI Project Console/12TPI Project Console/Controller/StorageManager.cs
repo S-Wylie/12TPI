@@ -235,7 +235,7 @@ namespace _12TPI_Project_Console.Controller
                                 TicketID = reader.GetInt32(0),
                                 FlightID = reader.GetInt32(1),
                                 CustomerID = reader.GetInt32(2),
-                                ClassName = reader.GetSafeString(3),
+                                ClassCode = reader.GetSafeString(3),
                                 MealChoice = reader.GetSafeString(4),
                             };
                             passengerTicketsList.Add(passengerTicket);
@@ -381,12 +381,12 @@ namespace _12TPI_Project_Console.Controller
         }
         public int UpdateTicket(PassengerTickets ticket)
             {
-                using (SqlCommand cmd = new SqlCommand($"UPDATE Tickets SET FlightID = @FlightID, CustomerID = @CustomerID, ClassName = @ClassName, MealChoice = @MealChoice WHERE TicketID = @TicketID", conn))
+                using (SqlCommand cmd = new SqlCommand($"UPDATE Tickets SET FlightID = @FlightID, CustomerID = @CustomerID, ClassCode = @ClassCode, MealChoice = @MealChoice WHERE TicketID = @TicketID", conn))
                 {
                     cmd.Parameters.AddWithValue("@TicketID", ticket.TicketID);
                     cmd.Parameters.AddWithValue("@FlightID", ticket.FlightID);
                     cmd.Parameters.AddWithValue("@CustomerID", ticket.CustomerID);
-                    cmd.Parameters.AddWithValue("@ClassName", ticket.ClassName);
+                    cmd.Parameters.AddWithValue("@ClassCode", ticket.ClassCode);
                     cmd.Parameters.AddWithValue("@MealChoice", ticket.MealChoice);
                     return cmd.ExecuteNonQuery();
                 }
@@ -394,7 +394,7 @@ namespace _12TPI_Project_Console.Controller
         
         public int UpdateClass(Classes Class)
             {
-                using (SqlCommand cmd = new SqlCommand($"UPDATE Classes SET Name = @Name, ChangesPermitted = @ChangesPermitted, BaggageAllowance = @BaggageAllowance, MilesAccural = @MilesAccural WHERE ClassCode = @ClassCode", conn))
+                using (SqlCommand cmd = new SqlCommand($"UPDATE Classes SET Name = @Name, ChangesPermitted = @ChangesPermitted, BaggageAllowance = @BaggageAllowance, MilesAccrual = @MilesAccrual WHERE ClassCode = @ClassCode", conn))
                 {
                     cmd.Parameters.AddWithValue("@ClassCode", Class.ClassCode);
                     cmd.Parameters.AddWithValue("@Name", Class.Name);
@@ -466,11 +466,11 @@ namespace _12TPI_Project_Console.Controller
         }
         public int AddTicket(PassengerTickets tickets)
         {
-            using (SqlCommand cmd = new SqlCommand("INSERT INTO PassengerTickets (FlightID, CustomerID, ClassName, MealChoice) VALUES (@FlightID, @CustomerID, @ClassName, @MealChoice);", conn))
+            using (SqlCommand cmd = new SqlCommand("INSERT INTO PassengerTickets (FlightID, CustomerID, ClassCode, MealChoice) VALUES (@FlightID, @CustomerID, @ClassCode, @MealChoice);", conn))
             {
                 cmd.Parameters.AddWithValue("@FlightID", tickets.FlightID);
                 cmd.Parameters.AddWithValue("@CustomerID", tickets.CustomerID);
-                cmd.Parameters.AddWithValue("@ClassName", tickets.ClassName);
+                cmd.Parameters.AddWithValue("@ClassCode", tickets.ClassCode);
                 cmd.Parameters.AddWithValue("@MealChoice", tickets.MealChoice);
                 return Convert.ToInt32(cmd.ExecuteScalar());
             }
