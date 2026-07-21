@@ -104,6 +104,42 @@ namespace _12TPI_Project_Console.Controller
             storageManager.UpdatePlane(updatedPlane);
             consoleView.DisplaySuccessMessage();
         }
+        public void UpdateFlight()
+        {
+            var updatedFlight = consoleView.PromptUpdateFlight();
+            storageManager.UpdateFlight(updatedFlight);
+            consoleView.DisplaySuccessMessage();
+        }
+        public void UpdateAirport()
+        {
+            var updatedAirport = consoleView.PromptUpdateAirport();
+            storageManager.UpdateAirport(updatedAirport);
+            consoleView.DisplaySuccessMessage();
+        }
+        public void UpdatePassenger()
+        {
+            var updatedPassenger = consoleView.PromptUpdatePassenger();
+            storageManager.UpdatePassenger(updatedPassenger);
+            consoleView.DisplaySuccessMessage();
+        }
+        public void UpdateTicket()
+        {
+            var updatedTicket = consoleView.PromptUpdateTicket();
+            storageManager.UpdateTicket(updatedTicket);
+            consoleView.DisplaySuccessMessage();
+        }
+        public void UpdateClass()
+        {
+            var updatedClass = consoleView.PromptUpdateClass();
+            storageManager.UpdateClass(updatedClass);
+            consoleView.DisplaySuccessMessage();
+        }
+        public void UpdateMealOptions()
+        {
+            var updatedMealOption = consoleView.PromptUpdateMealOption();
+            storageManager.UpdateMealOption(updatedMealOption);
+            consoleView.DisplaySuccessMessage();
+        }
         public void DeletePlane()
         {
             var planeToDelete = consoleView.PromptDeletePlane();

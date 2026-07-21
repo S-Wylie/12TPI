@@ -207,7 +207,7 @@ namespace _12TPI_Project_Console.View
         {
             foreach (Classes Class in classesList)
             {
-                Console.WriteLine($"{Class.ClassCode}, {Class.Name},{Class.ChangesPermitted},{Class.BaggageAllowance},{Class.MilesAccural}");
+                Console.WriteLine($"{Class.ClassCode}, {Class.Name},{Class.ChangesPermitted},{Class.BaggageAllowance},{Class.MilesAccrual}");
             }
         }
         public void DisplayMealOptions(List<MealOptions> mealOptionsList)
@@ -350,6 +350,66 @@ namespace _12TPI_Project_Console.View
             updatedPlane.MinimumLanding = GetIntInput("Enter the new Minimum Landing Length: ");
             return updatedPlane;
         }
+        public Flights PromptUpdateFlight()
+        {
+            Flights updatedFlight = new Flights();
+            updatedFlight.FlightID = GetIntInput("Enter the Flight ID of the flight to update: ");
+            updatedFlight.FlightNumber = GetStringInput("Enter the new Flight Number: ");
+            updatedFlight.PilotName = GetStringInput("Enter the new Pilot's Name: ");
+            updatedFlight.DepartingDateTime = GetDateTimeInput("Enter the new Departing Date and Time: ");
+            updatedFlight.DepartingAirport = GetStringInput("Enter the new Departing Airport's IATA Code: ");
+            updatedFlight.ArrivingDateTime = GetDateTimeInput("Enter the new Arriving Date and Time: ");
+            updatedFlight.ArrivingAirport = GetStringInput("Enter the new Arriving Airport's IATA Code: ");
+            updatedFlight.Status = GetStringInput("Enter the new Flight's Status: ");
+            return updatedFlight;
+        }
+        public Airports PromptUpdateAirport()
+        {
+            Airports updatedAirport = new Airports();
+            updatedAirport.IATACode = GetIntInput("Enter the IATA Code of the airport to update: ");
+            updatedAirport.Name = GetStringInput("Enter the new Name: ");
+            updatedAirport.Coordinates = GetStringInput("Enter the new Coordinates: ");
+            updatedAirport.Country = GetStringInput("Enter the new Country: ");
+            updatedAirport.Timezone = GetStringInput("Enter the new Timezone: ");
+            return updatedAirport;
+        }
+        public Passengers PromptUpdatePassenger()
+        {
+            Passengers updatedPassenger = new Passengers();
+            updatedPassenger.CustomerID = GetIntInput("Enter the Customer ID of the passenger to update: ");
+            updatedPassenger.FirstName = GetStringInput("Enter the new First Name: ");
+            updatedPassenger.LastName = GetStringInput("Enter the new Last Name: ");
+            updatedPassenger.MembershipStatus = GetStringInput("Enter the new Membership Status: ");
+            return updatedPassenger;
+        }
+        public PassengerTickets PromptUpdateTicket()
+        {
+            PassengerTickets updatedTicket = new PassengerTickets();
+            updatedTicket.TicketID = GetIntInput("Enter the Ticket ID of the ticket to update: ");
+            updatedTicket.FlightID = GetIntInput("Enter the new Flight ID: ");
+            updatedTicket.CustomerID = GetIntInput("Enter the new Customer ID: ");
+            updatedTicket.ClassCode = GetStringInput("Enter the new Class Code: ");
+            updatedTicket.MealChoice = GetStringInput("Enter the new Meal Choice: ");
+            return updatedTicket;
+        }
+        public Classes PromptUpdateClass()
+        {
+            Classes updatedClass = new Classes();
+            updatedClass.ClassCode = GetStringInput("Enter the Class Code of the class to update: ");
+            updatedClass.Name = GetStringInput("Enter the new Class Name: ");
+            updatedClass.ChangesPermitted = GetStringInput("Enter if changes are permitted? (Yes/No): ");
+            updatedClass.BaggageAllowance = GetIntInput("Enter the new Baggage Allowance: ");
+            updatedClass.MilesAccrual = GetStringInput("Enter if miles are able to be accrued? (Yes/No): ");
+            return updatedClass;
+        }
+        public MealOptions PromptUpdateMealOption()
+        {
+            MealOptions updatedMealOption = new MealOptions();
+            updatedMealOption.MealCode = GetStringInput("Enter the Meal Code of the meal option to update: ");
+            updatedMealOption.Name = GetStringInput("Enter the new Meal Name: ");
+            updatedMealOption.Conditions = GetStringInput("Enter the new Conditions: ");
+            return updatedMealOption;
+        }   
         public int PromptDeletePlane()
         {
             return GetIntInput("Enter the Registration ID of the plane to delete: ");
