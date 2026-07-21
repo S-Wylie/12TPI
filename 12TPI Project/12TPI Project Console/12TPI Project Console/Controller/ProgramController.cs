@@ -146,6 +146,42 @@ namespace _12TPI_Project_Console.Controller
             storageManager.DeletePlaneByID(planeToDelete);
             consoleView.DisplaySuccessMessage();
         }
+        public void DeleteFlight()
+        {
+            var flightToDelete = consoleView.PromptDeleteFlight();
+            storageManager.DeleteFlightByID(flightToDelete);
+            consoleView.DisplaySuccessMessage();
+        }
+        public void DeleteAirport()
+        {
+            var airportToDelete = consoleView.PromptDeleteAirport();
+            storageManager.DeleteAirportByIATACode(airportToDelete);
+            consoleView.DisplaySuccessMessage();
+        }
+        public void DeletePassenger()
+        {
+            var passengerToDelete = consoleView.PromptDeletePassenger();
+            storageManager.DeletePassengerByID(passengerToDelete);
+            consoleView.DisplaySuccessMessage();
+        }
+        public void DeleteTicket()
+        {
+            var ticketToDelete = consoleView.PromptDeleteTicket();
+            storageManager.DeleteTicketByID(ticketToDelete);
+            consoleView.DisplaySuccessMessage();
+        }
+        public void DeleteClass()
+        {
+            var classToDelete = consoleView.PromptDeleteClass();
+            storageManager.DeleteClassByCode(classToDelete);
+            consoleView.DisplaySuccessMessage();
+        }
+        public void DeleteMealOption()
+        {
+            var mealOptionToDelete = consoleView.PromptDeleteMealOption();
+            storageManager.DeleteMealOptionByCode(mealOptionToDelete);
+            consoleView.DisplaySuccessMessage();
+        }
         public void LaunchPlanesMenu()
         {
             bool exit = false;

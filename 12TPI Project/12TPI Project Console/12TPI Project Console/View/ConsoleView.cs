@@ -414,5 +414,29 @@ namespace _12TPI_Project_Console.View
         {
             return GetIntInput("Enter the Registration ID of the plane to delete: ");
         }
+        public int PromptDeleteFlight()
+        {
+            return GetIntInput("Enter the Flight ID of the flight to delete: ");
+        }
+        public string PromptDeleteAirport()
+        {
+            return GetStringInput("Enter the IATA Code of the airport to delete: ");
+        }
+        public int PromptDeletePassenger()
+        {
+            return GetIntInput("Enter the Customer ID of the passenger to delete: ");
+        }
+        public int PromptDeleteTicket()
+        {
+            return GetIntInput("Enter the Ticket ID of the ticket to delete: ");
+        }
+        public string PromptDeleteClass()
+        {
+            return GetStringInput("Enter the Class Code of the class to delete: ");
+        }
+        public string PromptDeleteMealOption()
+        {
+            return GetStringInput("Enter the Meal Code of the meal option to delete: ");
+        }
     }
 }

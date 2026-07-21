@@ -537,7 +537,7 @@ namespace _12TPI_Project_Console.Controller
                 return cmd.ExecuteNonQuery();
             }
         }
-        public int DeleteClassesByCode(string c /* = ClassCode */)
+        public int DeleteClassByCode(string c /* = ClassCode */)
         {
             using (SqlCommand cmd = new SqlCommand("DELETE FROM Classes WHERE ClassCode = @ClassCode", conn))
             {
@@ -545,7 +545,7 @@ namespace _12TPI_Project_Console.Controller
                 return cmd.ExecuteNonQuery();
             }
         }
-        public int DeleteMealOptionsByCode(string m /* = MealCode */)
+        public int DeleteMealOptionByCode(string m /* = MealCode */)
         {
             using (SqlCommand cmd = new SqlCommand("DELETE FROM MealOptions WHERE MealCode = @MealCode", conn))
             {
