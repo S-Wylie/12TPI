@@ -442,13 +442,13 @@ namespace _12TPI_Project_Console.Controller
                         LaunchFlightsMenu();
                         break;
                     case 3:
-                        ;
+                        LaunchAirportsMenu();
                         break;
                     case 4:
-                        ;
+                        LaunchPassengersMenu();
                         break;
                     case 5:
-                        ;
+                        LaunchTicketsMenu();
                         break;
                     case 6:
                         exit = true;
@@ -472,13 +472,13 @@ namespace _12TPI_Project_Console.Controller
                 switch (choice)
                 {
                     case 1:
-                        LaunchGeneralMenu();
+                        LaunchClassesMenu();
                         break;
                     case 2:
-                        LaunchEditingMenu();
+                        LaunchMealOptionsMenu();
                         break;
                     case 3:
-                        LaunchAdminMenu();
+                        LaunchEditingMenu();
                         break;
                     case 4:
                         exit = true;

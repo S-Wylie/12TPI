@@ -159,7 +159,7 @@ namespace _12TPI_Project_Console.Controller
                         {
                             Airports airport = new Airports()
                             {
-                                IATACode = reader.GetInt32(0),
+                                IATACode = reader.GetSafeString(0),
                                 Name = reader.GetSafeString(1),
                                 Coordinates = reader.GetSafeString(2),
                                 Country = reader.GetSafeString(3),

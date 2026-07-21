@@ -296,7 +296,7 @@ namespace _12TPI_Project_Console.View
         public Airports PromptAddAirport()
         {
             Airports newAirport = new Airports();
-            newAirport.IATACode = GetIntInput("Enter the IATA Code: ");
+            newAirport.IATACode = GetStringInput("Enter the IATA Code: ");
             newAirport.Name = GetStringInput("Enter the Airport's Name: ");
             newAirport.Coordinates = GetStringInput("Enter the Coordinates: ");
             newAirport.Country = GetStringInput("Enter the Airport's Country: ");
@@ -366,7 +366,7 @@ namespace _12TPI_Project_Console.View
         public Airports PromptUpdateAirport()
         {
             Airports updatedAirport = new Airports();
-            updatedAirport.IATACode = GetIntInput("Enter the IATA Code of the airport to update: ");
+            updatedAirport.IATACode = GetStringInput("Enter the IATA Code of the airport to update: ");
             updatedAirport.Name = GetStringInput("Enter the new Name: ");
             updatedAirport.Coordinates = GetStringInput("Enter the new Coordinates: ");
             updatedAirport.Country = GetStringInput("Enter the new Country: ");
