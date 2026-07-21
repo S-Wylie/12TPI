@@ -134,7 +134,7 @@ namespace _12TPI_Project_Console.Controller
             storageManager.UpdateClass(updatedClass);
             consoleView.DisplaySuccessMessage();
         }
-        public void UpdateMealOptions()
+        public void UpdateMealOption()
         {
             var updatedMealOption = consoleView.PromptUpdateMealOption();
             storageManager.UpdateMealOption(updatedMealOption);
@@ -213,6 +213,193 @@ namespace _12TPI_Project_Console.Controller
             }
 
         }
+        public void LaunchFlightsMenu()
+        {
+            bool exit = false;
+            while (!exit)
+            {
+                consoleView.DisplayFlightsMenu();
+                int choice = consoleView.GetUserChoice();
+                switch (choice)
+                {
+                    case 1:
+                        DisplayAllFlights();
+                        break;
+                    case 2:
+                        AddNewFlight();
+                        break;
+                    case 3:
+                        UpdateFlight();
+                        break;
+                    case 4:
+                        DeleteFlight();
+                        break;
+                    case 5:
+                        exit = true;
+                        break;
+                    default:
+                        consoleView.DisplayInvalidChoiceMessage();
+                        break;
+                }
+            }
+
+        }
+        public void LaunchAirportsMenu()
+        {
+            bool exit = false;
+            while (!exit)
+            {
+                consoleView.DisplayAirportsMenu();
+                int choice = consoleView.GetUserChoice();
+                switch (choice)
+                {
+                    case 1:
+                        DisplayAllAirports();
+                        break;
+                    case 2:
+                        AddNewAirport();
+                        break;
+                    case 3:
+                        UpdateAirport();
+                        break;
+                    case 4:
+                        DeleteAirport();
+                        break;
+                    case 5:
+                        exit = true;
+                        break;
+                    default:
+                        consoleView.DisplayInvalidChoiceMessage();
+                        break;
+                }
+            }
+
+        }
+
+        public void LaunchPassengersMenu()
+        {
+            bool exit = false;
+            while (!exit)
+            {
+                consoleView.DisplayPassengersMenu();
+                int choice = consoleView.GetUserChoice();
+                switch (choice)
+                {
+                    case 1:
+                        DisplayAllPassengers();
+                        break;
+                    case 2:
+                        AddNewPassenger();
+                        break;
+                    case 3:
+                        UpdatePassenger();
+                        break;
+                    case 4:
+                        DeletePassenger();
+                        break;
+                    case 5:
+                        exit = true;
+                        break;
+                    default:
+                        consoleView.DisplayInvalidChoiceMessage();
+                        break;
+                }
+            }
+
+        }
+        public void LaunchTicketsMenu()
+        {
+            bool exit = false;
+            while (!exit)
+            {
+                consoleView.DisplayTicketsMenu();
+                int choice = consoleView.GetUserChoice();
+                switch (choice)
+                {
+                    case 1:
+                        DisplayAllPassengerTickets();
+                        break;
+                    case 2:
+                        AddNewTicket();
+                        break;
+                    case 3:
+                        UpdateTicket();
+                        break;
+                    case 4:
+                        DeleteTicket();
+                        break;
+                    case 5:
+                        exit = true;
+                        break;
+                    default:
+                        consoleView.DisplayInvalidChoiceMessage();
+                        break;
+                }
+            }
+
+        }
+        public void LaunchClassesMenu()
+        {
+            bool exit = false;
+            while (!exit)
+            {
+                consoleView.DisplayClassesMenu();
+                int choice = consoleView.GetUserChoice();
+                switch (choice)
+                {
+                    case 1:
+                        DisplayAllClasses();
+                        break;
+                    case 2:
+                        AddNewClass();
+                        break;
+                    case 3:
+                        UpdateClass();
+                        break;
+                    case 4:
+                        DeleteClass();
+                        break;
+                    case 5:
+                        exit = true;
+                        break;
+                    default:
+                        consoleView.DisplayInvalidChoiceMessage();
+                        break;
+                }
+            }
+
+        }
+        public void LaunchMealOptionsMenu()
+        {
+            bool exit = false;
+            while (!exit)
+            {
+                consoleView.DisplayMealOptionsMenu();
+                int choice = consoleView.GetUserChoice();
+                switch (choice)
+                {
+                    case 1:
+                        DisplayAllMealOptions();
+                        break;
+                    case 2:
+                        AddNewMealOption();
+                        break;
+                    case 3:
+                        UpdateMealOption();
+                        break;
+                    case 4:
+                        DeleteMealOption();
+                        break;
+                    case 5:
+                        exit = true;
+                        break;
+                    default:
+                        consoleView.DisplayInvalidChoiceMessage();
+                        break;
+                }
+            }
+
+        }
         public void LaunchGeneralMenu()
         {
             bool exit = false;
@@ -252,7 +439,7 @@ namespace _12TPI_Project_Console.Controller
                         LaunchPlanesMenu();
                         break;
                     case 2:
-                        ;
+                        LaunchFlightsMenu();
                         break;
                     case 3:
                         ;
