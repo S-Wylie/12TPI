@@ -184,8 +184,8 @@ namespace _12TPI_Project_Console.Controller
         }
         public void LaunchPlanesMenu()
         {
-            bool exit = false;
-            while (!exit)
+            bool exit = false; 
+            while (!exit) //Prevents the program from exiting until the user chooses to exit
             {
                 consoleView.DisplayPlanesMenu();
                 int choice = consoleView.GetUserChoice();
@@ -472,15 +472,21 @@ namespace _12TPI_Project_Console.Controller
                 switch (choice)
                 {
                     case 1:
-                        LaunchClassesMenu();
+                        ;
                         break;
                     case 2:
-                        LaunchMealOptionsMenu();
+                        ;
                         break;
                     case 3:
-                        LaunchEditingMenu();
+                        DisplayAllClasses();
                         break;
                     case 4:
+                        DisplayAllMealOptions();
+                        break;
+                    case 5:
+                        LaunchEditingMenu();
+                        break;
+                    case 6:
                         exit = true;
                         break;
                     default:
