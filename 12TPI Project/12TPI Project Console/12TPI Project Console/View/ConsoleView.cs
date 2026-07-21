@@ -226,7 +226,7 @@ namespace _12TPI_Project_Console.View
         {
             Console.WriteLine("Operation completed successfully.");
         }
-        public string GetStringInput(string prompt)
+        public string GetStringInput(string prompt) //Prevents null data from being inserted into the string data type
         {
             string response;
             while (true)
@@ -241,7 +241,7 @@ namespace _12TPI_Project_Console.View
             }
             return response;
         }
-        public int GetIntInput(string prompt)
+        public int GetIntInput(string prompt) //Prevents null data from being inserted into the int data type, and makes sure the input is translated from string to int correctly
         {
             int response;
             while (true)
@@ -255,7 +255,7 @@ namespace _12TPI_Project_Console.View
             }
             return response;
         }
-        public DateTime GetDateTimeInput(string prompt)
+        public DateTime GetDateTimeInput(string prompt) //Prevents null data from being inserted into the date time data type, and makes sure the input is translated from string to date time correctly
         {
             DateTime response;
             while (true)
