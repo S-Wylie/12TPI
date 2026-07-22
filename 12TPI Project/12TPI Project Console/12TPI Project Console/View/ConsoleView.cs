@@ -10,7 +10,7 @@ namespace _12TPI_Project_Console.View
         public void DisplayWelcomeMessage()
         {
             Console.WriteLine("Welcome to the Flight Management System!");
-            Console.WriteLine("by Sienna Wylie 12TPI.  (C) 2026.");
+            Console.WriteLine("by S-Wylie");
         }
         public void DisplayLandingScreen()
         {
@@ -19,8 +19,7 @@ namespace _12TPI_Project_Console.View
             Console.WriteLine("1. General View");
             Console.WriteLine("2. Editing View (Requires Login)");
             Console.WriteLine("3. Admin View (Requires Login)");
-            Console.WriteLine("4. Ticket Booking (Requires Login)");
-            Console.WriteLine("5. Exit");
+            Console.WriteLine("4. Exit");
 
             Console.Write("Please select an option: ");
         }
@@ -31,7 +30,7 @@ namespace _12TPI_Project_Console.View
         public int GetUserChoice()
         {
             int choice;
-            while (!int.TryParse(Console.ReadLine(), out choice))
+            while (!int.TryParse(Console.ReadLine(), out choice)) //Makes sure the input will lead to an outcome
             {
                 Console.WriteLine("Invalid input. Please enter a number.");
                 Console.Write("Please select an option: ");
