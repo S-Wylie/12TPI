@@ -46,6 +46,29 @@ namespace _12TPI_Project_Console.View
         {
             Console.WriteLine("Thank you for using the Flight Management System. Goodbye!");
         }
+
+        public void DisplayEditingNameLogin()
+        {
+            Console.WriteLine("Editing Login");
+            Console.WriteLine("Please input Username: ");
+        }
+
+        public void DisplayEditingPINLogin()
+        {
+            Console.WriteLine("Please input PIN: ");
+        }
+
+        public void DisplayAdminNameLogin()
+        {
+            Console.WriteLine("Admin Login");
+            Console.WriteLine("Please input Username: ");
+        }
+
+        public void DisplayAdminPINLogin()
+        {
+            Console.WriteLine("Please input PIN: ");
+        }
+
         public void DisplayGeneralView()
         {
             Console.WriteLine("General View");
