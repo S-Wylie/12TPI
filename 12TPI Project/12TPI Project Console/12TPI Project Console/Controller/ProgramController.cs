@@ -1,4 +1,5 @@
-﻿using _12TPI_Project_Console.View;
+﻿using _12TPI_Project_Console.Model;
+using _12TPI_Project_Console.View;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,6 +10,11 @@ namespace _12TPI_Project_Console.Controller
     {
         private readonly StorageManager storageManager;
         private readonly ConsoleView consoleView;
+
+        private Logins currentLogin;
+
+        private static readonly string[] EditAccess = { "EDIT", "ADMIN" };
+        private static readonly string[] AdminAccess = { "ADMIN" };
 
         public ProgramController(StorageManager storageManager, ConsoleView consoleView)
         {
@@ -181,6 +187,51 @@ namespace _12TPI_Project_Console.Controller
             var mealOptionToDelete = consoleView.PromptDeleteMealOption();
             storageManager.DeleteMealOptionByCode(mealOptionToDelete);
             consoleView.DisplaySuccessMessage();
+        }
+
+        public void UserLogin()
+        {
+            consoleView.DisplayUserLogin();
+            var userName = consoleView.GetUserInput();
+            consoleView.DisplayPINLogin();
+            var userPIN = consoleView.GetUserInput();
+            if(string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(userPIN))
+            {
+                consoleView.DisplayLoginFailure();
+                return;
+            }
+            var loginResult = storageManager.ValidateUserLogin(userName, userPIN);
+
+            if (loginResult != null)
+            {
+                currentLogin = loginResult;
+                consoleView.DisplayLoginSuccess();
+            }
+            else
+            {
+                consoleView.DisplayLoginFailure();
+            }
+        }
+        public Boolean RequireAccessLevel(string[] requiredLevel)
+        {
+            if (requiredLevel.Contains(currentLogin.AccessLevel)) // Checks if current login has the required access level
+            {
+                return true;
+            }
+            else
+            {
+                consoleView.DisplayInsufficientAccessMessage();
+                UserLogin();  // Prompt the user to log in if they don't 
+                if (requiredLevel.Contains(currentLogin.AccessLevel))
+                {
+                    return true;
+                }
+                else
+                {
+                    consoleView.DisplayInsufficientAccessMessage(); 
+                    return false; // If the user still doesn't have the required access level after logging in
+                }
+            }
         }
         public void LaunchPlanesMenu()
         {
@@ -427,39 +478,42 @@ namespace _12TPI_Project_Console.Controller
                 }
             }
         }
-        public void LaunchEditingMenu() {
+        public void LaunchEditingMenu()
+        {
             bool exit = false;
             while (!exit)
             {
-                consoleView.DisplayEditingView();
-                int choice = consoleView.GetUserChoice();
-                switch (choice)
-                {
-                    case 1:
-                        LaunchPlanesMenu();
-                        break;
-                    case 2:
-                        LaunchFlightsMenu();
-                        break;
-                    case 3:
-                        LaunchAirportsMenu();
-                        break;
-                    case 4:
-                        LaunchPassengersMenu();
-                        break;
-                    case 5:
-                        LaunchTicketsMenu();
-                        break;
-                    case 6:
-                        exit = true;
-                        break;
-                    default:
-                        consoleView.DisplayInvalidChoiceMessage();
-                        break;
+                if (!RequireAccessLevel(EditAccess)) {
+                    exit = true;
+                } else {
+                    consoleView.DisplayEditingView();
+                    int choice = consoleView.GetUserChoice();
+                    switch (choice)
+                    {
+                        case 1:
+                            LaunchPlanesMenu();
+                            break;
+                        case 2:
+                            LaunchFlightsMenu();
+                            break;
+                        case 3:
+                            LaunchAirportsMenu();
+                            break;
+                        case 4:
+                            LaunchPassengersMenu();
+                            break;
+                        case 5:
+                            LaunchTicketsMenu();
+                            break;
+                        case 6:
+                            exit = true;
+                            break;
+                        default:
+                            consoleView.DisplayInvalidChoiceMessage();
+                            break;
+                    }
                 }
             }
-
-
         }
 
         public void LaunchAdminMenu()
@@ -467,41 +521,50 @@ namespace _12TPI_Project_Console.Controller
             bool exit = false;
             while (!exit)
             {
-                consoleView.DisplayAdminView();
-                int choice = consoleView.GetUserChoice();
-                switch (choice)
+                if (!RequireAccessLevel(AdminAccess))
                 {
-                    case 1:
-                        ;
-                        break;
-                    case 2:
-                        ;
-                        break;
-                    case 3:
-                        DisplayAllClasses();
-                        break;
-                    case 4:
-                        DisplayAllMealOptions();
-                        break;
-                    case 5:
-                        LaunchEditingMenu();
-                        break;
-                    case 6:
-                        exit = true;
-                        break;
-                    default:
-                        consoleView.DisplayInvalidChoiceMessage();
-                        break;
+                    exit = true;
+                }
+                else
+                {
+                    consoleView.DisplayAdminView();
+                    int choice = consoleView.GetUserChoice();
+                    switch (choice)
+                    {
+                        case 1:
+                            ;
+                            break;
+                        case 2:
+                            ;
+                            break;
+                        case 3:
+                            LaunchClassesMenu();
+                            break;
+                        case 4:
+                            LaunchMealOptionsMenu();
+                            break;
+                        case 5:
+                            LaunchEditingMenu();
+                            break;
+                        case 6:
+                            exit = true;
+                            break;
+                        default:
+                            consoleView.DisplayInvalidChoiceMessage();
+                            break;
+                    }
                 }
             }
         }
 
         public void Run()
         {
+            currentLogin = new("anonymous", "", "VIEW"); // Default view-only access.
             consoleView.DisplayWelcomeMessage();
             bool exit = false;
             while (!exit)
             {
+                consoleView.DisplayCurrentUser(currentLogin.Username, currentLogin.AccessLevel); 
                 consoleView.DisplayLandingScreen();
                 int choice = consoleView.GetUserChoice();
                 switch (choice)

@@ -64,6 +64,43 @@ namespace _12TPI_Project_Console.Controller
                 Console.WriteLine("Connection Closed");
             }
         }
+
+        public Logins ValidateUserLogin(string usernName, string userPIN)
+        {
+            Logins login = null;
+            string query = "SELECT Username, PINHash, AccessLevel FROM Logins WHERE Username = @Username AND PINHash = CONVERT(char(42),HASHBYTES('SHA1',CONVERT(varchar(50),@PIN)),1)";
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Username", usernName);
+                    cmd.Parameters.AddWithValue("@PIN", userPIN);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            login = new Logins()
+                            {
+                                Username = reader.GetSafeString(0),
+                                PINHash = reader.GetSafeString(1),
+                                AccessLevel = reader.GetSafeString(2)
+                            };
+                        }
+                        reader.Close();
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine($"SQL Error: {e.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error validating user login: {ex.Message}");
+            }
+            return login;
+        }
+
         public List<Planes> GetAllPlanes()
         {
             List<Planes> planesList = new List<Planes>();

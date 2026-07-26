@@ -46,29 +46,31 @@ namespace _12TPI_Project_Console.View
         {
             Console.WriteLine("Thank you for using the Flight Management System. Goodbye!");
         }
-
-        public void DisplayEditingNameLogin()
+        public void DisplayCurrentUser(string username, string accessLevel)
         {
-            Console.WriteLine("Editing Login");
-            Console.WriteLine("Please input Username: ");
+            Console.WriteLine($"Current User: {username} | Access Level: {accessLevel}");
         }
-
-        public void DisplayEditingPINLogin()
+        public void DisplayInsufficientAccessMessage()
         {
-            Console.WriteLine("Please input PIN: ");
+            Console.WriteLine("You do not have sufficient access to view this menu.");
         }
-
-        public void DisplayAdminNameLogin()
+        public void DisplayUserLogin()
+        { 
+            Console.WriteLine("Please login with your credentials.");
+            Console.Write("Username: ");
+        }
+        public void DisplayPINLogin()
         {
-            Console.WriteLine("Admin Login");
-            Console.WriteLine("Please input Username: ");
+            Console.Write("Please input PIN: ");
         }
-
-        public void DisplayAdminPINLogin()
+        public void DisplayLoginSuccess()
         {
-            Console.WriteLine("Please input PIN: ");
+            Console.WriteLine("Login successful!");
         }
-
+        public void DisplayLoginFailure()
+        {
+            Console.WriteLine("Login failed. Please try again.");
+        }
         public void DisplayGeneralView()
         {
             Console.WriteLine("General View");
