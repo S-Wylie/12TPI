@@ -363,6 +363,42 @@ namespace _12TPI_Project_Console.Controller
             }
             return mealOptionsList;
         }
+
+        public List<Logins> GetAllLogins()
+        {
+            List<Logins> loginsList = new List<Logins>();
+
+            string query = "SELECT * FROM Logins";
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Logins login = new Logins()
+                            {
+                                Username = reader.GetSafeString(0),
+                                PINHash = reader.GetSafeString(1),
+                                AccessLevel = reader.GetSafeString(2)
+                            };
+                            loginsList.Add(login);
+                        }
+                        reader.Close();
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine($"SQL Error: {e.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving MealOptions: {ex.Message}");
+            }
+            return mealOptionsList;
+        }
         public int UpdatePlane(Planes plane)
         {
             using (SqlCommand cmd = new SqlCommand($"UPDATE Planes SET Manufacturer = @Manufacturer, Model = @Model, PassengerCapacity = @PassengerCapacity, CargoCapacity = @CargoCapacity, MinimumTakeoff = @MinimumTakeoff, MinimumLanding = @MinimumLanding WHERE RegistrationID = @RegistrationID", conn))

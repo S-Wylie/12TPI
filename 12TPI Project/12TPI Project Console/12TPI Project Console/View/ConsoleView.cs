@@ -241,6 +241,15 @@ namespace _12TPI_Project_Console.View
                 Console.WriteLine($"{mealOption.MealCode}, {mealOption.Name},{mealOption.Conditions}");
             }
         }
+
+        public void DisplayLogins(List<Logins> loginsList)
+        {
+            foreach (Logins login in loginsList)
+            {
+                Console.WriteLine($"{login.Username}, {login.PINHash},{login.AccessLevel}");
+            }
+        }
+
         public void DisplayMessage(string message)
         {
             Console.WriteLine(message);

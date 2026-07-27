@@ -57,6 +57,12 @@ namespace _12TPI_Project_Console.Controller
             consoleView.DisplayClasses(classes);
         }
 
+        public void DisplayAllLogins()
+        {
+            var logins = storageManager.GetAllLogins();
+            consoleView.DisplayLogins(logins);
+        }
+
         public void DisplayAllMealOptions()
         {
             var mealOptions = storageManager.GetAllMealOptions();
