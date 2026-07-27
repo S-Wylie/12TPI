@@ -99,12 +99,11 @@ namespace _12TPI_Project_Console.View
         {
             Console.WriteLine("Admin View");
 
-            Console.WriteLine("1. Editing Logins");
-            Console.WriteLine("2. Admin Logins");
-            Console.WriteLine("3. Classes Menu");
-            Console.WriteLine("4. Meal Options Menu");
-            Console.WriteLine("5. Editing View");
-            Console.WriteLine("6. Return");
+            Console.WriteLine("1. Logins Menu");
+            Console.WriteLine("2. Classes Menu");
+            Console.WriteLine("3. Meal Options Menu");
+            Console.WriteLine("4. Editing View");
+            Console.WriteLine("5. Return");
 
             Console.Write("Please select an option: ");
         }
@@ -188,6 +187,18 @@ namespace _12TPI_Project_Console.View
             Console.WriteLine("2. Add Meal Option");
             Console.WriteLine("3. Update Meal Option");
             Console.WriteLine("4. Delete Meal Option");
+            Console.WriteLine("5. Return");
+
+            Console.Write("Please select an option: ");
+        }
+        public void DisplayLoginsMenu()
+        {
+            Console.WriteLine("Logins Menu");
+
+            Console.WriteLine("1. View Logins");
+            Console.WriteLine("2. Add Login");
+            Console.WriteLine("3. Update Login");
+            Console.WriteLine("4. Delete Login");
             Console.WriteLine("5. Return");
 
             Console.Write("Please select an option: ");

@@ -556,21 +556,18 @@ namespace _12TPI_Project_Console.Controller
                     switch (choice)
                     {
                         case 1:
-                            ;
+                            LaunchLoginsMenu;
                             break;
                         case 2:
-                            ;
-                            break;
-                        case 3:
                             LaunchClassesMenu();
                             break;
-                        case 4:
+                        case 3:
                             LaunchMealOptionsMenu();
                             break;
-                        case 5:
+                        case 4:
                             LaunchEditingMenu();
                             break;
-                        case 6:
+                        case 5:
                             exit = true;
                             break;
                         default:
@@ -580,7 +577,37 @@ namespace _12TPI_Project_Console.Controller
                 }
             }
         }
+        public void LaunchLoginsMenu()
+        {
+            bool exit = false;
+            while (!exit) //Prevents the program from exiting until the user chooses to exit
+            {
+                consoleView.DisplayLoginsMenu();
+                int choice = consoleView.GetUserChoice();
+                switch (choice)
+                {
+                    case 1:
+                        DisplayAllLogins();
+                        break;
+                    case 2:
+                        AddNewLogin();
+                        break;
+                    case 3:
+                        UpdateLogin();
+                        break;
+                    case 4:
+                        DeleteLogin();
+                        break;
+                    case 5:
+                        exit = true;
+                        break;
+                    default:
+                        consoleView.DisplayInvalidChoiceMessage();
+                        break;
+                }
+            }
 
+        }
         public void Run()
         {
             currentLogin = new("anonymous", "", "VIEW"); // Default view-only access.
