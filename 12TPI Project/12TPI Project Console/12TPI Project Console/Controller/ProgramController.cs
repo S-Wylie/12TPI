@@ -110,6 +110,12 @@ namespace _12TPI_Project_Console.Controller
             storageManager.AddMealOption(newMealOption);
             consoleView.DisplaySuccessMessage();
         }
+        public void AddNewLogin()
+        {
+            var newLogin = consoleView.PromptAddLogin();
+            storageManager.AddLogin(newLogin);
+            consoleView.DisplaySuccessMessage();
+        }
         public void UpdatePlane()
         {
             var updatedPlane = consoleView.PromptUpdatePlane();
@@ -152,6 +158,12 @@ namespace _12TPI_Project_Console.Controller
             storageManager.UpdateMealOption(updatedMealOption);
             consoleView.DisplaySuccessMessage();
         }
+        public void UpdateLogin()
+        {
+            var updatedLogin = consoleView.PromptUpdateLogin();
+            storageManager.UpdateLogin(updatedLogin);
+            consoleView.DisplaySuccessMessage();
+        }
         public void DeletePlane()
         {
             var planeToDelete = consoleView.PromptDeletePlane();
@@ -192,6 +204,12 @@ namespace _12TPI_Project_Console.Controller
         {
             var mealOptionToDelete = consoleView.PromptDeleteMealOption();
             storageManager.DeleteMealOptionByCode(mealOptionToDelete);
+            consoleView.DisplaySuccessMessage();
+        }
+        public void DeleteLogin()
+        {
+            var loginToDelete = consoleView.PromptDeleteLogin();
+            storageManager.DeleteLoginByUsername(loginToDelete);
             consoleView.DisplaySuccessMessage();
         }
 

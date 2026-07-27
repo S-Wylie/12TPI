@@ -371,6 +371,14 @@ namespace _12TPI_Project_Console.View
             newMealOption.Conditions = GetStringInput("Enter the Meal's Conditions: ");
             return newMealOption;
         }
+        public Logins PromptAddLogin()
+        {
+            Logins newLogin = new Logins();
+            newLogin.Username = GetStringInput("Enter the Username: ");
+            newLogin.PINHash = GetStringInput("Enter the PIN: ");
+            newLogin.AccessLevel = GetStringInput("Enter the Access Level: ");
+            return newLogin;
+        }
         public Planes PromptUpdatePlane()
         {
             Planes updatedPlane = new Planes();
@@ -442,7 +450,15 @@ namespace _12TPI_Project_Console.View
             updatedMealOption.Name = GetStringInput("Enter the new Meal Name: ");
             updatedMealOption.Conditions = GetStringInput("Enter the new Conditions: ");
             return updatedMealOption;
-        }   
+        }
+        public Logins PromptUpdateLogin()
+        {
+            Logins updatedLogin = new Logins();
+            updatedLogin.Username = GetStringInput("Enter the Username of the login to update: ");
+            updatedLogin.PINHash = GetStringInput("Enter the new PIN: ");
+            updatedLogin.AccessLevel = GetStringInput("Enter the new Access Level: ");
+            return updatedLogin;
+        }
         public int PromptDeletePlane()
         {
             return GetIntInput("Enter the Registration ID of the plane to delete: ");
@@ -470,6 +486,10 @@ namespace _12TPI_Project_Console.View
         public string PromptDeleteMealOption()
         {
             return GetStringInput("Enter the Meal Code of the meal option to delete: ");
+        }
+        public string PromptDeleteLogin()
+        {
+            return GetStringInput("Enter the Username of the login to delete: ");
         }
     }
 }

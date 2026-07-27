@@ -395,9 +395,9 @@ namespace _12TPI_Project_Console.Controller
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error retrieving MealOptions: {ex.Message}");
+                Console.WriteLine($"Error retrieving Logins: {ex.Message}");
             }
-            return mealOptionsList;
+            return loginsList;
         }
         public int UpdatePlane(Planes plane)
         {
@@ -487,6 +487,16 @@ namespace _12TPI_Project_Console.Controller
                 return cmd.ExecuteNonQuery();
             }
         }
+        public int UpdateLogin(Logins login)
+        {
+            using (SqlCommand cmd = new SqlCommand($"UPDATE Logins SET PINHash = @PINHash, AccessLevel = @AccessLevel WHERE Username = @Username", conn))
+            {
+                cmd.Parameters.AddWithValue("@Username", login.Username);
+                cmd.Parameters.AddWithValue("@PINHash", login.PINHash);
+                cmd.Parameters.AddWithValue("@AccessLevel", login.AccessLevel);
+                return cmd.ExecuteNonQuery();
+            }
+        }
         public int AddPlane(Planes plane)
         {
             using (SqlCommand cmd = new SqlCommand("INSERT INTO Planes (Manufacturer, Model, PassengerCapacity, CargoCapacity, MinimumTakeoff, MinimumLanding) VALUES (@Manufacturer, @Model, @PassengerCapacity, @CargoCapacity, @MinimumTakeoff, @MinimumLanding); SELECT SCOPE_IDENTITY();", conn))
@@ -570,6 +580,16 @@ namespace _12TPI_Project_Console.Controller
                 return cmd.ExecuteNonQuery();
             }
         }
+        public int AddLogin(Logins login)
+        {
+            using (SqlCommand cmd = new SqlCommand("INSERT INTO Logins (Username, PINHash, AccessLevel) VALUES (@Username, @PINHash, @AccessLevel);", conn))
+            {
+                cmd.Parameters.AddWithValue("@Username", login.Username);
+                cmd.Parameters.AddWithValue("@PINHash", login.PINHash);
+                cmd.Parameters.AddWithValue("@AccessLevel", login.AccessLevel);
+                return cmd.ExecuteNonQuery();
+            }
+        }
         public int DeletePlaneByID(int r /* = RegistartionID */)
         {
             using (SqlCommand cmd = new SqlCommand("DELETE FROM Planes WHERE RegistrationID = @RegistrationID", conn))
@@ -623,6 +643,14 @@ namespace _12TPI_Project_Console.Controller
             using (SqlCommand cmd = new SqlCommand("DELETE FROM MealOptions WHERE MealCode = @MealCode", conn))
             {
                 cmd.Parameters.AddWithValue("@MealCode", m);
+                return cmd.ExecuteNonQuery();
+            }
+        }
+        public int DeleteLoginByUsername(string u /* = Username */)
+        {
+            using (SqlCommand cmd = new SqlCommand("DELETE FROM Logins WHERE Username = @Username", conn))
+            {
+                cmd.Parameters.AddWithValue("@Username", u);
                 return cmd.ExecuteNonQuery();
             }
         }
