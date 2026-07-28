@@ -399,6 +399,159 @@ namespace _12TPI_Project_Console.Controller
             }
             return loginsList;
         }
+        public List<Planes> GetAirbusPlanesQuery()
+        {
+            List<Planes> planesList = new List<Planes>();
+
+            string query = "SELECT * FROM Planes WHERE Manufacturer = 'Airbus' ORDER BY RegistrationID ASC";
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Planes plane = new Planes()
+                            {
+                                RegistrationID = reader.GetInt32(0),
+                                Manufacturer = reader.GetSafeString(1),
+                                Model = reader.GetSafeString(2),
+                                PassengerCapacity = reader.GetInt32(3),
+                                CargoCapacity = reader.GetInt32(4),
+                                MinimumTakeoff = reader.GetInt32(5),
+                                MinimumLanding = reader.GetInt32(6)
+                            };
+                            planesList.Add(plane);
+                        }
+                        reader.Close();
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine($"SQL Error: {e.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving Planes: {ex.Message}");
+            }
+            return planesList;
+        }
+        public List<Flights> GetDelayedFlightsQuery()
+        {
+            List<Flights> flightsList = new List<Flights>();
+
+            string query = "SELECT * FROM Flights WHERE \"Status\" = 'Delayed' ORDER BY FlightID ASC";
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Flights flight = new Flights()
+                            {
+                                FlightID = reader.GetInt32(0),
+                                PlaneRegistrationID = reader.GetInt32(1),
+                                FlightNumber = reader.GetSafeString(2),
+                                PilotName = reader.GetSafeString(3),
+                                DepartingDateTime = reader.GetDateTime(4),
+                                DepartingAirport = reader.GetSafeString(5),
+                                ArrivingDateTime = reader.GetDateTime(6),
+                                ArrivingAirport = reader.GetSafeString(7),
+                                Status = reader.GetSafeString(8)
+                            };
+                            flightsList.Add(flight);
+                        }
+                        reader.Close();
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine($"SQL Error: {e.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving Flights: {ex.Message}");
+            }
+            return flightsList;
+        }
+        public List<Airports> GetAustralianAirportsQuery()
+        {
+            List<Airports> airportsList = new List<Airports>();
+
+            string query = "SELECT * FROM Airports WHERE Country = 'Australia' ORDER BY IATACode ASC";
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Airports airport = new Airports()
+                            {
+                                IATACode = reader.GetSafeString(0),
+                                Name = reader.GetSafeString(1),
+                                Coordinates = reader.GetSafeString(2),
+                                Country = reader.GetSafeString(3),
+                                Timezone = reader.GetSafeString(4)
+                            };
+                            airportsList.Add(airport);
+                        }
+                        reader.Close();
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine($"SQL Error: {e.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving Airports: {ex.Message}");
+            }
+            return airportsList;
+        }
+        public List<Passengers> GetActiveMembershipsQuery()
+        {
+            List<Passengers> passengersList = new List<Passengers>();
+
+            string query = "SELECT * FROM Passengers WHERE MembershipStatus = 'Active' ORDER BY LastName ASC";
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Passengers passenger = new Passengers()
+                            {
+                                CustomerID = reader.GetInt32(0),
+                                FirstName = reader.GetSafeString(1),
+                                LastName = reader.GetSafeString(2),
+                                MembershipStatus = reader.GetSafeString(3)
+                            };
+                            passengersList.Add(passenger);
+                        }
+                        reader.Close();
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine($"SQL Error: {e.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving Passengers: {ex.Message}");
+            }
+            return passengersList;
+        }
         public int UpdatePlane(Planes plane)
         {
             using (SqlCommand cmd = new SqlCommand($"UPDATE Planes SET Manufacturer = @Manufacturer, Model = @Model, PassengerCapacity = @PassengerCapacity, CargoCapacity = @CargoCapacity, MinimumTakeoff = @MinimumTakeoff, MinimumLanding = @MinimumLanding WHERE RegistrationID = @RegistrationID", conn))

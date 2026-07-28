@@ -103,9 +103,52 @@ namespace _12TPI_Project_Console.View
             Console.WriteLine("2. Classes Menu");
             Console.WriteLine("3. Meal Options Menu");
             Console.WriteLine("4. Editing View");
-            Console.WriteLine("5. Return");
+            Console.WriteLine("5. Preset Queries");
+            Console.WriteLine("6. Return");
 
             Console.Write("Please select an option: ");
+        }
+        public void DisplaySimpleQueriesMenu()
+        {
+            Console.WriteLine("Preset Queries");
+            Console.WriteLine("Simple Queries");
+
+            Console.WriteLine("1. Airbus Planes");
+            Console.WriteLine("2. Delayed Flights");
+            Console.WriteLine("3. Australian Airports");
+            Console.WriteLine("4. Active Memberships");
+            Console.WriteLine("5. Sidney Valdez Flights");
+            Console.WriteLine("6. Next Page");
+            Console.WriteLine("7. Return");
+
+            Console.WriteLine("Please select an option:");
+        }
+        public void DisplayAdvancedQueriesMenu()
+        {
+            Console.WriteLine("Advanced Queries");
+
+            Console.WriteLine("1. Ticket and Passenger Information");
+            Console.WriteLine("2. All Ticket Information");
+            Console.WriteLine("3. Business Passengers");
+            Console.WriteLine("4. Gluten Intolerant Passengers");
+            Console.WriteLine("5. Flight and Plane Information");
+            Console.WriteLine("6. Next Page");
+            Console.WriteLine("7. Return");
+
+            Console.WriteLine("Please select an option: ");
+        }
+        public void DisplayComplexQueriesMenu()
+        {
+            Console.WriteLine("Complex Queries");
+
+            Console.WriteLine("1. Plane Capacity Average");
+            Console.WriteLine("2. Top Flights");
+            Console.WriteLine("3. Top Countries");
+            Console.WriteLine("4. Top Pilots");
+            Console.WriteLine("5. Top Meals");
+            Console.WriteLine("6. Return");
+
+            Console.WriteLine("Please select an option: ");
         }
         public void DisplayPlanesMenu()
         {
