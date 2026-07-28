@@ -552,6 +552,309 @@ namespace _12TPI_Project_Console.Controller
             }
             return passengersList;
         }
+        public List<Flights> GetSidneyValdezFlightsQuery()
+        {
+            List<Flights> flightsList = new List<Flights>();
+
+            string query = "SELECT * FROM Flights WHERE PilotName = 'Sidney Valdez' ORDER BY PilotName ASC";
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Flights flight = new Flights()
+                            {
+                                FlightID = reader.GetInt32(0),
+                                PlaneRegistrationID = reader.GetInt32(1),
+                                FlightNumber = reader.GetSafeString(2),
+                                PilotName = reader.GetSafeString(3),
+                                DepartingDateTime = reader.GetDateTime(4),
+                                DepartingAirport = reader.GetSafeString(5),
+                                ArrivingDateTime = reader.GetDateTime(6),
+                                ArrivingAirport = reader.GetSafeString(7),
+                                Status = reader.GetSafeString(8)
+                            };
+                            flightsList.Add(flight);
+                        }
+                        reader.Close();
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine($"SQL Error: {e.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving Flights: {ex.Message}");
+            }
+            return flightsList;
+        }
+        public List<Tuple<PassengerTickets, Passengers>> GetTicketAndPassengerInfoQuery()
+        {
+            List<Tuple<PassengerTickets, Passengers>> ticketaAndpassengerInfoList = new List<Tuple<PassengerTickets, Passengers>>();
+
+            string query = "SELECT P.CustomerID, P.FirstName, P.LastName, P.MembershipStatus, T.TicketID, T.FlightID, T.ClassCode, T.MealChoice FROM Passengers P, PassengerTickets T WHERE P.CustomerID = T.CustomerID ORDER BY LastName ASC";
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            PassengerTickets ticket = new PassengerTickets()
+                            {
+                                TicketID = reader.GetInt32(4),
+                                FlightID = reader.GetInt32(5),
+                                ClassCode = reader.GetSafeString(6),
+                                MealChoice = reader.GetSafeString(7)
+                            };
+
+                            Passengers passenger = new Passengers()
+                            {
+                                CustomerID = reader.GetInt32(0),
+                                FirstName = reader.GetSafeString(1),
+                                LastName = reader.GetSafeString(2),
+                                MembershipStatus = reader.GetSafeString(3)
+                            };
+
+                            ticketaAndpassengerInfoList.Add(new Tuple<PassengerTickets, Passengers>(ticket, passenger));
+                        }
+                        reader.Close();
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine($"SQL Error: {e.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving PassengerTickets and/or Passengers: {ex.Message}");
+            }
+            return ticketaAndpassengerInfoList;
+        }
+        public List<Tuple<Passengers,PassengerTickets,Flights,Classes,MealOptions>> GetAllTicketInfoQuery()
+        {
+            List<Tuple<Passengers,PassengerTickets,Flights,Classes,MealOptions>> AllTicketInfoList = new List<Tuple<Passengers, PassengerTickets, Flights, Classes, MealOptions>>();
+
+            string query = "SELECT P.CustomerID, P.FirstName, P.LastName, P.MembershipStatus, T.TicketID, T.FlightID, F.PlaneRegistrationID, F.FlightNumber, F.PilotName, F.DepartingDateTime, F.DepartingAirport, F.ArrivalDateTime, F.ArrivalAirport, F.\"Status\", C.ClassCode, C.\"Name\", C.ChangesPermitted, C.BaggaeAllowance, C.MilesAccural, T.MealChoice, M.\"Name\", M.Conditions FROM Passengers P, PassengerTickets T, Classes C, Flights F, MealOptions WHERE T.FlightID = F.FlightID AND P.CustomerID = T.CustomerID AND T.ClassCode = C.ClassCode AND T.MealChoice = M.MealCode ORDER BY LastName ASC";
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Passengers passenger = new Passengers()
+                            {
+                                CustomerID = reader.GetInt32(0),
+                                FirstName = reader.GetSafeString(1),
+                                LastName = reader.GetSafeString(2),
+                                MembershipStatus = reader.GetSafeString(3)
+                            };
+
+                            PassengerTickets ticket = new PassengerTickets()
+                            {
+                                TicketID = reader.GetInt32(4),
+                                FlightID = reader.GetInt32(5),
+                                ClassCode = reader.GetSafeString(6),
+                                MealChoice = reader.GetSafeString(7)
+                            };
+
+                            Flights flight = new Flights()
+                            {
+                                FlightID = reader.GetInt32(5),
+                                PlaneRegistrationID = reader.GetInt32(6),
+                                FlightNumber = reader.GetSafeString(7),
+                                PilotName = reader.GetSafeString(8),
+                                DepartingDateTime = reader.GetDateTime(9),
+                                DepartingAirport = reader.GetSafeString(10),
+                                ArrivingDateTime = reader.GetDateTime(11),
+                                ArrivingAirport = reader.GetSafeString(12),
+                                Status = reader.GetSafeString(13)
+                            };
+
+                            Classes Class = new Classes()
+                            {
+                                ClassCode = reader.GetSafeString(14),
+                                Name = reader.GetSafeString(15),
+                                ChangesPermitted = reader.GetSafeString(16),
+                                BaggageAllowance = reader.GetInt32(17),
+                                MilesAccrual = reader.GetSafeString(18)
+                            };
+
+                            MealOptions mealOption = new MealOptions()
+                            {
+                                MealCode = reader.GetSafeString(19),
+                                Name = reader.GetSafeString(20),
+                                Conditions = reader.GetSafeString(21)
+                            };
+
+                            AllTicketInfoList.Add(new Tuple<Passengers, PassengerTickets, Flights, Classes, MealOptions>(passenger, ticket, flight, Class, mealOption));
+                        }
+                        reader.Close();
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine($"SQL Error: {e.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving Passengers, PassengerTickets, Flights, Classes, and/or MealOptions: {ex.Message}");
+            }
+            return AllTicketInfoList;
+        }
+        public List<Tuple<Planes, Flights>> GetPlaneandFlightInfoQuery()
+        {
+            List<Tuple<Planes, Flights>> PlaneAndFlightInfoList = new List<Tuple<Planes, Flights>>();
+
+            string query = "SELECT P.RegistrationID, P.Manufacturer, P.\"Model\", P.PassengerCapacity, P.CargoCapacity, P.MinimumTakeoff, P.MinimumLanding, F.FlightID, F.FlightNumber, F.PilotName, F.DepartingDateTime, F.DepartingAirport, F.ArrivalDateTime, F.ArrivalAirport, F.\"Status\" FROM Planes P, Flights F WHERE P.RegistrationID = F.PlaneRegistrationID ORDER BY P.RegistrationID ASC";
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Planes plane = new Planes()
+                            {
+                                RegistrationID = reader.GetInt32(0),
+                                Manufacturer = reader.GetSafeString(1),
+                                Model = reader.GetSafeString(2),
+                                PassengerCapacity = reader.GetInt32(3),
+                                CargoCapacity = reader.GetInt32(4),
+                                MinimumTakeoff = reader.GetInt32(5),
+                                MinimumLanding = reader.GetInt32(6)
+                            };
+
+                            Flights flight = new Flights()
+                            {
+                                FlightID = reader.GetInt32(7),
+                                PlaneRegistrationID = reader.GetInt32(0),
+                                FlightNumber = reader.GetSafeString(8),
+                                PilotName = reader.GetSafeString(9),
+                                DepartingDateTime = reader.GetDateTime(10),
+                                DepartingAirport = reader.GetSafeString(11),
+                                ArrivingDateTime = reader.GetDateTime(12),
+                                ArrivingAirport = reader.GetSafeString(13),
+                                Status = reader.GetSafeString(14)
+                            };
+
+                            PlaneAndFlightInfoList.Add(new Tuple<Planes, Flights>(plane, flight));
+                        }
+                        reader.Close();
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine($"SQL Error: {e.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving Planes and/or Flights: {ex.Message}");
+            }
+            return PlaneAndFlightInfoList;
+        }
+        public List<Tuple<Passengers, PassengerTickets>> GetBusinessPassengersQuery()
+        {
+            List<Tuple<Passengers, PassengerTickets>> BusinessPassengersList = new List<Tuple<Passengers, PassengerTickets>>();
+
+            string query = "SELECT P.CustomerID, P.FirstName, P.LastName, P.MembershipStatus, T.TicketID, T.FlightID, T.ClassCode, T.MealChoice FROM Passengers P, PassengerTickets TWHERE P.CustomerID = T.CustomerID AND T.ClassCode = 'BUS' ORDER BY LastName ASC";
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Passengers passenger = new Passengers()
+                            {
+                                CustomerID = reader.GetInt32(0),
+                                FirstName = reader.GetSafeString(1),
+                                LastName = reader.GetSafeString(2),
+                                MembershipStatus = reader.GetSafeString(3)
+                            };
+
+                            PassengerTickets ticket = new PassengerTickets()
+                            {
+                                TicketID = reader.GetInt32(4),
+                                FlightID = reader.GetInt32(5),
+                                ClassCode = reader.GetSafeString(6),
+                                MealChoice = reader.GetSafeString(7)
+                            };
+
+                            BusinessPassengersList.Add(new Tuple<Passengers, PassengerTickets>(passenger, ticket));
+                        }
+                        reader.Close();
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine($"SQL Error: {e.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving Passengers and/or Passenger Tickets: {ex.Message}");
+            }
+            return BusinessPassengersList;
+        }
+        public List<Tuple<Passengers, PassengerTickets>> GetGlutenIntolPassengersQuery()
+        {
+            List<Tuple<Passengers, PassengerTickets>> GlutenIntolList = new List<Tuple<Passengers, PassengerTickets>>();
+
+            string query = "SELECT P.CustomerID, P.FirstName, P.LastName, P.MembershipStatus, T.TicketID, T.FlightID, T.ClassCode, T.MealChoice FROM Passengers P, PassengerTickets T WHERE P.CustomerID = T.CustomerID AND T.MealChoice = 'GFML' ORDER BY LastName ASC";
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Passengers passenger = new Passengers()
+                            {
+                                CustomerID = reader.GetInt32(0),
+                                FirstName = reader.GetSafeString(1),
+                                LastName = reader.GetSafeString(2),
+                                MembershipStatus = reader.GetSafeString(3)
+                            };
+
+                            PassengerTickets ticket = new PassengerTickets()
+                            {
+                                TicketID = reader.GetInt32(4),
+                                FlightID = reader.GetInt32(5),
+                                ClassCode = reader.GetSafeString(6),
+                                MealChoice = reader.GetSafeString(7)
+                            };
+
+                            GlutenIntolList.Add(new Tuple<Passengers, PassengerTickets>(passenger, ticket));
+                        }
+                        reader.Close();
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine($"SQL Error: {e.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving Passengers and/or Passenger Tickets: {ex.Message}");
+            }
+            return GlutenIntolList;
+        }
         public int UpdatePlane(Planes plane)
         {
             using (SqlCommand cmd = new SqlCommand($"UPDATE Planes SET Manufacturer = @Manufacturer, Model = @Model, PassengerCapacity = @PassengerCapacity, CargoCapacity = @CargoCapacity, MinimumTakeoff = @MinimumTakeoff, MinimumLanding = @MinimumLanding WHERE RegistrationID = @RegistrationID", conn))
