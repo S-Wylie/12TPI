@@ -595,7 +595,7 @@ namespace _12TPI_Project_Console.Controller
         }
         public List<Tuple<PassengerTickets, Passengers>> GetTicketAndPassengerInfoQuery()
         {
-            List<Tuple<PassengerTickets, Passengers>> ticketaAndpassengerInfoList = new List<Tuple<PassengerTickets, Passengers>>();
+            List<Tuple<PassengerTickets, Passengers>> ticketsAndpassengersList = new List<Tuple<PassengerTickets, Passengers>>();
 
             string query = "SELECT P.CustomerID, P.FirstName, P.LastName, P.MembershipStatus, T.TicketID, T.FlightID, T.ClassCode, T.MealChoice FROM Passengers P, PassengerTickets T WHERE P.CustomerID = T.CustomerID ORDER BY LastName ASC";
             try
@@ -622,7 +622,7 @@ namespace _12TPI_Project_Console.Controller
                                 MembershipStatus = reader.GetSafeString(3)
                             };
 
-                            ticketaAndpassengerInfoList.Add(new Tuple<PassengerTickets, Passengers>(ticket, passenger));
+                            ticketsAndpassengersList.Add(new Tuple<PassengerTickets, Passengers>(ticket, passenger));
                         }
                         reader.Close();
                     }
@@ -636,11 +636,11 @@ namespace _12TPI_Project_Console.Controller
             {
                 Console.WriteLine($"Error retrieving PassengerTickets and/or Passengers: {ex.Message}");
             }
-            return ticketaAndpassengerInfoList;
+            return ticketsAndpassengersList;
         }
         public List<Tuple<Passengers,PassengerTickets,Flights,Classes,MealOptions>> GetAllTicketInfoQuery()
         {
-            List<Tuple<Passengers,PassengerTickets,Flights,Classes,MealOptions>> AllTicketInfoList = new List<Tuple<Passengers, PassengerTickets, Flights, Classes, MealOptions>>();
+            List<Tuple<Passengers,PassengerTickets,Flights,Classes,MealOptions>> AllTicketList = new List<Tuple<Passengers, PassengerTickets, Flights, Classes, MealOptions>>();
 
             string query = "SELECT P.CustomerID, P.FirstName, P.LastName, P.MembershipStatus, T.TicketID, T.FlightID, F.PlaneRegistrationID, F.FlightNumber, F.PilotName, F.DepartingDateTime, F.DepartingAirport, F.ArrivalDateTime, F.ArrivalAirport, F.\"Status\", C.ClassCode, C.\"Name\", C.ChangesPermitted, C.BaggaeAllowance, C.MilesAccural, T.MealChoice, M.\"Name\", M.Conditions FROM Passengers P, PassengerTickets T, Classes C, Flights F, MealOptions WHERE T.FlightID = F.FlightID AND P.CustomerID = T.CustomerID AND T.ClassCode = C.ClassCode AND T.MealChoice = M.MealCode ORDER BY LastName ASC";
             try
@@ -696,7 +696,7 @@ namespace _12TPI_Project_Console.Controller
                                 Conditions = reader.GetSafeString(21)
                             };
 
-                            AllTicketInfoList.Add(new Tuple<Passengers, PassengerTickets, Flights, Classes, MealOptions>(passenger, ticket, flight, Class, mealOption));
+                            AllTicketList.Add(new Tuple<Passengers, PassengerTickets, Flights, Classes, MealOptions>(passenger, ticket, flight, Class, mealOption));
                         }
                         reader.Close();
                     }
@@ -710,11 +710,11 @@ namespace _12TPI_Project_Console.Controller
             {
                 Console.WriteLine($"Error retrieving Passengers, PassengerTickets, Flights, Classes, and/or MealOptions: {ex.Message}");
             }
-            return AllTicketInfoList;
+            return AllTicketList;
         }
         public List<Tuple<Planes, Flights>> GetPlaneandFlightInfoQuery()
         {
-            List<Tuple<Planes, Flights>> PlaneAndFlightInfoList = new List<Tuple<Planes, Flights>>();
+            List<Tuple<Planes, Flights>> PlaneAndFlightList = new List<Tuple<Planes, Flights>>();
 
             string query = "SELECT P.RegistrationID, P.Manufacturer, P.\"Model\", P.PassengerCapacity, P.CargoCapacity, P.MinimumTakeoff, P.MinimumLanding, F.FlightID, F.FlightNumber, F.PilotName, F.DepartingDateTime, F.DepartingAirport, F.ArrivalDateTime, F.ArrivalAirport, F.\"Status\" FROM Planes P, Flights F WHERE P.RegistrationID = F.PlaneRegistrationID ORDER BY P.RegistrationID ASC";
             try
@@ -749,7 +749,7 @@ namespace _12TPI_Project_Console.Controller
                                 Status = reader.GetSafeString(14)
                             };
 
-                            PlaneAndFlightInfoList.Add(new Tuple<Planes, Flights>(plane, flight));
+                            PlaneAndFlightList.Add(new Tuple<Planes, Flights>(plane, flight));
                         }
                         reader.Close();
                     }
@@ -763,11 +763,11 @@ namespace _12TPI_Project_Console.Controller
             {
                 Console.WriteLine($"Error retrieving Planes and/or Flights: {ex.Message}");
             }
-            return PlaneAndFlightInfoList;
+            return PlaneAndFlightList;
         }
         public List<Tuple<Passengers, PassengerTickets>> GetBusinessPassengersQuery()
         {
-            List<Tuple<Passengers, PassengerTickets>> BusinessPassengersList = new List<Tuple<Passengers, PassengerTickets>>();
+            List<Tuple<Passengers, PassengerTickets>> passengersAndticketsList = new List<Tuple<Passengers, PassengerTickets>>();
 
             string query = "SELECT P.CustomerID, P.FirstName, P.LastName, P.MembershipStatus, T.TicketID, T.FlightID, T.ClassCode, T.MealChoice FROM Passengers P, PassengerTickets TWHERE P.CustomerID = T.CustomerID AND T.ClassCode = 'BUS' ORDER BY LastName ASC";
             try
@@ -794,7 +794,7 @@ namespace _12TPI_Project_Console.Controller
                                 MealChoice = reader.GetSafeString(7)
                             };
 
-                            BusinessPassengersList.Add(new Tuple<Passengers, PassengerTickets>(passenger, ticket));
+                            passengersAndticketsList.Add(new Tuple<Passengers, PassengerTickets>(passenger, ticket));
                         }
                         reader.Close();
                     }
@@ -808,11 +808,11 @@ namespace _12TPI_Project_Console.Controller
             {
                 Console.WriteLine($"Error retrieving Passengers and/or Passenger Tickets: {ex.Message}");
             }
-            return BusinessPassengersList;
+            return passengersAndticketsList;
         }
         public List<Tuple<Passengers, PassengerTickets>> GetGlutenIntolPassengersQuery()
         {
-            List<Tuple<Passengers, PassengerTickets>> GlutenIntolList = new List<Tuple<Passengers, PassengerTickets>>();
+            List<Tuple<Passengers, PassengerTickets>> passengersAndticketsList = new List<Tuple<Passengers, PassengerTickets>>();
 
             string query = "SELECT P.CustomerID, P.FirstName, P.LastName, P.MembershipStatus, T.TicketID, T.FlightID, T.ClassCode, T.MealChoice FROM Passengers P, PassengerTickets T WHERE P.CustomerID = T.CustomerID AND T.MealChoice = 'GFML' ORDER BY LastName ASC";
             try
@@ -839,7 +839,7 @@ namespace _12TPI_Project_Console.Controller
                                 MealChoice = reader.GetSafeString(7)
                             };
 
-                            GlutenIntolList.Add(new Tuple<Passengers, PassengerTickets>(passenger, ticket));
+                            passengersAndticketsList.Add(new Tuple<Passengers, PassengerTickets>(passenger, ticket));
                         }
                         reader.Close();
                     }
@@ -853,7 +853,173 @@ namespace _12TPI_Project_Console.Controller
             {
                 Console.WriteLine($"Error retrieving Passengers and/or Passenger Tickets: {ex.Message}");
             }
-            return GlutenIntolList;
+            return passengersAndticketsList;
+        }
+        public List<Planes> GetPlaneCapacityAvgQuery()
+        {
+            List<Planes> planesList = new List<Planes>();
+
+            string query = "SELECT AVG(PassengerCapacity) AS PassengerCapAvg, AVG(CargoCapacity) AS CargoCapAvg FROM Planes ORDER BY PassengerCapAvg ASC, CargoCapAvg ASC";
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Planes plane = new Planes()
+                            {
+                                PassengerCapacity = reader.GetInt32(0),
+                                CargoCapacity = reader.GetInt32(1),
+                            };
+                            planesList.Add(plane);
+                        }
+                        reader.Close();
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine($"SQL Error: {e.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving Planes: {ex.Message}");
+            }
+            return planesList;
+        }
+        public List<Flights> GetTopFlightsQuery()
+        {
+            List<Flights> flightsList = new List<Flights>();
+
+            string query = "SELECT FlightNumber, COUNT(FlightNumber) AS FlightPopularity FROM Flights GROUP BY FlightNumber ORDER BY FlightPopularity DESC";
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Flights flight = new Flights()
+                            {
+                                FlightNumber = reader.GetSafeString(0)
+                            };
+                            flightsList.Add(flight);
+                        }
+                        reader.Close();
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine($"SQL Error: {e.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving Flights: {ex.Message}");
+            }
+            return flightsList;
+        }
+        public List<Airports> GetTopCountriesQuery()
+        {
+            List<Airports> airportsList = new List<Airports>();
+
+            string query = "SELECT Country, COUNT(Country) AS CountryPopularity FROM Airports GROUP BY Country ORDER BY CountryPopularity DESC";
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Airports airport = new Airports()
+                            {
+                                Country = reader.GetSafeString(0)
+                            };
+                            airportsList.Add(airport);
+                        }
+                        reader.Close();
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine($"SQL Error: {e.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving Airports: {ex.Message}");
+            }
+            return airportsList;
+        }
+        public List<Flights> GetTopPilotsQuery()
+        {
+            List<Flights> flightsList = new List<Flights>();
+
+            string query = "SELECT PilotName, COUNT(PilotName) AS PilotPopularity FROM Flights GROUP BY PilotName ORDER BY PilotPopularity DESC";
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Flights flight = new Flights()
+                            {
+                                PilotName = reader.GetSafeString(0)
+                            };
+                            flightsList.Add(flight);
+                        }
+                        reader.Close();
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine($"SQL Error: {e.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving Flights: {ex.Message}");
+            }
+            return flightsList;
+        }
+        public List<PassengerTickets> GetTopMealsQuery()
+        {
+            List<PassengerTickets> ticketsList = new List<PassengerTickets>();
+
+            string query = "SELECT MealChoice, COUNT(MealChoice) AS MealPopularity FROM PassengerTickets GROUP BY MealChoice ORDER BY MealPopularity DESC";
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            PassengerTickets ticket = new PassengerTickets()
+                            {
+                                MealChoice = reader.GetSafeString(0)
+                            };
+                            ticketsList.Add(ticket);
+                        }
+                        reader.Close();
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine($"SQL Error: {e.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving PassengerTickets: {ex.Message}");
+            }
+            return ticketsList;
         }
         public int UpdatePlane(Planes plane)
         {
