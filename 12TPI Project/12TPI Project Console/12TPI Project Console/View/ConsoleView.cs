@@ -377,7 +377,7 @@ namespace _12TPI_Project_Console.View
         {
             foreach (Planes plane in planesList)
             {
-                Console.WriteLine($"{plane.RegistrationID}, {plane.Manufacturer},{plane.Model},{plane.PassengerCapacity},{plane.CargoCapacity},{plane.MinimumTakeoff},{plane.MinimumLanding}");
+                Console.WriteLine($"{plane.PassengerCapacity},{plane.CargoCapacity}");
             }
         }
         public void DisplayMessage(string message)

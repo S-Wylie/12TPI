@@ -855,28 +855,14 @@ namespace _12TPI_Project_Console.Controller
             }
             return passengersAndticketsList;
         }
-        public List<Planes> GetPlaneCapacityAvgQuery()
+        public SqlDataReader ReportQueryRunner(string query)
         {
-            List<Planes> planesList = new List<Planes>();
-
-            string query = "SELECT AVG(PassengerCapacity) AS PassengerCapAvg, AVG(CargoCapacity) AS CargoCapAvg FROM Planes ORDER BY PassengerCapAvg ASC, CargoCapAvg ASC";
+            SqlDataReader reader = null;
             try
             {
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            Planes plane = new Planes()
-                            {
-                                PassengerCapacity = reader.GetInt32(0),
-                                CargoCapacity = reader.GetInt32(1),
-                            };
-                            planesList.Add(plane);
-                        }
-                        reader.Close();
-                    }
+                    reader = cmd.ExecuteReader();
                 }
             }
             catch (SqlException e)
@@ -885,10 +871,11 @@ namespace _12TPI_Project_Console.Controller
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error retrieving Planes: {ex.Message}");
+                Console.WriteLine($"Error executing query: {ex.Message}");
             }
-            return planesList;
+            return reader;
         }
+      
         public List<Flights> GetTopFlightsQuery()
         {
             List<Flights> flightsList = new List<Flights>();
