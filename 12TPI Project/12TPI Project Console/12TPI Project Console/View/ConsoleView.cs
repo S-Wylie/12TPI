@@ -303,7 +303,83 @@ namespace _12TPI_Project_Console.View
                 Console.WriteLine($"{login.Username}, {login.PINHash},{login.AccessLevel}");
             }
         }
-
+        public void DisplayAirbusPlanesQuery(List<Planes> planesList)
+        {
+            foreach (Planes plane in planesList)
+            {
+                Console.WriteLine($"{plane.RegistrationID}, {plane.Manufacturer},{plane.Model},{plane.PassengerCapacity},{plane.CargoCapacity},{plane.MinimumTakeoff},{plane.MinimumLanding}");
+            }
+        }
+        public void DisplayDelayedFlightsQuery(List<Flights> flightsList)
+        {
+            foreach (Flights flight in flightsList)
+            {
+                Console.WriteLine($"{flight.FlightID}, {flight.PlaneRegistrationID},{flight.FlightNumber},{flight.PilotName},{flight.DepartingDateTime},{flight.DepartingAirport},{flight.ArrivingDateTime},{flight.ArrivingAirport},{flight.Status}");
+            }
+        }
+        public void DisplayAustralianAirportsQuery(List<Airports> airportsList)
+        {
+            foreach (Airports airport in airportsList)
+            {
+                Console.WriteLine($"{airport.IATACode}, {airport.Name},{airport.Coordinates},{airport.Country},{airport.Timezone}");
+            }
+        }
+        public void DisplayActiveMembershipsQuery(List<Passengers> passengersList)
+        {
+            foreach (Passengers passenger in passengersList)
+            {
+                Console.WriteLine($"{passenger.CustomerID}, {passenger.FirstName},{passenger.LastName},{passenger.MembershipStatus}");
+            }
+        }
+        public void DisplaySidenyValdezFlightsQuery(List<Flights> flightsList)
+        {
+            foreach (Flights flight in flightsList)
+            {
+                Console.WriteLine($"{flight.FlightID}, {flight.PlaneRegistrationID},{flight.FlightNumber},{flight.PilotName},{flight.DepartingDateTime},{flight.DepartingAirport},{flight.ArrivingDateTime},{flight.ArrivingAirport},{flight.Status}");
+            }
+        }
+        public void DisplayTicketandPassengerInfoQuery(List<Tuple<PassengerTickets, Passengers>> ticketAndPassengerList)
+        {
+            foreach (var (ticket, passenger) in ticketAndPassengerList)
+            {
+                Console.WriteLine($"{ticket.TicketID}, {ticket.FlightID}, {ticket.ClassCode}, {ticket.MealChoice}, {passenger.CustomerID}, {passenger.FirstName},{passenger.LastName}, {passenger.MembershipStatus}");
+            }
+        }
+        public void DisplayAllTicketInfoQuery(List<Tuple<Passengers, PassengerTickets, Flights, Classes, MealOptions>> AllTicketList)
+        {
+            foreach (var (passenger, ticket, flight, Class, mealOption) in AllTicketList)
+            {
+                Console.WriteLine($"{passenger.CustomerID}, {passenger.FirstName},{passenger.LastName},{passenger.MembershipStatus}{ticket.TicketID}, {ticket.FlightID},{flight.PlaneRegistrationID},{flight.FlightNumber},{flight.PilotName},{flight.DepartingDateTime},{flight.DepartingAirport},{flight.ArrivingDateTime},{flight.ArrivingAirport},{flight.Status},{Class.ClassCode},{Class.Name},{Class.ChangesPermitted},{Class.BaggageAllowance},{Class.MilesAccrual},{ticket.MealChoice},{mealOption.Name},{mealOption.Conditions}");
+            }
+        }
+        public void DisplayFlightAndPlaneInfoQuery(List<Tuple<Flights, Planes>> flightandplaneList)
+        {
+            foreach (var (flight, plane) in flightandplaneList)
+            {
+                Console.WriteLine($"{plane.RegistrationID},{plane.Manufacturer},{plane.Model}, {plane.PassengerCapacity},{plane.CargoCapacity},{plane.MinimumTakeoff},{plane.MinimumLanding},{flight.FlightID},{flight.PilotName},{flight.DepartingDateTime},{flight.DepartingAirport},{flight.ArrivingDateTime},{flight.ArrivingAirport}`,{flight.Status}");
+            }
+        }
+        public void DisplayBusinessPassengersQuery(List<Tuple<Passengers, PassengerTickets>> passengerandticketList)
+        {
+            foreach (var (passenger, ticket) in passengerandticketList)
+            {
+                Console.WriteLine($"{passenger.CustomerID},{passenger.FirstName},{passenger.LastName},{passenger.MembershipStatus},{ticket.TicketID},{ticket.FlightID},{ticket.ClassCode},{ticket.MealChoice}");
+            }
+        }
+        public void DisplayGlutenIntolPassengersQuery(List<Tuple<Passengers, PassengerTickets>> passengerandticketList)
+        {
+            foreach (var (passenger, ticket) in passengerandticketList)
+            {
+                Console.WriteLine($"{passenger.CustomerID},{passenger.FirstName},{passenger.LastName},{passenger.MembershipStatus},{ticket.TicketID},{ticket.FlightID},{ticket.ClassCode},{ticket.MealChoice}");
+            }
+        }
+        public void DisplayPlaneCapacityAvgQuery(List<Planes> planesList)
+        {
+            foreach (Planes plane in planesList)
+            {
+                Console.WriteLine($"{plane.RegistrationID}, {plane.Manufacturer},{plane.Model},{plane.PassengerCapacity},{plane.CargoCapacity},{plane.MinimumTakeoff},{plane.MinimumLanding}");
+            }
+        }
         public void DisplayMessage(string message)
         {
             Console.WriteLine(message);
