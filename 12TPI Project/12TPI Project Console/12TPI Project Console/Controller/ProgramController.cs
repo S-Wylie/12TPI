@@ -68,6 +68,57 @@ namespace _12TPI_Project_Console.Controller
             var mealOptions = storageManager.GetAllMealOptions();
             consoleView.DisplayMealOptions(mealOptions);
         }
+
+        public void DisplayAirbusPlanes()
+        {
+            var planes = storageManager.GetAirbusPlanesQuery();
+            consoleView.DisplayAirbusPlanesQuery(planes);
+        }
+        public void DisplayDelayedFlights()
+        {
+            var flights = storageManager.GetDelayedFlightsQuery();
+            consoleView.DisplayDelayedFlightsQuery(flights);
+        }
+        public void DisplayAustralianAirports()
+        {
+            var airports = storageManager.GetAustralianAirportsQuery();
+            consoleView.DisplayAustralianAirportsQuery(airports);
+        }
+        public void DisplayActiveMemberships()
+        {
+            var passengers = storageManager.GetActiveMembershipsQuery();
+            consoleView.DisplayActiveMembershipsQuery(passengers);
+        }
+        public void DisplaySidneyValdezFlights()
+        {
+            var passengers = storageManager.GetSidneyValdezFlightsQuery();
+            consoleView.DisplaySidenyValdezFlightsQuery(passengers);
+        }
+        public void DisplayTicketAndPassengerInfo()
+        {
+            var ticketandpassengers = storageManager.GetTicketAndPassengerInfoQuery();
+            consoleView.DisplayTicketandPassengerInfoQuery(ticketandpassengers);
+        }
+        public void DisplayAllTicketInfo()
+        {
+            var allticket = storageManager.GetAllTicketInfoQuery();
+            consoleView.DisplayAllTicketInfoQuery(allticket);
+        }
+        public void DisplayPlaneAndFlightInfo()
+        {
+            var planeAndflight = storageManager.GetPlaneandFlightInfoQuery();
+            consoleView.DisplayPlaneAndFlightInfoQuery(planeAndflight);
+        }
+        public void DisplayBusinessPassengers()
+        {
+            var passengersandticket = storageManager.GetBusinessPassengersQuery();
+            consoleView.DisplayBusinessPassengersQuery(passengersandticket);
+        }
+        public void GetGlutenIntolPassengersQuery()
+        {
+            var passengersandticket = storageManager.GetGlutenIntolPassengersQuery();
+            consoleView.DisplayGlutenIntolPassengersQuery(passengersandticket);
+        }
         public void AddNewPlane()
         {
             var newPlane = consoleView.PromptAddPlane();
@@ -212,7 +263,6 @@ namespace _12TPI_Project_Console.Controller
             storageManager.DeleteLoginByUsername(loginToDelete);
             consoleView.DisplaySuccessMessage();
         }
-
         public void UserLogin()
         {
             consoleView.DisplayUserLogin();
@@ -580,7 +630,7 @@ namespace _12TPI_Project_Console.Controller
         public void LaunchLoginsMenu()
         {
             bool exit = false;
-            while (!exit) //Prevents the program from exiting until the user chooses to exit
+            while (!exit) 
             {
                 consoleView.DisplayLoginsMenu();
                 int choice = consoleView.GetUserChoice();
@@ -607,6 +657,36 @@ namespace _12TPI_Project_Console.Controller
                 }
             }
 
+        }
+        public void LaunchSimpleQueriesMenu()
+        {
+            bool exit = false;
+            while (!exit) 
+            {
+                consoleView.DisplaySimpleQueriesMenu();
+                int choice = consoleView.GetUserChoice();
+                switch (choice)
+                {
+                    case 1:
+                        DisplayAllLogins();
+                        break;
+                    case 2:
+                        AddNewLogin();
+                        break;
+                    case 3:
+                        UpdateLogin();
+                        break;
+                    case 4:
+                        DeleteLogin();
+                        break;
+                    case 5:
+                        exit = true;
+                        break;
+                    default:
+                        consoleView.DisplayInvalidChoiceMessage();
+                        break;
+                }
+            }
         }
         public void Run()
         {

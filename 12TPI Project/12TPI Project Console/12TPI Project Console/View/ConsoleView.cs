@@ -352,9 +352,9 @@ namespace _12TPI_Project_Console.View
                 Console.WriteLine($"{passenger.CustomerID}, {passenger.FirstName},{passenger.LastName},{passenger.MembershipStatus}{ticket.TicketID}, {ticket.FlightID},{flight.PlaneRegistrationID},{flight.FlightNumber},{flight.PilotName},{flight.DepartingDateTime},{flight.DepartingAirport},{flight.ArrivingDateTime},{flight.ArrivingAirport},{flight.Status},{Class.ClassCode},{Class.Name},{Class.ChangesPermitted},{Class.BaggageAllowance},{Class.MilesAccrual},{ticket.MealChoice},{mealOption.Name},{mealOption.Conditions}");
             }
         }
-        public void DisplayFlightAndPlaneInfoQuery(List<Tuple<Flights, Planes>> flightandplaneList)
+        public void DisplayPlaneAndFlightInfoQuery(List<Tuple<Planes, Flights>> planeAndflightList)
         {
-            foreach (var (flight, plane) in flightandplaneList)
+            foreach (var (plane, flight) in planeAndflightList)
             {
                 Console.WriteLine($"{plane.RegistrationID},{plane.Manufacturer},{plane.Model}, {plane.PassengerCapacity},{plane.CargoCapacity},{plane.MinimumTakeoff},{plane.MinimumLanding},{flight.FlightID},{flight.PilotName},{flight.DepartingDateTime},{flight.DepartingAirport},{flight.ArrivingDateTime},{flight.ArrivingAirport}`,{flight.Status}");
             }
