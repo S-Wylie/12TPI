@@ -114,7 +114,7 @@ namespace _12TPI_Project_Console.Controller
             var passengersandticket = storageManager.GetBusinessPassengersQuery();
             consoleView.DisplayBusinessPassengersQuery(passengersandticket);
         }
-        public void GetGlutenIntolPassengersQuery()
+        public void DisplayGlutenIntolPassengers()
         {
             var passengersandticket = storageManager.GetGlutenIntolPassengersQuery();
             consoleView.DisplayGlutenIntolPassengersQuery(passengersandticket);
@@ -668,18 +668,60 @@ namespace _12TPI_Project_Console.Controller
                 switch (choice)
                 {
                     case 1:
-                        DisplayAllLogins();
+                        DisplayAirbusPlanes();
                         break;
                     case 2:
-                        AddNewLogin();
+                        DisplayDelayedFlights();
                         break;
                     case 3:
-                        UpdateLogin();
+                        DisplayAustralianAirports();
                         break;
                     case 4:
-                        DeleteLogin();
+                        DisplayActiveMemberships();
                         break;
                     case 5:
+                        DisplaySidneyValdezFlights();
+                        break;
+                    case 6:
+                        LaunchAdvancedQueriesMenu();
+                        break;
+                    case 7:
+                        exit = true;
+                        break;
+                    default:
+                        consoleView.DisplayInvalidChoiceMessage();
+                        break;
+                }
+            }
+        }
+        public void LaunchAdvancedQueriesMenu()
+        {
+            bool exit = false;
+            while (!exit)
+            {
+                consoleView.DisplayAdvancedQueriesMenu();
+                int choice = consoleView.GetUserChoice();
+                switch (choice)
+                {
+                    case 1:
+                        DisplayTicketAndPassengerInfo();
+                        break;
+                    case 2:
+                        DisplayAllTicketInfo();
+                        break;
+                    case 3:
+                        DisplayPlaneAndFlightInfo();
+                        break;
+                    case 4:
+                        DisplayBusinessPassengers();
+                        break;
+                    case 5:
+                        DisplayGlutenIntolPassengers();
+                        break;
+                    case 6:
+                        ;
+                        break;
+                    case 7:
                         exit = true;
                         break;
                     default:

@@ -129,9 +129,9 @@ namespace _12TPI_Project_Console.View
 
             Console.WriteLine("1. Ticket and Passenger Information");
             Console.WriteLine("2. All Ticket Information");
-            Console.WriteLine("3. Business Passengers");
-            Console.WriteLine("4. Gluten Intolerant Passengers");
-            Console.WriteLine("5. Flight and Plane Information");
+            Console.WriteLine("3. Flight and Plane Information");
+            Console.WriteLine("4. Business Passengers");
+            Console.WriteLine("5. Gluten Intolerant Passengers");
             Console.WriteLine("6. Next Page");
             Console.WriteLine("7. Return");
 
