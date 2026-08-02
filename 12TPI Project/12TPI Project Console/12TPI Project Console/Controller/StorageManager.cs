@@ -140,7 +140,7 @@ namespace _12TPI_Project_Console.Controller
             }
             return planesList;
         }
-        public List<Flights> GetAllFlights()
+        public List<Flights> GetAllFlights() 
         {
             List<Flights> flightsList = new List<Flights>();
 
@@ -855,14 +855,29 @@ namespace _12TPI_Project_Console.Controller
             }
             return passengersAndticketsList;
         }
-        public SqlDataReader ReportQueryRunner(string query)
+            
+        public List<AvgPlaneCapStats> GetAvgPlaneCapQuery()
         {
-            SqlDataReader reader = null;
+            List<AvgPlaneCapStats> avgCapList = new List<AvgPlaneCapStats>();
+
+            string query = "SELECT AVG(PassengerCapacity) AS PassengerCapAvg, AVG(CargoCapacity) AS CargoCapAvg FROM Planes";
             try
             {
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    reader = cmd.ExecuteReader();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            AvgPlaneCapStats avgCap = new AvgPlaneCapStats()
+                            {
+                                PassengerCapAvg = reader.GetInt32(0),
+                                CargoCapAvg = reader.GetInt32(1)
+                            };
+                            avgCapList.Add(avgCap);
+                        }
+                        reader.Close();
+                    }
                 }
             }
             catch (SqlException e)
@@ -871,11 +886,11 @@ namespace _12TPI_Project_Console.Controller
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error executing query: {ex.Message}");
+                Console.WriteLine($"Error retrieving plane capacity averages: {ex.Message}");
             }
-            return reader;
+            return avgCapList;
         }
-      
+
         public List<Flights> GetTopFlightsQuery()
         {
             List<Flights> flightsList = new List<Flights>();

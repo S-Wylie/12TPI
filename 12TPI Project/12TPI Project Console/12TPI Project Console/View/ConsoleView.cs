@@ -373,18 +373,20 @@ namespace _12TPI_Project_Console.View
                 Console.WriteLine($"{passenger.CustomerID},{passenger.FirstName},{passenger.LastName},{passenger.MembershipStatus},{ticket.TicketID},{ticket.FlightID},{ticket.ClassCode},{ticket.MealChoice}");
             }
         }
-        public void DisplayPlaneCapacityAvgQuery(List<Planes> planesList)
+        public void DisplayPlaneCapAvgQuery(List<AvgPlaneCapStats> avgCapList)
         {
-            foreach (Planes plane in planesList)
+            foreach (AvgPlaneCapStats stats in avgCapList)
             {
-                Console.WriteLine($"{plane.PassengerCapacity},{plane.CargoCapacity}");
+                Console.WriteLine($"{stats.PassengerCapAvg},{stats.CargoCapAvg}");
             }
         }
+
         public void DisplayMessage(string message)
         {
             Console.WriteLine(message);
         }
 
+        
         public void DisplaySuccessMessage()
         {
             Console.WriteLine("Operation completed successfully.");

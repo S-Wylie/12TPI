@@ -119,6 +119,13 @@ namespace _12TPI_Project_Console.Controller
             var passengersandticket = storageManager.GetGlutenIntolPassengersQuery();
             consoleView.DisplayGlutenIntolPassengersQuery(passengersandticket);
         }
+
+        public void DisplayAvgPlaneCap()
+        {
+            var avgCap = storageManager.GetAvgPlaneCapQuery();
+            consoleView.DisplayPlaneCapAvgQuery(avgCap);
+        }
+
         public void AddNewPlane()
         {
             var newPlane = consoleView.PromptAddPlane();
@@ -705,6 +712,43 @@ namespace _12TPI_Project_Console.Controller
                 {
                     case 1:
                         DisplayTicketAndPassengerInfo();
+                        break;
+                    case 2:
+                        DisplayAllTicketInfo();
+                        break;
+                    case 3:
+                        DisplayPlaneAndFlightInfo();
+                        break;
+                    case 4:
+                        DisplayBusinessPassengers();
+                        break;
+                    case 5:
+                        DisplayGlutenIntolPassengers();
+                        break;
+                    case 6:
+                        ;
+                        break;
+                    case 7:
+                        exit = true;
+                        break;
+                    default:
+                        consoleView.DisplayInvalidChoiceMessage();
+                        break;
+                }
+            }
+        }
+
+        public void LaunchComplexQueriesMenu()
+        {
+            bool exit = false;
+            while (!exit)
+            {
+                consoleView.DisplayComplexQueriesMenu();
+                int choice = consoleView.GetUserChoice();
+                switch (choice)
+                {
+                    case 1:
+                        DisplayAvgPlaneCap();
                         break;
                     case 2:
                         DisplayAllTicketInfo();
