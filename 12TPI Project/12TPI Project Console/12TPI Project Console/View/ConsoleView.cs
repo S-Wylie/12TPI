@@ -380,7 +380,34 @@ namespace _12TPI_Project_Console.View
                 Console.WriteLine($"{stats.PassengerCapAvg},{stats.CargoCapAvg}");
             }
         }
-
+        public void DisplayTopFlightsQuery(List<Tuple<Flights, TopFlightsStats>> topFlightsList)
+        {
+            foreach (var (flight, stats) in topFlightsList)
+            {
+                Console.WriteLine($"{flight.FlightNumber},{stats.FlightPopularity}");
+            }
+        }
+        public void DisplayTopCountriesQuery(List<Tuple<Airports, TopCountriesStats>> topCountriesList)
+        {
+            foreach (var (airport, stats) in topCountriesList)
+            {
+                Console.WriteLine($"{airport.Country},{stats.CountryPopularity}");
+            }
+        }
+        public void DisplayTopPilotsQuery(List<Tuple<Flights, TopPilotsStats>> topPilotsList)
+        {
+            foreach (var (flight, stats) in topPilotsList)
+            {
+                Console.WriteLine($"{flight.PilotName},{stats.PilotPopularity}");
+            }
+        }
+        public void DisplayTopMealsQuery(List<Tuple<PassengerTickets, TopMealsStats>> topCountriesList)
+        {
+            foreach (var (ticket, stats) in topCountriesList)
+            {
+                Console.WriteLine($"{ticket.MealChoice},{stats.MealPopularity}");
+            }
+        }
         public void DisplayMessage(string message)
         {
             Console.WriteLine(message);

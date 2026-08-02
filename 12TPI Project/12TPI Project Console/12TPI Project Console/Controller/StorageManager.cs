@@ -3,6 +3,7 @@ using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Net.Sockets;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Xml;
@@ -880,6 +881,7 @@ namespace _12TPI_Project_Console.Controller
                     }
                 }
             }
+
             catch (SqlException e)
             {
                 Console.WriteLine($"SQL Error: {e.Message}");
@@ -891,9 +893,9 @@ namespace _12TPI_Project_Console.Controller
             return avgCapList;
         }
 
-        public List<Flights> GetTopFlightsQuery()
+        public List<Tuple<Flights, TopFlightsStats>> GetTopFlightsQuery()
         {
-            List<Flights> flightsList = new List<Flights>();
+            List<Tuple<Flights, TopFlightsStats>> topFlightsList = new List<Tuple<Flights, TopFlightsStats>>();
 
             string query = "SELECT FlightNumber, COUNT(FlightNumber) AS FlightPopularity FROM Flights GROUP BY FlightNumber ORDER BY FlightPopularity DESC";
             try
@@ -908,40 +910,13 @@ namespace _12TPI_Project_Console.Controller
                             {
                                 FlightNumber = reader.GetSafeString(0)
                             };
-                            flightsList.Add(flight);
-                        }
-                        reader.Close();
-                    }
-                }
-            }
-            catch (SqlException e)
-            {
-                Console.WriteLine($"SQL Error: {e.Message}");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error retrieving Flights: {ex.Message}");
-            }
-            return flightsList;
-        }
-        public List<Airports> GetTopCountriesQuery()
-        {
-            List<Airports> airportsList = new List<Airports>();
 
-            string query = "SELECT Country, COUNT(Country) AS CountryPopularity FROM Airports GROUP BY Country ORDER BY CountryPopularity DESC";
-            try
-            {
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            Airports airport = new Airports()
+                            TopFlightsStats stats = new TopFlightsStats()
                             {
-                                Country = reader.GetSafeString(0)
+                                FlightPopularity = reader.GetInt32(1)
                             };
-                            airportsList.Add(airport);
+
+                            topFlightsList.Add(new Tuple<Flights, TopFlightsStats>(flight, stats));
                         }
                         reader.Close();
                     }
@@ -953,13 +928,53 @@ namespace _12TPI_Project_Console.Controller
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error retrieving Airports: {ex.Message}");
+                Console.WriteLine($"Error retrieving Flights and/or TopFlightsStats: {ex.Message}");
             }
-            return airportsList;
+            return topFlightsList;
         }
-        public List<Flights> GetTopPilotsQuery()
+        public List<Tuple<Airports, TopCountriesStats>> GetTopCountriesQuery()
+            {
+                List<Tuple<Airports, TopCountriesStats>> topCountriesList = new List<Tuple<Airports, TopCountriesStats>>();
+
+                string query = "SELECT Country, COUNT(Country) AS CountryPopularity FROM Airports GROUP BY Country ORDER BY CountryPopularity DESC";
+                try
+                {
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Airports airport = new Airports()
+                                {
+                                    Country = reader.GetSafeString(0)
+                                };
+
+                                TopCountriesStats stats = new TopCountriesStats()
+                                {
+                                    CountryPopularity = reader.GetInt32(1)
+                                };
+
+                                topCountriesList.Add(new Tuple<Airports, TopCountriesStats>(airport, stats));
+                            }
+                            reader.Close();
+                        }
+                    }
+                }
+                catch (SqlException e)
+                {
+                    Console.WriteLine($"SQL Error: {e.Message}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error retrieving Airports and/or TopCountriesStats: {ex.Message}");
+                }
+                return topCountriesList; 
+            }
+
+        public List<Tuple<Flights, TopPilotsStats>> GetTopPilotsQuery()
         {
-            List<Flights> flightsList = new List<Flights>();
+            List<Tuple<Flights, TopPilotsStats>> topPilotsList = new List<Tuple<Flights, TopPilotsStats>>();
 
             string query = "SELECT PilotName, COUNT(PilotName) AS PilotPopularity FROM Flights GROUP BY PilotName ORDER BY PilotPopularity DESC";
             try
@@ -974,7 +989,13 @@ namespace _12TPI_Project_Console.Controller
                             {
                                 PilotName = reader.GetSafeString(0)
                             };
-                            flightsList.Add(flight);
+
+                            TopPilotsStats stats = new TopPilotsStats()
+                            {
+                                PilotPopularity = reader.GetInt32(1)
+                            };
+
+                            topPilotsList.Add(new Tuple<Flights, TopPilotsStats>(flight, stats));
                         }
                         reader.Close();
                     }
@@ -986,13 +1007,13 @@ namespace _12TPI_Project_Console.Controller
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error retrieving Flights: {ex.Message}");
+                Console.WriteLine($"Error retrieving Flights and/or TopPilotsStats: {ex.Message}");
             }
-            return flightsList;
+            return topPilotsList;
         }
-        public List<PassengerTickets> GetTopMealsQuery()
+        public List<Tuple<PassengerTickets, TopMealsStats>> GetTopMealsQuery()
         {
-            List<PassengerTickets> ticketsList = new List<PassengerTickets>();
+            List<Tuple<PassengerTickets, TopMealsStats>> topMealsList = new List<Tuple<PassengerTickets, TopMealsStats>>();
 
             string query = "SELECT MealChoice, COUNT(MealChoice) AS MealPopularity FROM PassengerTickets GROUP BY MealChoice ORDER BY MealPopularity DESC";
             try
@@ -1007,7 +1028,13 @@ namespace _12TPI_Project_Console.Controller
                             {
                                 MealChoice = reader.GetSafeString(0)
                             };
-                            ticketsList.Add(ticket);
+
+                            TopMealsStats stats = new TopMealsStats()
+                            {
+                                MealPopularity = reader.GetInt32(1)
+                            };
+
+                            topMealsList.Add(new Tuple<PassengerTickets, TopMealsStats>(ticket, stats));
                         }
                         reader.Close();
                     }
@@ -1019,10 +1046,11 @@ namespace _12TPI_Project_Console.Controller
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error retrieving PassengerTickets: {ex.Message}");
+                Console.WriteLine($"Error retrieving PassengerTickets and/or TopMealsStats: {ex.Message}");
             }
-            return ticketsList;
+            return topMealsList;
         }
+
         public int UpdatePlane(Planes plane)
         {
             using (SqlCommand cmd = new SqlCommand($"UPDATE Planes SET Manufacturer = @Manufacturer, Model = @Model, PassengerCapacity = @PassengerCapacity, CargoCapacity = @CargoCapacity, MinimumTakeoff = @MinimumTakeoff, MinimumLanding = @MinimumLanding WHERE RegistrationID = @RegistrationID", conn))

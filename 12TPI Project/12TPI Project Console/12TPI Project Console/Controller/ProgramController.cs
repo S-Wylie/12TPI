@@ -125,7 +125,26 @@ namespace _12TPI_Project_Console.Controller
             var avgCap = storageManager.GetAvgPlaneCapQuery();
             consoleView.DisplayPlaneCapAvgQuery(avgCap);
         }
-
+        public void DisplayTopFlights()
+        {
+            var topFlights = storageManager.GetTopFlightsQuery();
+            consoleView.DisplayTopFlightsQuery(topFlights);
+        }
+        public void DisplayTopCountries()
+        {
+            var topCountries = storageManager.GetTopCountriesQuery();
+            consoleView.DisplayTopCountriesQuery(topCountries);
+        }
+        public void DisplayTopPilots()
+        {
+            var topPilots = storageManager.GetTopPilotsQuery();
+            consoleView.DisplayTopPilotsQuery(topPilots);
+        }
+        public void DisplayTopMeals()
+        {
+            var topMeals = storageManager.GetTopMealsQuery();
+            consoleView.DisplayTopMealsQuery(topMeals);
+        }
         public void AddNewPlane()
         {
             var newPlane = consoleView.PromptAddPlane();
@@ -726,7 +745,7 @@ namespace _12TPI_Project_Console.Controller
                         DisplayGlutenIntolPassengers();
                         break;
                     case 6:
-                        ;
+                        LaunchComplexQueriesMenu();
                         break;
                     case 7:
                         exit = true;
@@ -751,21 +770,18 @@ namespace _12TPI_Project_Console.Controller
                         DisplayAvgPlaneCap();
                         break;
                     case 2:
-                        DisplayAllTicketInfo();
+                        DisplayTopFlights();
                         break;
                     case 3:
-                        DisplayPlaneAndFlightInfo();
+                        DisplayTopCountries();
                         break;
                     case 4:
-                        DisplayBusinessPassengers();
+                        DisplayTopPilots();
                         break;
                     case 5:
-                        DisplayGlutenIntolPassengers();
+                        DisplayTopMeals();
                         break;
                     case 6:
-                        ;
-                        break;
-                    case 7:
                         exit = true;
                         break;
                     default:
