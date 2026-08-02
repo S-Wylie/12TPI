@@ -153,7 +153,7 @@ namespace _12TPI_Project_Console.Controller
         }
         public void AddNewFlight()
         {
-            var newFlight = consoleView.PromptAddFlight();
+            var newFlight = consoleView.PromptAddFlight(storageManager.GetMaxPlaneID());
             storageManager.AddFlight(newFlight);
             consoleView.DisplaySuccessMessage();
         }
@@ -171,7 +171,7 @@ namespace _12TPI_Project_Console.Controller
         }
         public void AddNewTicket()
         {
-            var newTicket = consoleView.PromptAddTicket();
+            var newTicket = consoleView.PromptAddTicket(storageManager.GetMaxFlightID(),storageManager.GetMaxCustomerID());
             storageManager.AddTicket(newTicket);
             consoleView.DisplaySuccessMessage();
         }
@@ -195,13 +195,13 @@ namespace _12TPI_Project_Console.Controller
         }
         public void UpdatePlane()
         {
-            var updatedPlane = consoleView.PromptUpdatePlane();
+            var updatedPlane = consoleView.PromptUpdatePlane(storageManager.GetMaxPlaneID());
             storageManager.UpdatePlane(updatedPlane);
             consoleView.DisplaySuccessMessage();
         }
         public void UpdateFlight()
         {
-            var updatedFlight = consoleView.PromptUpdateFlight();
+            var updatedFlight = consoleView.PromptUpdateFlight(storageManager.GetMaxFlightID());
             storageManager.UpdateFlight(updatedFlight);
             consoleView.DisplaySuccessMessage();
         }
@@ -213,13 +213,13 @@ namespace _12TPI_Project_Console.Controller
         }
         public void UpdatePassenger()
         {
-            var updatedPassenger = consoleView.PromptUpdatePassenger();
+            var updatedPassenger = consoleView.PromptUpdatePassenger(storageManager.GetMaxCustomerID());
             storageManager.UpdatePassenger(updatedPassenger);
             consoleView.DisplaySuccessMessage();
         }
         public void UpdateTicket()
         {
-            var updatedTicket = consoleView.PromptUpdateTicket();
+            var updatedTicket = consoleView.PromptUpdateTicket(storageManager.GetMaxTicketID(),storageManager.GetMaxFlightID(),storageManager.GetMaxCustomerID());
             storageManager.UpdateTicket(updatedTicket);
             consoleView.DisplaySuccessMessage();
         }
@@ -243,13 +243,13 @@ namespace _12TPI_Project_Console.Controller
         }
         public void DeletePlane()
         {
-            var planeToDelete = consoleView.PromptDeletePlane();
+            var planeToDelete = consoleView.PromptDeletePlane(storageManager.GetMaxPlaneID());
             storageManager.DeletePlaneByID(planeToDelete);
             consoleView.DisplaySuccessMessage();
         }
         public void DeleteFlight()
         {
-            var flightToDelete = consoleView.PromptDeleteFlight();
+            var flightToDelete = consoleView.PromptDeleteFlight(storageManager.GetMaxFlightID());
             storageManager.DeleteFlightByID(flightToDelete);
             consoleView.DisplaySuccessMessage();
         }
@@ -261,13 +261,13 @@ namespace _12TPI_Project_Console.Controller
         }
         public void DeletePassenger()
         {
-            var passengerToDelete = consoleView.PromptDeletePassenger();
+            var passengerToDelete = consoleView.PromptDeletePassenger(storageManager.GetMaxCustomerID());
             storageManager.DeletePassengerByID(passengerToDelete);
             consoleView.DisplaySuccessMessage();
         }
         public void DeleteTicket()
         {
-            var ticketToDelete = consoleView.PromptDeleteTicket();
+            var ticketToDelete = consoleView.PromptDeleteTicket(storageManager.GetMaxTicketID());
             storageManager.DeleteTicketByID(ticketToDelete);
             consoleView.DisplaySuccessMessage();
         }

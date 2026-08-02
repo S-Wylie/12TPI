@@ -141,6 +141,31 @@ namespace _12TPI_Project_Console.Controller
             }
             return planesList;
         }
+        public int GetMaxPlaneID()
+        {
+            int maxPlaneID = 0;
+            string query = "SELECT MAX(RegistrationID) FROM Planes";
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    object result = cmd.ExecuteScalar();
+                    if (result != DBNull.Value)
+                    {
+                        maxPlaneID = Convert.ToInt32(result);
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine($"SQL Error: {e.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving max Plane ID: {ex.Message}");
+            }
+            return maxPlaneID;
+        }
         public List<Flights> GetAllFlights() 
         {
             List<Flights> flightsList = new List<Flights>();
@@ -219,6 +244,31 @@ namespace _12TPI_Project_Console.Controller
             }
             return airportsList;
         }
+        public int GetMaxCustomerID()
+        {
+            int maxCustomerID = 0;
+            string query = "SELECT MAX(CustomerID) FROM Passengers";
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    object result = cmd.ExecuteScalar();
+                    if (result != DBNull.Value)
+                    {
+                        maxCustomerID = Convert.ToInt32(result);
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine($"SQL Error: {e.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving max Customer ID: {ex.Message}");
+            }
+            return maxCustomerID;
+        }
         public List<Passengers> GetAllPassengers()
         {
             List<Passengers> passengersList = new List<Passengers>();
@@ -255,6 +305,32 @@ namespace _12TPI_Project_Console.Controller
             }
             return passengersList;
         }
+        public int GetMaxTicketID()
+        {
+            int maxTicketID = 0;
+            string query = "SELECT MAX(TicketID) FROM PassengerTickets";
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    object result = cmd.ExecuteScalar();
+                    if (result != DBNull.Value)
+                    {
+                        maxTicketID = Convert.ToInt32(result);
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine($"SQL Error: {e.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving max Ticket ID: {ex.Message}");
+            }
+            return maxTicketID;
+        }
+
         public List<PassengerTickets> GetAllPassengerTickets()
         {
             List<PassengerTickets> passengerTicketsList = new List<PassengerTickets>();
@@ -438,6 +514,31 @@ namespace _12TPI_Project_Console.Controller
                 Console.WriteLine($"Error retrieving Planes: {ex.Message}");
             }
             return planesList;
+        }
+        public int GetMaxFlightID()
+        {
+            int maxFlightID = 0;
+            string query = "SELECT MAX(FlightID) FROM Flights";
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    object result = cmd.ExecuteScalar();
+                    if (result != DBNull.Value)
+                    {
+                        maxFlightID = Convert.ToInt32(result);
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine($"SQL Error: {e.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving max Flight ID: {ex.Message}");
+            }
+            return maxFlightID;
         }
         public List<Flights> GetDelayedFlightsQuery()
         {
