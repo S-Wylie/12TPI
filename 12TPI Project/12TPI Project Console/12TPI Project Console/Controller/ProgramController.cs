@@ -615,48 +615,10 @@ namespace _12TPI_Project_Console.Controller
                 }
             }
         }
-
-        public void LaunchAdminMenu()
-        {
-            bool exit = false;
-            while (!exit)
-            {
-                if (!RequireAccessLevel(AdminAccess))
-                {
-                    exit = true;
-                }
-                else
-                {
-                    consoleView.DisplayAdminView();
-                    int choice = consoleView.GetUserChoice();
-                    switch (choice)
-                    {
-                        case 1:
-                            LaunchLoginsMenu;
-                            break;
-                        case 2:
-                            LaunchClassesMenu();
-                            break;
-                        case 3:
-                            LaunchMealOptionsMenu();
-                            break;
-                        case 4:
-                            LaunchEditingMenu();
-                            break;
-                        case 5:
-                            exit = true;
-                            break;
-                        default:
-                            consoleView.DisplayInvalidChoiceMessage();
-                            break;
-                    }
-                }
-            }
-        }
         public void LaunchLoginsMenu()
         {
             bool exit = false;
-            while (!exit) 
+            while (!exit)
             {
                 consoleView.DisplayLoginsMenu();
                 int choice = consoleView.GetUserChoice();
@@ -684,6 +646,45 @@ namespace _12TPI_Project_Console.Controller
             }
 
         }
+
+        public void LaunchAdminMenu()
+        {
+            bool exit = false;
+            while (!exit)
+            {
+                if (!RequireAccessLevel(AdminAccess))
+                {
+                    exit = true;
+                }
+                else
+                {
+                    consoleView.DisplayAdminView();
+                    int choice = consoleView.GetUserChoice();
+                    switch (choice)
+                    {
+                        case 1:
+                            LaunchLoginsMenu();
+                            break;
+                        case 2:
+                            LaunchClassesMenu();
+                            break;
+                        case 3:
+                            LaunchMealOptionsMenu();
+                            break;
+                        case 4:
+                            LaunchEditingMenu();
+                            break;
+                        case 5:
+                            exit = true;
+                            break;
+                        default:
+                            consoleView.DisplayInvalidChoiceMessage();
+                            break;
+                    }
+                }
+            }
+        }
+      
         public void LaunchSimpleQueriesMenu()
         {
             bool exit = false;
