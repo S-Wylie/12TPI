@@ -201,7 +201,7 @@ namespace _12TPI_Project_Console.Controller
         }
         public void UpdateFlight()
         {
-            var updatedFlight = consoleView.PromptUpdateFlight(storageManager.GetMaxFlightID());
+            var updatedFlight = consoleView.PromptUpdateFlight(storageManager.GetMaxFlightID(), storageManager.GetMaxPlaneID());
             storageManager.UpdateFlight(updatedFlight);
             consoleView.DisplaySuccessMessage();
         }

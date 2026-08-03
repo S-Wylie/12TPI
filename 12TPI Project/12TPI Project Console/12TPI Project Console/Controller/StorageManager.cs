@@ -350,7 +350,7 @@ namespace _12TPI_Project_Console.Controller
                                 FlightID = reader.GetInt32(1),
                                 CustomerID = reader.GetInt32(2),
                                 ClassCode = reader.GetSafeString(3),
-                                MealChoice = reader.GetSafeString(4),
+                                MealChoice = reader.GetSafeString(4)
                             };
                             passengerTicketsList.Add(passengerTicket);
                         }

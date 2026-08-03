@@ -481,9 +481,9 @@ namespace _12TPI_Project_Console.View
             newFlight.FlightNumber = GetStringInput("Enter the Flight Number: ",5);
             newFlight.PilotName = GetStringInput("Enter the Pilot Name: ",50);
             newFlight.DepartingDateTime = GetDateTimeInput("Enter the Departing Date and Time: ");
-            newFlight.DepartingAirport = GetStringInput("Enter the Departing Airport: ",3);
+            newFlight.DepartingAirport = GetStringInput("Enter the Departing Airport’s IATA Code: ", 3);
             newFlight.ArrivingDateTime = GetDateTimeInput("Enter the Arriving Date and Time: ");
-            newFlight.ArrivingAirport = GetStringInput("Enter the Arriving Airport: ",3);
+            newFlight.ArrivingAirport = GetStringInput("Enter the Arrival Airport’s IATA Code: ", 3);
             newFlight.Status = GetStringInput("Enter the Flight's Status: ",10);
             return newFlight;
         }
@@ -517,10 +517,10 @@ namespace _12TPI_Project_Console.View
         public Classes PromptAddClass()
         {
             Classes newClass = new Classes();
-            newClass.ClassCode = GetStringInput("Enter the Classe Code",3);
+            newClass.ClassCode = GetStringInput("Enter the Class Code: ",3);
             newClass.Name = GetStringInput("Enter the Class Name: ",25);
             newClass.ChangesPermitted = GetStringInput("Enter if changes are permitted (Yes/No): ",3);
-            newClass.BaggageAllowance = GetIntInput("Enter the Baggage Allowance: ",300);
+            newClass.BaggageAllowance = GetIntInput("Enter the Baggage Allowance: ",5);
             newClass.MilesAccrual = GetStringInput("Enter if Miles can be accrued (Yes/No): ",3);
             return newClass;
         }
@@ -529,7 +529,7 @@ namespace _12TPI_Project_Console.View
             MealOptions newMealOption = new MealOptions();
             newMealOption.MealCode = GetStringInput("Enter the Meal Code: ",4);
             newMealOption.Name = GetStringInput("Enter the Meal's Name: ",25);
-            newMealOption.Conditions = GetStringInput("Enter the Meal's Conditions: ",500);
+            newMealOption.Conditions = GetStringInput("Enter the Meal's Conditions: ",150);
             return newMealOption;
         }
         public Logins PromptAddLogin()
@@ -552,12 +552,13 @@ namespace _12TPI_Project_Console.View
             updatedPlane.MinimumLanding = GetIntInput("Enter the new Minimum Landing Length: ",1000);
             return updatedPlane;
         }
-        public Flights PromptUpdateFlight(int maxFlightID)
+        public Flights PromptUpdateFlight(int maxFlightID, int maxPlaneID)
         {
             Flights updatedFlight = new Flights();
             updatedFlight.FlightID = GetIntInput("Enter the Flight ID of the flight to update: ",maxFlightID);
+            updatedFlight.PlaneRegistrationID = GetIntInput("Enter the new Plane Registration ID: ", maxPlaneID);
             updatedFlight.FlightNumber = GetStringInput("Enter the new Flight Number: ",5);
-            updatedFlight.PilotName = GetStringInput("Enter the new Pilot's Name: ",50);
+            updatedFlight.PilotName = GetStringInput("Enter the new Pilot Name: ",50);
             updatedFlight.DepartingDateTime = GetDateTimeInput("Enter the new Departing Date and Time: ");
             updatedFlight.DepartingAirport = GetStringInput("Enter the new Departing Airport's IATA Code: ",3);
             updatedFlight.ArrivingDateTime = GetDateTimeInput("Enter the new Arriving Date and Time: ");
@@ -571,7 +572,7 @@ namespace _12TPI_Project_Console.View
             updatedAirport.IATACode = GetStringInput("Enter the IATA Code of the airport to update: ",3);
             updatedAirport.Name = GetStringInput("Enter the new Name: ",50);
             updatedAirport.Coordinates = GetStringInput("Enter the new Coordinates: ",50);
-            updatedAirport.Country = GetStringInput("Enter the new Country: ",50);
+            updatedAirport.Country = GetStringInput("Enter the Airport's new Country: ",50);
             updatedAirport.Timezone = GetStringInput("Enter the new Timezone: ",6);
             return updatedAirport;
         }
@@ -599,10 +600,10 @@ namespace _12TPI_Project_Console.View
             Classes updatedClass = new Classes();
             updatedClass.ClassCode = GetStringInput("Enter the Class Code of the class to update: ",3);
             updatedClass.Name = GetStringInput("Enter the new Class Name: ",25);
-            updatedClass.ChangesPermitted = GetStringInput("Enter if changes are permitted? (Yes/No): ",3);
+            updatedClass.ChangesPermitted = GetStringInput("Enter if changes are permitted (Yes/No): ",3);
             updatedClass.BaggageAllowance = GetIntInput("Enter the new Baggage Allowance: ",500);
-            updatedClass.MilesAccrual = GetStringInput("Enter if miles are able to be accrued? (Yes/No): ",3);
-            return updatedClass;
+            updatedClass.MilesAccrual = GetStringInput("Enter if miles are able to be accrued (Yes/No): ",3);
+            return updatedClass; 
         }
         public MealOptions PromptUpdateMealOption()
         {
