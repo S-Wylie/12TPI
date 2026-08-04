@@ -744,7 +744,7 @@ namespace _12TPI_Project_Console.Controller
         {
             List<Tuple<Passengers,PassengerTickets,Flights,Classes,MealOptions>> AllTicketList = new List<Tuple<Passengers, PassengerTickets, Flights, Classes, MealOptions>>();
 
-            string query = "SELECT P.CustomerID, P.FirstName, P.LastName, P.MembershipStatus, T.TicketID, T.FlightID, F.PlaneRegistrationID, F.FlightNumber, F.PilotName, F.DepartingDateTime, F.DepartingAirport, F.ArrivalDateTime, F.ArrivalAirport, F.\"Status\", C.ClassCode, C.\"Name\", C.ChangesPermitted, C.BaggaeAllowance, C.MilesAccrual, T.MealChoice, M.\"Name\", M.Conditions FROM Passengers P, PassengerTickets T, Classes C, Flights F, MealOptions WHERE T.FlightID = F.FlightID AND P.CustomerID = T.CustomerID AND T.ClassCode = C.ClassCode AND T.MealChoice = M.MealCode ORDER BY LastName ASC";
+            string query = "SELECT P.CustomerID, P.FirstName, P.LastName, P.MembershipStatus, T.TicketID, T.FlightID, F.PlaneRegistrationID, F.FlightNumber, F.PilotName, F.DepartingDateTime, F.DepartingAirport, F.ArrivalDateTime, F.ArrivalAirport, F.\"Status\", C.ClassCode, C.\"Name\", C.ChangesPermitted, C.BaggaeAllowance, C.MilesAccrual, T.MealChoice, M.\"Name\", M.Conditions FROM Passengers P, PassengerTickets T, Classes C, Flights F, MealOptions M WHERE T.FlightID = F.FlightID AND P.CustomerID = T.CustomerID AND T.ClassCode = C.ClassCode AND T.MealChoice = M.MealCode ORDER BY LastName ASC";
             try
             {
                 using (SqlCommand cmd = new SqlCommand(query, conn))

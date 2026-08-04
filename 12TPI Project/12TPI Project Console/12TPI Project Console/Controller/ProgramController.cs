@@ -675,6 +675,9 @@ namespace _12TPI_Project_Console.Controller
                             LaunchEditingMenu();
                             break;
                         case 5:
+                            LaunchSimpleQueriesMenu();
+                            break;
+                        case 6:
                             exit = true;
                             break;
                         default:
