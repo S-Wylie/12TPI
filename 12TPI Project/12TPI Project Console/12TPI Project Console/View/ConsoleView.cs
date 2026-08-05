@@ -7,6 +7,50 @@ namespace _12TPI_Project_Console.View
 {
     public class ConsoleView
     {
+        //Airports table
+        const int maxIATACodeLength = 3;
+        const int maxAirportNameLength = 50;
+        const int maxCoordinatesLength = 50;
+        const int maxCountryLength = 50;
+        const int maxTimezoneLength = 6;
+
+        //Planes table
+        const int maxManufacturerLength = 50;
+        const int maxModelLength = 50;
+        const int maxPassengerCapacityLength = 1000;
+        const int maxCargoCapacityLength = 10000;
+        const int maxMinimumTakeoffLength = 1000;
+        const int maxMinimumLandingLength = 1000;
+
+        //Flights table
+        const int maxFlightNumberLength = 5;
+        const int maxPilotNameLength = 50;
+        const int maxDepartingAirportLength = 3;
+        const int maxArrivingAirportLength = 3;
+        const int maxStatusLength = 10;
+
+        //Passengers table
+        const int maxFirstNameLength = 25;
+        const int maxLastNameLength = 25;
+        const int maxMembershipStatusLength = 10;
+
+        //Classes table
+        const int maxClassCodeLength = 3;
+        const int maxClassNameLength = 25;
+        const int maxChangesPermittedLength = 3;
+        const int maxBaggageAllowanceLength = 5;
+        const int maxMilesAccrualLength = 3;
+
+        //MealOptions table
+        const int maxMealCodeLength = 4;
+        const int maxMealNameLength = 50;
+        const int maxMealConditionsLength = 150;
+
+        //Logins table
+        const int maxUsernameLength = 25;
+        const int maxPINLength = 42;
+        const int maxAccessLevelLength = 20;
+
         public void DisplayWelcomeMessage()
         {
             Console.WriteLine("Welcome to the Flight Management System!");
@@ -466,43 +510,43 @@ namespace _12TPI_Project_Console.View
         public Planes PromptAddPlane()
         {
             Planes newPlane = new Planes();
-            newPlane.Manufacturer = GetStringInput("Enter the Manufacturer: ",50 );
-            newPlane.Model = GetStringInput("Enter the Model: ",50);
-            newPlane.PassengerCapacity = GetIntInput("Enter the Passenger Capacity: ",1000);
-            newPlane.CargoCapacity = GetIntInput("Enter the Cargo Capacity: ",10000);
-            newPlane.MinimumTakeoff = GetIntInput("Enter the Minimum Takeoff Length: ",1000);
-            newPlane.MinimumLanding = GetIntInput("Enter the Minimum Landing Length: ",1000);
+            newPlane.Manufacturer = GetStringInput("Enter the Manufacturer: ", maxManufacturerLength);
+            newPlane.Model = GetStringInput("Enter the Model: ", maxModelLength);
+            newPlane.PassengerCapacity = GetIntInput("Enter the Passenger Capacity: ", maxPassengerCapacityLength);
+            newPlane.CargoCapacity = GetIntInput("Enter the Cargo Capacity: ", maxCargoCapacityLength);
+            newPlane.MinimumTakeoff = GetIntInput("Enter the Minimum Takeoff Length: ", maxMinimumTakeoffLength);
+            newPlane.MinimumLanding = GetIntInput("Enter the Minimum Landing Length: ", maxMinimumLandingLength);
             return newPlane;
         }
         public Flights PromptAddFlight(int  maxPlaneID)
         {
             Flights newFlight = new Flights();
             newFlight.PlaneRegistrationID = GetIntInput("Enter the Plane Registration ID: ", maxPlaneID);
-            newFlight.FlightNumber = GetStringInput("Enter the Flight Number: ",5);
-            newFlight.PilotName = GetStringInput("Enter the Pilot Name: ",50);
+            newFlight.FlightNumber = GetStringInput("Enter the Flight Number: ",maxFlightNumberLength);
+            newFlight.PilotName = GetStringInput("Enter the Pilot Name: ",maxPilotNameLength);
             newFlight.DepartingDateTime = GetDateTimeInput("Enter the Departing Date and Time: ");
-            newFlight.DepartingAirport = GetStringInput("Enter the Departing Airport’s IATA Code: ", 3);
+            newFlight.DepartingAirport = GetStringInput("Enter the Departing Airport’s IATA Code: ",maxDepartingAirportLength);
             newFlight.ArrivingDateTime = GetDateTimeInput("Enter the Arriving Date and Time: ");
-            newFlight.ArrivingAirport = GetStringInput("Enter the Arrival Airport’s IATA Code: ", 3);
-            newFlight.Status = GetStringInput("Enter the Flight's Status: ",10);
+            newFlight.ArrivingAirport = GetStringInput("Enter the Arrival Airport’s IATA Code: ",maxArrivingAirportLength);
+            newFlight.Status = GetStringInput("Enter the Flight's Status: ",maxStatusLength);
             return newFlight;
         }
         public Airports PromptAddAirport()
         {
             Airports newAirport = new Airports();
-            newAirport.IATACode = GetStringInput("Enter the IATA Code: ",3);
-            newAirport.Name = GetStringInput("Enter the Airport's Name: ",50);
-            newAirport.Coordinates = GetStringInput("Enter the Coordinates: ",50);
-            newAirport.Country = GetStringInput("Enter the Airport's Country: ",50);
-            newAirport.Timezone = GetStringInput("Enter the Timezone: ",6);
+            newAirport.IATACode = GetStringInput("Enter the IATA Code: ",maxIATACodeLength);
+            newAirport.Name = GetStringInput("Enter the Airport's Name: ",maxAirportNameLength);
+            newAirport.Coordinates = GetStringInput("Enter the Coordinates: ",maxCoordinatesLength);
+            newAirport.Country = GetStringInput("Enter the Airport's Country: ",maxCountryLength);
+            newAirport.Timezone = GetStringInput("Enter the Timezone: ",maxTimezoneLength);
             return newAirport;
         }
         public Passengers PromptAddPassenger()
         {
             Passengers newPassenger = new Passengers();
-            newPassenger.FirstName = GetStringInput("Enter First Name: ",25);
-            newPassenger.LastName = GetStringInput("Enter Last Name: ",25);
-            newPassenger.MembershipStatus = GetStringInput("Enter the Passenger's Membership Status: ",10);
+            newPassenger.FirstName = GetStringInput("Enter First Name: ",maxFirstNameLength);
+            newPassenger.LastName = GetStringInput("Enter Last Name: ",maxLastNameLength);
+            newPassenger.MembershipStatus = GetStringInput("Enter the Passenger's Membership Status: ",maxMembershipStatusLength);
             return newPassenger;
         }
         public PassengerTickets PromptAddTicket(int maxFlightId, int maxCustomerID)
@@ -510,34 +554,34 @@ namespace _12TPI_Project_Console.View
             PassengerTickets newTicket = new PassengerTickets();
             newTicket.FlightID = GetIntInput("Enter the Flight ID: ", maxFlightId);
             newTicket.CustomerID = GetIntInput("Enter the Customer ID: ", maxCustomerID);
-            newTicket.ClassCode = GetStringInput("Enter the Ticket's Class Code: ",3);
-            newTicket.MealChoice = GetStringInput("Enter the Ticket's Meal Choice: ",4);
+            newTicket.ClassCode = GetStringInput("Enter the Ticket's Class Code: ",maxClassCodeLength);
+            newTicket.MealChoice = GetStringInput("Enter the Ticket's Meal Choice: ",maxMealCodeLength);
             return newTicket;
         }
         public Classes PromptAddClass()
         {
             Classes newClass = new Classes();
-            newClass.ClassCode = GetStringInput("Enter the Class Code: ",3);
-            newClass.Name = GetStringInput("Enter the Class Name: ",25);
-            newClass.ChangesPermitted = GetStringInput("Enter if changes are permitted (Yes/No): ",3);
-            newClass.BaggageAllowance = GetIntInput("Enter the Baggage Allowance: ",5);
-            newClass.MilesAccrual = GetStringInput("Enter if Miles can be accrued (Yes/No): ",3);
+            newClass.ClassCode = GetStringInput("Enter the Class Code: ",maxClassCodeLength);
+            newClass.Name = GetStringInput("Enter the Class Name: ",maxClassNameLength);
+            newClass.ChangesPermitted = GetStringInput("Enter if changes are permitted (Yes/No): ",maxChangesPermittedLength);
+            newClass.BaggageAllowance = GetIntInput("Enter the Baggage Allowance: ",maxBaggageAllowanceLength);
+            newClass.MilesAccrual = GetStringInput("Enter if Miles can be accrued (Yes/No): ",maxMilesAccrualLength);
             return newClass;
         }
         public MealOptions PromptAddMealOption()
         {
             MealOptions newMealOption = new MealOptions();
-            newMealOption.MealCode = GetStringInput("Enter the Meal Code: ",4);
-            newMealOption.Name = GetStringInput("Enter the Meal's Name: ",25);
-            newMealOption.Conditions = GetStringInput("Enter the Meal's Conditions: ",150);
+            newMealOption.MealCode = GetStringInput("Enter the Meal Code: ",maxMealCodeLength);
+            newMealOption.Name = GetStringInput("Enter the Meal's Name: ",maxMealNameLength);
+            newMealOption.Conditions = GetStringInput("Enter the Meal's Conditions: ", maxMealConditionsLength);
             return newMealOption;
         }
         public Logins PromptAddLogin()
         {
             Logins newLogin = new Logins();
-            newLogin.Username = GetStringInput("Enter the Username: ",25);
-            newLogin.PINHash = GetStringInput("Enter the PIN: ",42);
-            newLogin.AccessLevel = GetStringInput("Enter the Access Level: ",20);
+            newLogin.Username = GetStringInput("Enter the Username: ",maxUsernameLength);
+            newLogin.PINHash = GetStringInput("Enter the PIN: ",maxPINLength);
+            newLogin.AccessLevel = GetStringInput("Enter the Access Level: ",maxAccessLevelLength);
             return newLogin;
         }
         public Planes PromptUpdatePlane(int maxPlaneID)
