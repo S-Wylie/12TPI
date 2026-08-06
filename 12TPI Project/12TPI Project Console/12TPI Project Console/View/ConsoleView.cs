@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace _12TPI_Project_Console.View
 {
@@ -471,12 +472,96 @@ namespace _12TPI_Project_Console.View
         }
         public string GetStringInput(string prompt, int minLength, int maxLength) //Prevents null data from being inserted into the string data type
         {
+            var regex = new Regex("^[a-zA-Z0-9]*$");
             string response;
             while (true)
             {
                 Console.Write(prompt);
                 response = Console.ReadLine();
-                if (!string.IsNullOrWhiteSpace(response) && response.Length <= maxLength && response.Length >= minLength)
+                if (!string.IsNullOrWhiteSpace(response) && response.Length <= maxLength && response.Length >= minLength && regex.IsMatch(response))
+                {
+                    break;
+                }
+                Console.WriteLine("Invalid input. Please try again.");
+            }
+            return response;
+        }
+
+        public string GetSpaceStringInput(string prompt, int minLength, int maxLength)
+        {
+            var regex = new Regex("^[a-zA-Z0-9 ]*$");
+            string response;
+            while (true)
+            {
+                Console.Write(prompt);
+                response = Console.ReadLine();
+                if (!string.IsNullOrWhiteSpace(response) && response.Length <= maxLength && response.Length >= minLength && regex.IsMatch(response))
+                {
+                    break;
+                }
+                Console.WriteLine("Invalid input. Please try again.");
+            }
+            return response;
+        }
+        public string GetSpclStringInput(string prompt, int minLength, int maxLength)
+        {
+            var regex = new Regex("^[a-zA-Z0-9-+!@#$%^&*().,]*$");
+            string response;
+            while (true)
+            {
+                Console.Write(prompt);
+                response = Console.ReadLine();
+                if (!string.IsNullOrWhiteSpace(response) && response.Length <= maxLength && response.Length >= minLength && regex.IsMatch(response))
+                {
+                    break;
+                }
+                Console.WriteLine("Invalid input. Please try again.");
+            }
+            return response;
+        }
+
+        public string GetCoordStringInput(string prompt, int minLength, int maxLength)
+        {
+            var regex = new Regex("^[a-zA-Z0-9,° ]*$");
+            string response;
+            while (true)
+            {
+                Console.Write(prompt);
+                response = Console.ReadLine();
+                if (!string.IsNullOrWhiteSpace(response) && response.Length <= maxLength && response.Length >= minLength && regex.IsMatch(response))
+                {
+                    break;
+                }
+                Console.WriteLine("Invalid input. Please try again.");
+            }
+            return response;
+        }
+        public string GetTimezoneStringInput(string prompt, int minLength, int maxLength)
+        {
+            var regex = new Regex("^[a-zA-Z0-9-+.,]*$");
+            string response;
+            while (true)
+            {
+                Console.Write(prompt);
+                response = Console.ReadLine();
+                if (!string.IsNullOrWhiteSpace(response) && response.Length <= maxLength && response.Length >= minLength && regex.IsMatch(response))
+                {
+                    break;
+                }
+                Console.WriteLine("Invalid input. Please try again.");
+            }
+            return response;
+        }
+
+        public string GetTextStringInput(string prompt, int minLength, int maxLength)
+        {
+            var regex = new Regex("^[a-zA-Z0-9,. ]*$");
+            string response;
+            while (true)
+            {
+                Console.Write(prompt);
+                response = Console.ReadLine();
+                if (!string.IsNullOrWhiteSpace(response) && response.Length <= maxLength && response.Length >= minLength && regex.IsMatch(response))
                 {
                     break;
                 }
@@ -531,7 +616,7 @@ namespace _12TPI_Project_Console.View
             Flights newFlight = new Flights();
             newFlight.PlaneRegistrationID = GetIntInput("Enter the Plane Registration ID: ", maxPlaneID);
             newFlight.FlightNumber = GetStringInput("Enter the Flight Number: ",minFlightNumberLength,maxFlightNumberLength);
-            newFlight.PilotName = GetStringInput("Enter the Pilot Name: ",minDefaultLength,maxPilotNameLength);
+            newFlight.PilotName = GetSpaceStringInput("Enter the Pilot Name: ",minDefaultLength,maxPilotNameLength);
             newFlight.DepartingDateTime = GetDateTimeInput("Enter the Departing Date and Time: ");
             newFlight.DepartingAirport = GetStringInput("Enter the Departing Airport’s IATA Code: ",minIATACodeLength,maxIATACodeLength);
             newFlight.ArrivingDateTime = GetDateTimeInput("Enter the Arriving Date and Time: ");
@@ -543,10 +628,10 @@ namespace _12TPI_Project_Console.View
         {
             Airports newAirport = new Airports();
             newAirport.IATACode = GetStringInput("Enter the IATA Code: ",minIATACodeLength,maxIATACodeLength);
-            newAirport.Name = GetStringInput("Enter the Airport's Name: ",minDefaultLength,maxAirportNameLength);
-            newAirport.Coordinates = GetStringInput("Enter the Coordinates: ",minChangesPermittedLength,maxCoordinatesLength);
-            newAirport.Country = GetStringInput("Enter the Airport's Country: ",minDefaultLength,maxCountryLength);
-            newAirport.Timezone = GetStringInput("Enter the Timezone: ",minTimezoneLength,maxTimezoneLength);
+            newAirport.Name = GetSpaceStringInput("Enter the Airport's Name: ",minDefaultLength,maxAirportNameLength);
+            newAirport.Coordinates = GetCoordStringInput("Enter the Coordinates: ",minChangesPermittedLength,maxCoordinatesLength);
+            newAirport.Country = GetSpaceStringInput("Enter the Airport's Country: ",minDefaultLength,maxCountryLength);
+            newAirport.Timezone = GetTimezoneStringInput("Enter the Timezone: ",minTimezoneLength,maxTimezoneLength);
             return newAirport;
         }
         public Passengers PromptAddPassenger()
@@ -554,7 +639,7 @@ namespace _12TPI_Project_Console.View
             Passengers newPassenger = new Passengers();
             newPassenger.FirstName = GetStringInput("Enter First Name: ",minDefaultLength,maxFirstNameLength);
             newPassenger.LastName = GetStringInput("Enter Last Name: ",minDefaultLength,maxLastNameLength);
-            newPassenger.MembershipStatus = GetStringInput("Enter the Passenger's Membership Status: ",minMembershipStatusLength, maxMembershipStatusLength);
+            newPassenger.MembershipStatus = GetStringInput("Enter the Passenger's Membership Status (Inactive/Active): ",minMembershipStatusLength, maxMembershipStatusLength);
             return newPassenger;
         }
         public PassengerTickets PromptAddTicket(int maxFlightId, int maxCustomerID)
@@ -570,7 +655,7 @@ namespace _12TPI_Project_Console.View
         {
             Classes newClass = new Classes();
             newClass.ClassCode = GetStringInput("Enter the Class Code: ",minClassCodeLength,maxClassCodeLength);
-            newClass.Name = GetStringInput("Enter the Class Name: ",minDefaultLength,maxClassNameLength);
+            newClass.Name = GetSpaceStringInput("Enter the Class Name: ",minDefaultLength,maxClassNameLength);
             newClass.ChangesPermitted = GetStringInput("Enter if changes are permitted (Yes/No): ",minChangesPermittedLength,maxChangesPermittedLength);
             newClass.BaggageAllowance = GetIntInput("Enter the Baggage Allowance: ",maxBaggageAllowanceLength);
             newClass.MilesAccrual = GetStringInput("Enter if Miles can be accrued (Yes/No): ",minMilesAccrualLength,maxMilesAccrualLength);
@@ -580,14 +665,14 @@ namespace _12TPI_Project_Console.View
         {
             MealOptions newMealOption = new MealOptions();
             newMealOption.MealCode = GetStringInput("Enter the Meal Code: ",minClassCodeLength,maxMealCodeLength);
-            newMealOption.Name = GetStringInput("Enter the Meal's Name: ",minDefaultLength,maxMealNameLength);
-            newMealOption.Conditions = GetStringInput("Enter the Meal's Conditions: ", minDefaultLength,maxMealConditionsLength);
+            newMealOption.Name = GetSpaceStringInput("Enter the Meal's Name: ",minDefaultLength,maxMealNameLength);
+            newMealOption.Conditions = GetTextStringInput("Enter the Meal's Conditions: ", minDefaultLength,maxMealConditionsLength);
             return newMealOption;
         }
         public Logins PromptAddLogin()
         {
             Logins newLogin = new Logins();
-            newLogin.Username = GetStringInput("Enter the Username: ",minDefaultLength,maxUsernameLength);
+            newLogin.Username = GetSpclStringInput("Enter the Username: ",minDefaultLength,maxUsernameLength);
             newLogin.PINHash = GetStringInput("Enter the PIN: ",minDefaultLength,maxPINLength);
             newLogin.AccessLevel = GetStringInput("Enter the Access Level: ",minDefaultLength,maxAccessLevelLength);
             return newLogin;
@@ -610,7 +695,7 @@ namespace _12TPI_Project_Console.View
             updatedFlight.FlightID = GetIntInput("Enter the Flight ID of the flight to update: ",maxFlightID);
             updatedFlight.PlaneRegistrationID = GetIntInput("Enter the new Plane Registration ID: ", maxPlaneID);
             updatedFlight.FlightNumber = GetStringInput("Enter the new Flight Number: ",minFlightNumberLength,maxFlightNumberLength);
-            updatedFlight.PilotName = GetStringInput("Enter the new Pilot Name: ",minDefaultLength,maxPilotNameLength);
+            updatedFlight.PilotName = GetSpaceStringInput("Enter the new Pilot Name: ",minDefaultLength,maxPilotNameLength);
             updatedFlight.DepartingDateTime = GetDateTimeInput("Enter the new Departing Date and Time: ");
             updatedFlight.DepartingAirport = GetStringInput("Enter the new Departing Airport's IATA Code: ",minIATACodeLength, maxIATACodeLength);
             updatedFlight.ArrivingDateTime = GetDateTimeInput("Enter the new Arriving Date and Time: ");
@@ -622,10 +707,10 @@ namespace _12TPI_Project_Console.View
         {
             Airports updatedAirport = new Airports();
             updatedAirport.IATACode = GetStringInput("Enter the IATA Code of the airport to update: ",minIATACodeLength, maxIATACodeLength);
-            updatedAirport.Name = GetStringInput("Enter the new Name: ",minDefaultLength,maxAirportNameLength);
-            updatedAirport.Coordinates = GetStringInput("Enter the new Coordinates: ",minDefaultLength,maxCoordinatesLength);
-            updatedAirport.Country = GetStringInput("Enter the Airport's new Country: ",minDefaultLength,maxCountryLength);
-            updatedAirport.Timezone = GetStringInput("Enter the new Timezone: ",minTimezoneLength,maxTimezoneLength);
+            updatedAirport.Name = GetSpaceStringInput("Enter the new Name: ",minDefaultLength,maxAirportNameLength);
+            updatedAirport.Coordinates = GetCoordStringInput("Enter the new Coordinates: ",minDefaultLength,maxCoordinatesLength);
+            updatedAirport.Country = GetSpaceStringInput("Enter the Airport's new Country: ",minDefaultLength,maxCountryLength);
+            updatedAirport.Timezone = GetTimezoneStringInput("Enter the new Timezone: ",minTimezoneLength,maxTimezoneLength);
             return updatedAirport;
         }
         public Passengers PromptUpdatePassenger(int maxCustomerID)
@@ -651,7 +736,7 @@ namespace _12TPI_Project_Console.View
         {
             Classes updatedClass = new Classes();
             updatedClass.ClassCode = GetStringInput("Enter the Class Code of the class to update: ",minClassCodeLength,maxClassCodeLength);
-            updatedClass.Name = GetStringInput("Enter the new Class Name: ",minDefaultLength,maxClassNameLength);
+            updatedClass.Name = GetSpaceStringInput("Enter the new Class Name: ",minDefaultLength,maxClassNameLength);
             updatedClass.ChangesPermitted = GetStringInput("Enter if changes are permitted (Yes/No): ",minDefaultLength,maxChangesPermittedLength);
             updatedClass.BaggageAllowance = GetIntInput("Enter the new Baggage Allowance: ",maxBaggageAllowanceLength);
             updatedClass.MilesAccrual = GetStringInput("Enter if miles are able to be accrued (Yes/No): ",minDefaultLength,maxMilesAccrualLength);
@@ -661,14 +746,14 @@ namespace _12TPI_Project_Console.View
         {
             MealOptions updatedMealOption = new MealOptions();
             updatedMealOption.MealCode = GetStringInput("Enter the Meal Code of the meal option to update: ",minMealCodeLength,maxMealCodeLength);
-            updatedMealOption.Name = GetStringInput("Enter the new Meal Name: ",minDefaultLength,maxMealNameLength);
-            updatedMealOption.Conditions = GetStringInput("Enter the new Conditions: ",minDefaultLength,maxMealConditionsLength);
+            updatedMealOption.Name = GetSpaceStringInput("Enter the new Meal Name: ",minDefaultLength,maxMealNameLength);
+            updatedMealOption.Conditions = GetTextStringInput("Enter the new Conditions: ",minDefaultLength,maxMealConditionsLength);
             return updatedMealOption;
         }
         public Logins PromptUpdateLogin()
         {
             Logins updatedLogin = new Logins();
-            updatedLogin.Username = GetStringInput("Enter the Username of the login to update: ",minDefaultLength,maxUsernameLength);
+            updatedLogin.Username = GetSpclStringInput("Enter the Username of the login to update: ",minDefaultLength,maxUsernameLength);
             updatedLogin.PINHash = GetStringInput("Enter the new PIN: ",minDefaultLength,maxPINLength);
             updatedLogin.AccessLevel = GetStringInput("Enter the new Access Level: ",minDefaultLength,maxAccessLevelLength);
             return updatedLogin;
@@ -703,7 +788,7 @@ namespace _12TPI_Project_Console.View
         }
         public string PromptDeleteLogin()
         {
-            return GetStringInput("Enter the Username of the login to delete: ",minDefaultLength,maxUsernameLength);
+            return GetSpclStringInput("Enter the Username of the login to delete: ",minDefaultLength,maxUsernameLength);
         }
     }
 }
