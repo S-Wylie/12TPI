@@ -58,7 +58,8 @@ namespace _12TPI_Project_Console.View
         //Logins table
         const int maxUsernameLength = 25;
         const int maxPINLength = 42;
-        const int maxAccessLevelLength = 20;
+        const int minAccessLevelLength = 4;
+        const int maxAccessLevelLength = 5;
 
         public void DisplayWelcomeMessage()
         {
@@ -522,7 +523,7 @@ namespace _12TPI_Project_Console.View
 
         public string GetCoordStringInput(string prompt, int minLength, int maxLength)
         {
-            var regex = new Regex("^[a-zA-Z0-9,° ]*$");
+            var regex = new Regex("^[a-zA-Z0-9.,° ]*$");
             string response;
             while (true)
             {
@@ -604,7 +605,7 @@ namespace _12TPI_Project_Console.View
         {
             Planes newPlane = new Planes();
             newPlane.Manufacturer = GetStringInput("Enter the Manufacturer: ",minDefaultLength,maxManufacturerLength);
-            newPlane.Model = GetStringInput("Enter the Model: ",minDefaultLength,maxModelLength);
+            newPlane.Model = GetSpaceStringInput("Enter the Model: ",minDefaultLength,maxModelLength);
             newPlane.PassengerCapacity = GetIntInput("Enter the Passenger Capacity: ", maxPassengerCapacityLength);
             newPlane.CargoCapacity = GetIntInput("Enter the Cargo Capacity: ", maxCargoCapacityLength);
             newPlane.MinimumTakeoff = GetIntInput("Enter the Minimum Takeoff Length: ", maxMinimumTakeoffLength);
@@ -664,7 +665,7 @@ namespace _12TPI_Project_Console.View
         public MealOptions PromptAddMealOption()
         {
             MealOptions newMealOption = new MealOptions();
-            newMealOption.MealCode = GetStringInput("Enter the Meal Code: ",minClassCodeLength,maxMealCodeLength);
+            newMealOption.MealCode = GetStringInput("Enter the Meal Code: ",minMealCodeLength,maxMealCodeLength);
             newMealOption.Name = GetSpaceStringInput("Enter the Meal's Name: ",minDefaultLength,maxMealNameLength);
             newMealOption.Conditions = GetTextStringInput("Enter the Meal's Conditions: ", minDefaultLength,maxMealConditionsLength);
             return newMealOption;
@@ -674,7 +675,7 @@ namespace _12TPI_Project_Console.View
             Logins newLogin = new Logins();
             newLogin.Username = GetSpclStringInput("Enter the Username: ",minDefaultLength,maxUsernameLength);
             newLogin.PINHash = GetStringInput("Enter the PIN: ",minDefaultLength,maxPINLength);
-            newLogin.AccessLevel = GetStringInput("Enter the Access Level: ",minDefaultLength,maxAccessLevelLength);
+            newLogin.AccessLevel = GetStringInput("Enter the Access Level: ",minAccessLevelLength,maxAccessLevelLength);
             return newLogin;
         }
         public Planes PromptUpdatePlane(int maxPlaneID)
@@ -755,7 +756,7 @@ namespace _12TPI_Project_Console.View
             Logins updatedLogin = new Logins();
             updatedLogin.Username = GetSpclStringInput("Enter the Username of the login to update: ",minDefaultLength,maxUsernameLength);
             updatedLogin.PINHash = GetStringInput("Enter the new PIN: ",minDefaultLength,maxPINLength);
-            updatedLogin.AccessLevel = GetStringInput("Enter the new Access Level: ",minDefaultLength,maxAccessLevelLength);
+            updatedLogin.AccessLevel = GetStringInput("Enter the new Access Level: ",minAccessLevelLength,maxAccessLevelLength);
             return updatedLogin;
         }
         public int PromptDeletePlane(int maxRegistrationID)
