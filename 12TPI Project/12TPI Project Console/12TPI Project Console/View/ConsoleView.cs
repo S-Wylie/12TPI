@@ -302,9 +302,11 @@ namespace _12TPI_Project_Console.View
         }
         public void DisplayPlanes(List<Planes> planesList)
         {
+            Console.WriteLine("{0,-18}{1,-15}{2,-17}{3,-20}{4,-16}{5,-16}{6,-16}", "Registration ID", "Manufacturer", "Model", "Passenger Capacity", "Cargo Capacity", "Minimum Takeoff", "Minimum Landing");
             foreach (Planes plane in planesList)
             {
-                Console.WriteLine($"{plane.RegistrationID}, {plane.Manufacturer},{plane.Model},{plane.PassengerCapacity},{plane.CargoCapacity},{plane.MinimumTakeoff},{plane.MinimumLanding}");
+                //Console.WriteLine($"{plane.RegistrationID}, {plane.Manufacturer},{plane.Model},{plane.PassengerCapacity},{plane.CargoCapacity},{plane.MinimumTakeoff},{plane.MinimumLanding}");
+                Console.WriteLine("{0,-18}{1,-15}{2,-17}{3,-20}{4,-16}{5,-16}{6,-16}", plane.RegistrationID, plane.Manufacturer, plane.Model, plane.PassengerCapacity, plane.CargoCapacity, plane.MinimumTakeoff, plane.MinimumLanding);
             }
         }
         public void DisplayFlights(List<Flights> flightsList)
