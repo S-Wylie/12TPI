@@ -113,7 +113,7 @@ namespace _12TPI_Project_Console.View
             Console.WriteLine("Please login with your credentials.");
             Console.Write("Username: ");
         }
-        public void DisplayPINLogin() 
+        public void DisplayPINLogin()
         {
             Console.Write("Please input PIN: ");
         }
@@ -309,177 +309,156 @@ namespace _12TPI_Project_Console.View
         }
         public void DisplayFlights(List<Flights> flightsList)
         {
-            Console.WriteLine("{0,-10}{1,-8}{2,-8}{3,-17}{4,-22}{5,-18}{6,-22}{7,-18}{8,-10}", "FlightID", "PlaneID", "Flight#", "PilotName", "DepartingDateTime", "DepartingAirport", "ArrivingDateTime", "ArrivingAirport", "Status");
             foreach (Flights flight in flightsList)
             {
-                Console.WriteLine("{0,-10}{1,-8}{2,-8}{3,-17}{4,-22}{5,-18}{6,-22}{7,-18}{8,-10}", flight.FlightID, flight.PlaneRegistrationID, flight.FlightNumber, flight.PilotName, flight.DepartingDateTime, flight.DepartingAirport, flight.ArrivingDateTime, flight.ArrivingAirport, flight.Status);
+                Console.WriteLine($"{flight.FlightID}, {flight.PlaneRegistrationID},{flight.FlightNumber},{flight.PilotName},{flight.DepartingDateTime},{flight.DepartingAirport},{flight.ArrivingDateTime},{flight.ArrivingAirport},{flight.Status}");
             }
         }
         public void DisplayAirports(List<Airports> airportsList)
         {
-            Console.WriteLine("{0,-10}{1,-35}{2,-25}{3,-20}{4,-20}","IATA Code", "Name", "Coordinates", "Country", "Timezone");
             foreach (Airports airport in airportsList)
             {
-                Console.WriteLine("{0,-10}{1,-35}{2,-25}{3,-20}{4,-20}", airport.IATACode, airport.Name, airport.Coordinates, airport.Country, airport.Timezone);
+                Console.WriteLine($"{airport.IATACode}, {airport.Name},{airport.Coordinates},{airport.Country},{airport.Timezone}");
             }
         }
         public void DisplayPassengers(List<Passengers> passengersList)
         {
-            Console.WriteLine("{0,-12}{1,-10}{2,-10}{3,-15}", "CustomerID", "FirstName", "LastName", "MembershipStatus");
             foreach (Passengers passenger in passengersList)
             {
-                Console.WriteLine("{0,-12}{1,-10}{2,-10}{3,-15}", passenger.CustomerID, passenger.FirstName, passenger.LastName, passenger.MembershipStatus);
+                Console.WriteLine($"{passenger.CustomerID}, {passenger.FirstName},{passenger.LastName},{passenger.MembershipStatus}");
             }
         }
         public void DisplayTickets(List<PassengerTickets> ticketsList)
         {
-            Console.WriteLine("{0,-9}{1,-9}{2,-12}{3,-15}", "TicketID", "FlightID", "CustomerID", "ClassCode");
             foreach (PassengerTickets ticket in ticketsList)
             {
-                Console.WriteLine("{0,-9}{1,-9}{2,-12}{3,-15}", ticket.TicketID, ticket.FlightID, ticket.CustomerID, ticket.ClassCode);
+                Console.WriteLine($"{ticket.TicketID}, {ticket.FlightID},{ticket.CustomerID},{ticket.ClassCode},{ticket.MealChoice}");
             }
         }
         public void DisplayClasses(List<Classes> classesList)
         {
-            Console.WriteLine("{0,-12}{1,-18}{2,-18}{3,-18}{4,-18}", "Class Code", "Name", "Changes Permitted", "Baggage Allowance", "Miles Accrual");
             foreach (Classes Class in classesList)
             {
-                Console.WriteLine("{0,-12}{1,-18}{2,-18}{3,-18}{4,-18}", Class.ClassCode, Class.Name, Class.ChangesPermitted, Class.BaggageAllowance, Class.MilesAccrual);
+                Console.WriteLine($"{Class.ClassCode}, {Class.Name},{Class.ChangesPermitted},{Class.BaggageAllowance},{Class.MilesAccrual}");
             }
         }
         public void DisplayMealOptions(List<MealOptions> mealOptionsList)
         {
-            Console.WriteLine("{0,-12}{1,-15}{2,-15}", "Meal Code", "Name", "Conditions");
             foreach (MealOptions mealOption in mealOptionsList)
             {
-                Console.WriteLine("{0,-12}{1,-15}{2,-15}", mealOption.MealCode, mealOption.Name, mealOption.Conditions);
+                Console.WriteLine($"{mealOption.MealCode}, {mealOption.Name},{mealOption.Conditions}");
             }
         }
         public void DisplayLogins(List<Logins> loginsList)
         {
-            Console.WriteLine("{0,-12}{1,-43}{2,-15}", "Username", "PIN Hash", "Access Level");
             foreach (Logins login in loginsList)
             {
-                Console.WriteLine("{0,-12}{1,-43}{2,-15}", login.Username, login.PINHash, login.AccessLevel);
+                Console.WriteLine($"{login.Username}, {login.PINHash},{login.AccessLevel}");
             }
         }
         public void DisplayAirbusPlanesQuery(List<Planes> planesList)
         {
-            Console.WriteLine("{0,-18}{1,-15}{2,-17}{3,-20}{4,-16}{5,-16}{6,-16}", "Registration ID", "Manufacturer", "Model", "Passenger Capacity", "Cargo Capacity", "Minimum Takeoff", "Minimum Landing");
             foreach (Planes plane in planesList)
             {
-                Console.WriteLine("{0,-18}{1,-15}{2,-17}{3,-20}{4,-16}{5,-16}{6,-16}", plane.RegistrationID, plane.Manufacturer, plane.Model, plane.PassengerCapacity, plane.CargoCapacity, plane.MinimumTakeoff, plane.MinimumLanding);
+                Console.WriteLine($"{plane.RegistrationID}, {plane.Manufacturer},{plane.Model},{plane.PassengerCapacity},{plane.CargoCapacity},{plane.MinimumTakeoff},{plane.MinimumLanding}");
             }
         }
         public void DisplayDelayedFlightsQuery(List<Flights> flightsList)
         {
-            Console.WriteLine("{0,-10}{1,-8}{2,-8}{3,-17}{4,-22}{5,-18}{6,-22}{7,-18}{8,-10}", "FlightID", "PlaneID", "Flight#", "PilotName", "DepartingDateTime", "DepartingAirport", "ArrivingDateTime", "ArrivingAirport", "Status");
             foreach (Flights flight in flightsList)
             {
-                Console.WriteLine("{0,-10}{1,-8}{2,-8}{3,-17}{4,-22}{5,-18}{6,-22}{7,-18}{8,-10}", flight.FlightID, flight.PlaneRegistrationID, flight.FlightNumber, flight.PilotName, flight.DepartingDateTime, flight.DepartingAirport, flight.ArrivingDateTime, flight.ArrivingAirport, flight.Status);
+                Console.WriteLine($"{flight.FlightID}, {flight.PlaneRegistrationID},{flight.FlightNumber},{flight.PilotName},{flight.DepartingDateTime},{flight.DepartingAirport},{flight.ArrivingDateTime},{flight.ArrivingAirport},{flight.Status}");
             }
         }
         public void DisplayAustralianAirportsQuery(List<Airports> airportsList)
         {
-            Console.WriteLine("{0,-12}{1,-35}{2,-25}{3,-20}{4,-20}", "IATA Code", "Name", "Coordinates", "Country", "Timezone");
             foreach (Airports airport in airportsList)
             {
-                Console.WriteLine("{0,-12}{1,-35}{2,-25}{3,-20}{4,-20}", airport.IATACode, airport.Name, airport.Coordinates, airport.Country, airport.Timezone);
+                Console.WriteLine($"{airport.IATACode}, {airport.Name},{airport.Coordinates},{airport.Country},{airport.Timezone}");
             }
         }
         public void DisplayActiveMembershipsQuery(List<Passengers> passengersList)
         {
-            Console.WriteLine("{0,-12}{1,-10}{2,-10}{3,-15}", "CustomerID", "FirstName", "LastName", "MembershipStatus");
             foreach (Passengers passenger in passengersList)
             {
-                Console.WriteLine("{0,-12}{1,-10}{2,-10}{3,-15}", passenger.CustomerID, passenger.FirstName, passenger.LastName, passenger.MembershipStatus);
+                Console.WriteLine($"{passenger.CustomerID}, {passenger.FirstName},{passenger.LastName},{passenger.MembershipStatus}");
             }
         }
         public void DisplaySidenyValdezFlightsQuery(List<Flights> flightsList)
         {
-            Console.WriteLine("{0,-10}{1,-8}{2,-8}{3,-17}{4,-22}{5,-18}{6,-22}{7,-18}{8,-10}", "FlightID", "PlaneID", "Flight#", "PilotName", "DepartingDateTime", "DepartingAirport", "ArrivingDateTime", "ArrivingAirport", "Status");
             foreach (Flights flight in flightsList)
             {
-                Console.WriteLine("{0,-10}{1,-8}{2,-8}{3,-17}{4,-22}{5,-18}{6,-22}{7,-18}{8,-10}", flight.FlightID, flight.PlaneRegistrationID, flight.FlightNumber, flight.PilotName, flight.DepartingDateTime, flight.DepartingAirport, flight.ArrivingDateTime, flight.ArrivingAirport, flight.Status);
+                Console.WriteLine($"{flight.FlightID}, {flight.PlaneRegistrationID},{flight.FlightNumber},{flight.PilotName},{flight.DepartingDateTime},{flight.DepartingAirport},{flight.ArrivingDateTime},{flight.ArrivingAirport},{flight.Status}");
             }
         }
         public void DisplayTicketandPassengerInfoQuery(List<Tuple<PassengerTickets, Passengers>> ticketAndPassengerList)
         {
-            Console.WriteLine("{0,-10}{1,-10}{2,-12}{3,-12}{4,-17}{5,-18}{6,-22}{7,-18}", "TicketID", "FlightID", "ClassCode", "MealChoice", "CustomerID", "FirstName", "LastName", "MembershipStatus" );
             foreach (var (ticket, passenger) in ticketAndPassengerList)
             {
-                Console.WriteLine("{0,-10}{1,-10}{2,-12}{3,-12}{4,-17}{5,-18}{6,-22}{7,-18}", ticket.TicketID, ticket.FlightID, ticket.ClassCode, ticket.MealChoice, passenger.CustomerID, passenger.FirstName, passenger.LastName, passenger.MembershipStatus);
+                Console.WriteLine($"{ticket.TicketID}, {ticket.FlightID}, {ticket.ClassCode}, {ticket.MealChoice}, {passenger.CustomerID}, {passenger.FirstName},{passenger.LastName}, {passenger.MembershipStatus}");
             }
         }
         public void DisplayAllTicketInfoQuery(List<Tuple<Passengers, PassengerTickets, Flights, Classes, MealOptions>> AllTicketList)
         {
             foreach (var (passenger, ticket, flight, Class, mealOption) in AllTicketList)
             {
-                Console.WriteLine($"{passenger.CustomerID}, {passenger.FirstName}, {passenger.LastName},{passenger.MembershipStatus}\n{ticket.TicketID}, {ticket.FlightID}, {flight.PlaneRegistrationID}, {flight.FlightNumber}, {flight.PilotName},{flight.DepartingDateTime}, {flight.DepartingAirport}, {flight.ArrivingDateTime},{flight.ArrivingAirport}, {flight.Status}\n{Class.ClassCode}, {Class.Name}, {Class.ChangesPermitted}, {Class.BaggageAllowance}, {Class.MilesAccrual}\n{ticket.MealChoice}, {mealOption.Name}, {mealOption.Conditions}\n\n");
+                Console.WriteLine($"{passenger.CustomerID}, {passenger.FirstName},{passenger.LastName},{passenger.MembershipStatus}{ticket.TicketID}, {ticket.FlightID},{flight.PlaneRegistrationID},{flight.FlightNumber},{flight.PilotName},{flight.DepartingDateTime},{flight.DepartingAirport},{flight.ArrivingDateTime},{flight.ArrivingAirport},{flight.Status},{Class.ClassCode},{Class.Name},{Class.ChangesPermitted},{Class.BaggageAllowance},{Class.MilesAccrual},{ticket.MealChoice},{mealOption.Name},{mealOption.Conditions}");
             }
         }
         public void DisplayPlaneAndFlightInfoQuery(List<Tuple<Planes, Flights>> planeAndflightList)
         {
             foreach (var (plane, flight) in planeAndflightList)
             {
-                Console.WriteLine($"{plane.RegistrationID},{plane.Manufacturer},{plane.Model}, {plane.PassengerCapacity},{plane.CargoCapacity},{plane.MinimumTakeoff},{plane.MinimumLanding}\n{flight.FlightID},{flight.PilotName},{flight.DepartingDateTime},{flight.DepartingAirport},{flight.ArrivingDateTime},{flight.ArrivingAirport},{flight.Status}\n\n");
+                Console.WriteLine($"{plane.RegistrationID},{plane.Manufacturer},{plane.Model}, {plane.PassengerCapacity},{plane.CargoCapacity},{plane.MinimumTakeoff},{plane.MinimumLanding},{flight.FlightID},{flight.PilotName},{flight.DepartingDateTime},{flight.DepartingAirport},{flight.ArrivingDateTime},{flight.ArrivingAirport}`,{flight.Status}");
             }
         }
         public void DisplayBusinessPassengersQuery(List<Tuple<Passengers, PassengerTickets>> passengerandticketList)
         {
-            Console.WriteLine("{0,-12}{1,-10}{2,-10}{3,-17}{4,-12}{5,-12}{6,-12}{7,-12}","CustomerID","FirstName","LastName","MembershipStatus","TicketID","FlightID","ClassCode","MealChoice");
             foreach (var (passenger, ticket) in passengerandticketList)
             {
-                Console.WriteLine("{0,-12}{1,-10}{2,-10}{3,-17}{4,-12}{5,-12}{6,-12}{7,-12}", passenger.CustomerID, passenger.FirstName, passenger.LastName, passenger.MembershipStatus, ticket.TicketID, ticket.FlightID, ticket.ClassCode, ticket.MealChoice  );
+                Console.WriteLine($"{passenger.CustomerID},{passenger.FirstName},{passenger.LastName},{passenger.MembershipStatus},{ticket.TicketID},{ticket.FlightID},{ticket.ClassCode},{ticket.MealChoice}");
             }
         }
         public void DisplayGlutenIntolPassengersQuery(List<Tuple<Passengers, PassengerTickets>> passengerandticketList)
         {
-            Console.WriteLine("{0,-12}{1,-10}{2,-10}{3,-17}{4,-12}{5,-12}{6,-12}{7,-12}","CustomerID","FirstName","LastName","MembershipStatus","TicketID","FlightID","ClassCode","MealChoice");
             foreach (var (passenger, ticket) in passengerandticketList)
             {
-                Console.WriteLine("{0,-12}{1,-10}{2,-10}{3,-17}{4,-12}{5,-12}{6,-12}{7,-12}", passenger.CustomerID, passenger.FirstName, passenger.LastName, passenger.MembershipStatus, ticket.TicketID, ticket.FlightID, ticket.ClassCode, ticket.MealChoice);
+                Console.WriteLine($"{passenger.CustomerID},{passenger.FirstName},{passenger.LastName},{passenger.MembershipStatus},{ticket.TicketID},{ticket.FlightID},{ticket.ClassCode},{ticket.MealChoice}");
             }
         }
         public void DisplayPlaneCapAvgQuery(List<AvgPlaneCapStats> avgCapList)
         {
-            Console.WriteLine("{0,-15}{1,-12}", "Passenger Cap Avg", "Cargo Cap Avg");
             foreach (AvgPlaneCapStats stats in avgCapList)
             {
-                Console.WriteLine("{0,-15}{1,-12}", stats.PassengerCapAvg, stats.CargoCapAvg);
+                Console.WriteLine($"{stats.PassengerCapAvg},{stats.CargoCapAvg}");
             }
         }
         public void DisplayTopFlightsQuery(List<Tuple<Flights, TopFlightsStats>> topFlightsList)
         {
-            Console.WriteLine("{0,-15}{1,-15}","Flight Number","Popularity");
             foreach (var (flight, stats) in topFlightsList)
             {
-                //Console.WriteLine($"{flight.FlightNumber},{stats.FlightPopularity}");
-                Console.WriteLine("{0,-15}{1,-15}", flight.FlightNumber, stats.FlightPopularity);
+                Console.WriteLine($"{flight.FlightNumber},{stats.FlightPopularity}");
             }
         }
         public void DisplayTopCountriesQuery(List<Tuple<Airports, TopCountriesStats>> topCountriesList)
         {
-            Console.WriteLine("{0,-15}{1,-15}","Country","Popularity");
             foreach (var (airport, stats) in topCountriesList)
             {
-                Console.WriteLine("{0,-15}{1,-15}", airport.Country, stats.CountryPopularity);
+                Console.WriteLine($"{airport.Country},{stats.CountryPopularity}");
             }
         }
         public void DisplayTopPilotsQuery(List<Tuple<Flights, TopPilotsStats>> topPilotsList)
         {
-            Console.WriteLine("{0,-20}{1,-15}","Pilot Name","Popularity");
             foreach (var (flight, stats) in topPilotsList)
             {
-                Console.WriteLine("{0,-20}{1,-15}", flight.PilotName, stats.PilotPopularity);
+                Console.WriteLine($"{flight.PilotName},{stats.PilotPopularity}");
             }
         }
         public void DisplayTopMealsQuery(List<Tuple<PassengerTickets, TopMealsStats>> topCountriesList)
         {
-            Console.WriteLine("{0,-15}{1,-15}","Meal Choice","Popularity");
             foreach (var (ticket, stats) in topCountriesList)
             {
-                Console.WriteLine("{0,-15}{1,-15}", ticket.MealChoice, stats.MealPopularity);
+                Console.WriteLine($"{ticket.MealChoice},{stats.MealPopularity}");
             }
         }
         public void DisplayMessage(string message)
@@ -487,6 +466,7 @@ namespace _12TPI_Project_Console.View
             Console.WriteLine(message);
         }
 
+        
         public void DisplaySuccessMessage()
         {
             Console.WriteLine("Operation completed successfully.");

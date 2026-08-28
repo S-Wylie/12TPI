@@ -745,7 +745,7 @@ namespace _12TPI_Project_Console.Controller
         {
             List<Tuple<Passengers,PassengerTickets,Flights,Classes,MealOptions>> AllTicketList = new List<Tuple<Passengers, PassengerTickets, Flights, Classes, MealOptions>>();
 
-            string query = "SELECT P.CustomerID, P.FirstName, P.LastName, P.MembershipStatus, T.TicketID, T.FlightID, T.ClassCode, T.MealChoice, F.PlaneRegistrationID, F.FlightNumber, F.PilotName, F.DepartingDateTime, F.DepartingAirport, F.ArrivalDateTime, F.ArrivalAirport, F.\"Status\", C.\"Name\", C.ChangesPermitted, C.BaggaeAllowance, C.MilesAccrual, M.\"Name\", M.Conditions FROM Passengers P, PassengerTickets T, Classes C, Flights F, MealOptions M WHERE T.FlightID = F.FlightID AND P.CustomerID = T.CustomerID AND T.ClassCode = C.ClassCode AND T.MealChoice = M.MealCode ORDER BY LastName ASC";
+            string query = "SELECT P.CustomerID, P.FirstName, P.LastName, P.MembershipStatus, T.TicketID, T.FlightID, F.PlaneRegistrationID, F.FlightNumber, F.PilotName, F.DepartingDateTime, F.DepartingAirport, F.ArrivalDateTime, F.ArrivalAirport, F.\"Status\", C.ClassCode, C.\"Name\", C.ChangesPermitted, C.BaggaeAllowance, C.MilesAccrual, T.MealChoice, M.\"Name\", M.Conditions FROM Passengers P, PassengerTickets T, Classes C, Flights F, MealOptions M WHERE T.FlightID = F.FlightID AND P.CustomerID = T.CustomerID AND T.ClassCode = C.ClassCode AND T.MealChoice = M.MealCode ORDER BY LastName ASC";
             try
             {
                 using (SqlCommand cmd = new SqlCommand(query, conn))
@@ -766,7 +766,6 @@ namespace _12TPI_Project_Console.Controller
                             {
                                 TicketID = reader.GetInt32(4),
                                 FlightID = reader.GetInt32(5),
-                                CustomerID = reader.GetInt32(0),
                                 ClassCode = reader.GetSafeString(6),
                                 MealChoice = reader.GetSafeString(7)
                             };
@@ -774,28 +773,28 @@ namespace _12TPI_Project_Console.Controller
                             Flights flight = new Flights()
                             {
                                 FlightID = reader.GetInt32(5),
-                                PlaneRegistrationID = reader.GetInt32(8),
-                                FlightNumber = reader.GetSafeString(9),
-                                PilotName = reader.GetSafeString(10),
-                                DepartingDateTime = reader.GetDateTime(11),
-                                DepartingAirport = reader.GetSafeString(12),
-                                ArrivingDateTime = reader.GetDateTime(13),
-                                ArrivingAirport = reader.GetSafeString(14),
-                                Status = reader.GetSafeString(15)
+                                PlaneRegistrationID = reader.GetInt32(6),
+                                FlightNumber = reader.GetSafeString(7),
+                                PilotName = reader.GetSafeString(8),
+                                DepartingDateTime = reader.GetDateTime(9),
+                                DepartingAirport = reader.GetSafeString(10),
+                                ArrivingDateTime = reader.GetDateTime(11),
+                                ArrivingAirport = reader.GetSafeString(12),
+                                Status = reader.GetSafeString(13)
                             };
 
                             Classes Class = new Classes()
                             {
-                                ClassCode = reader.GetSafeString(6),
-                                Name = reader.GetSafeString(16),
-                                ChangesPermitted = reader.GetSafeString(17),
-                                BaggageAllowance = reader.GetInt32(18),
-                                MilesAccrual = reader.GetSafeString(19)
+                                ClassCode = reader.GetSafeString(14),
+                                Name = reader.GetSafeString(15),
+                                ChangesPermitted = reader.GetSafeString(16),
+                                BaggageAllowance = reader.GetInt32(17),
+                                MilesAccrual = reader.GetSafeString(18)
                             };
 
                             MealOptions mealOption = new MealOptions()
                             {
-                                MealCode = reader.GetSafeString(7),
+                                MealCode = reader.GetSafeString(19),
                                 Name = reader.GetSafeString(20),
                                 Conditions = reader.GetSafeString(21)
                             };
@@ -873,7 +872,7 @@ namespace _12TPI_Project_Console.Controller
         {
             List<Tuple<Passengers, PassengerTickets>> passengersAndticketsList = new List<Tuple<Passengers, PassengerTickets>>();
 
-            string query = "SELECT P.CustomerID, P.FirstName, P.LastName, P.MembershipStatus, T.TicketID, T.FlightID, T.ClassCode, T.MealChoice FROM Passengers P, PassengerTickets T WHERE P.CustomerID = T.CustomerID AND T.ClassCode = 'BUS' ORDER BY LastName ASC";
+            string query = "SELECT P.CustomerID, P.FirstName, P.LastName, P.MembershipStatus, T.TicketID, T.FlightID, T.ClassCode, T.MealChoice FROM Passengers P, PassengerTickets TWHERE P.CustomerID = T.CustomerID AND T.ClassCode = 'BUS' ORDER BY LastName ASC";
             try
             {
                 using (SqlCommand cmd = new SqlCommand(query, conn))
@@ -1209,7 +1208,7 @@ namespace _12TPI_Project_Console.Controller
         }
         public int UpdateTicket(PassengerTickets ticket)
             {
-                using (SqlCommand cmd = new SqlCommand($"UPDATE Tickets SET FlightID = @FlightID, CustomerID = @CustomerID, ClassCode = @ClassCode, MealCode = @MealCode WHERE TicketID = @TicketID", conn))
+                using (SqlCommand cmd = new SqlCommand($"UPDATE Tickets SET FlightID = @FlightID, CustomerID = @CustomerID, ClassCode = @ClassCode, MealChoice = @MealChoice WHERE TicketID = @TicketID", conn))
                 {
                     cmd.Parameters.AddWithValue("@TicketID", ticket.TicketID);
                     cmd.Parameters.AddWithValue("@FlightID", ticket.FlightID);
